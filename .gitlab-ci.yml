@@ -1,4 +1,4 @@
 build:
-  script: "./gradlew build"
+  script: "sh gradlew build"
 deploy:
-  script: "cp kds.jar /home/kds/run/kds.jar; bash /home/kds/run/notify.sh"
+  script: "cp kds.jar /home/kds/run/kds.jar; sh /home/kds/run/notify.sh"
