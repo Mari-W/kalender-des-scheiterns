@@ -1,0 +1,4 @@
+build:
+  script: "./gradlew build"
+deploy:
+  script: "cp kds.jar /home/kds/run/kds.jar; bash /home/kds/run/notify.sh"
