@@ -74,17 +74,17 @@ h3{  font-size: 15px}
 .submit:hover{ background-color: #f45b69; }
 
 @media only screen and (min-width : 280px) {
-    .cont{ width: 90% }
+    .content{ width: 95% }
 }
 
 @media only screen and (min-width : 480px) {
-    .cont{ width: 60% }
+    .content{ width: 90% }
 }
 
 @media only screen and (min-width : 768px) {
-    .cont{ width: 40% }
+    .content{ width: 80% }
 }
 
 @media only screen and (min-width : 992px) {
-    .cont{ width: 30% }
+    .content{ width: 70% }
 }
