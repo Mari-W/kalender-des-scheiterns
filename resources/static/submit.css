@@ -74,7 +74,7 @@ h3{  font-size: 15px}
 .submit:hover{ background-color: #f45b69; }
 
 @media only screen and (min-width : 280px) {
-    .content{ width: 95% }
+    .content{ width: 95%; height: 90%}
 }
 
 @media only screen and (min-width : 480px) {
