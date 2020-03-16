@@ -1,0 +1,94 @@
+body {
+    background-color: #f45b69;
+    font-family: 'Baloo 2', cursive;
+}
+
+.submit {
+    overflow: hidden;
+    background-color: white;
+    padding: 40px 30px 30px 30px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    transform: translate(-50%, -50%);
+    transition: transform 300ms, box-shadow 300ms;
+    box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
+}
+.submit > input {
+    font-family: 'Baloo 2', cursive;
+    border-radius: 5px;
+    font-size: 21px;
+    color: #f45b69;
+    border: 10px black;
+    background: white;
+    width: 85px;
+    padding: 0 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.submit > button {
+    font-family: "Asap", sans-serif;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: 150px;
+    border: 1px #17191B;
+    padding: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #f45b69;
+    -webkit-transition: background-color 300ms;
+    -moz-transition: background-color 300ms;
+    transition: background-color 300ms;
+}
+
+span {
+    vertical-align:super;
+    font-size:50%;
+}
+
+.submit > input:focus {
+    outline: none;
+}
+
+.submit > button:hover {
+    background-color: #f45b69;
+}
+
+h1 {
+    color: #f45b69;
+    font-size: 23px;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+
+.submit > p {
+    color: black;
+    font-size: 21px;
+    white-space: pre-line;
+    margin-right: 10px;
+}
+
+.submit > a {
+    color: #f45b69;
+    font-size: 15px;
+    white-space: pre-line;
+}
+
+.submit > h3 {
+    margin-top: 5px;
+    color: black;
+    font-size: 15px;
+    white-space: pre-line;
+}
+
+.submit > a:hover {
+    text-decoration: none;
+}

@@ -38,6 +38,15 @@ fun Application.module(testing: Boolean = false) {
             call.respondTwig("submit", mapOf("var" to Config["password"]))
         }
 
+        route("/submit") {
+            get("/"){
+                call.respondTwig("submit")
+            }
+            post("/"){
+
+            }
+        }
+
         static("/static") {
             resources("static")
         }

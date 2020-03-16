@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Hi</title>
+    <title>Kalender des Scheiterns</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/submit.css">
+
 </head>
 <body>
+<div>
 
-<h1>Lol</h1>
-{{ var }}
+    <form class="submit" role="form" action="/submit" method="post">
+
+        <img src="https://nicosemsrott.eu/assets/images/logo-center-black.svg" alt="Nico Semsrott’s logo">
+        <br>
+        <br>
+        <h1>Ich will folgendes Ereignis für den Kalender des Scheiterns einreichen: </h1>
+        <label>
+            <input type="text" name="value" placeholder="Beschreibe dein Ereignis des Scheiterns" autofocus>
+        </label>
+        <br>
+        <h1>Das Geschehen ereignete sich am:</h1>
+        <label>
+            <input type="date" name="date" value="2001-04-01" min="0000-01-01" max="2020-12-31">
+        </label>
+        <br>
+        <h1>Ich belege mein Ereignis mit folgendem Link / Quelle: </h1>
+        <label>
+            <input type="text" name="source" placeholder="https://www.der-postillon.com/" >
+        </label>
+        <br>
+        <button type="submit">Submit!</button>
+        <h3>
+            Der <a href="kalenderdescheiterns.de">Kalender des Scheiterns</a> ist ein Kalender der ERKÄRUNG LOL
+        </h3>
+        <h3>
+
+        </h3>
+        <h3>
+            &copy; Marius Weidner und Moritz Geist 2020
+        </h3>
+    </form>
+</div>
 </body>
 </html>
