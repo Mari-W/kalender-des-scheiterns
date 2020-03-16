@@ -51,7 +51,7 @@ fun Application.module(testing: Boolean = false) {
 
         route("/submit") {
             get("/") {
-                call.respondTwig("submit")
+                call.respondTwig("submitn")
             }
             post("/") {
                 if(!call.request.isMultipart()) {

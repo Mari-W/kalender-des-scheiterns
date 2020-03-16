@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Kalender des Scheiterns</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/submitn.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="content">
+    <div class="form">
+        <form action="/submit" method="post" enctype="multipart/form-data">
+            <img src="https://nicosemsrott.eu/assets/images/logo-center-black.svg" alt="Nico Semsrott’s logo">
+            <label>
+                Ich will folgendes Ereignis für den Kalender des Scheiterns einreichen:
+                <textarea class="text" name="text" maxlength="420"
+                          placeholder="Beschreibe das Ereignis des Scheiterns (mit maxmial 420 Zeichen)" required
+                          autofocus
+                          oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+            </label>
+            <label>
+                Das Geschehen ereignete sich am:
+                <input type="date" class="date" name="date" value="1986-03-11" min="0000-01-01" max="2020-12-31" required>
+            </label>
+            <label>
+                Ich belege mein Ereignis mit folgendem Link:
+                <input type="url" class="source" name="source" placeholder="https://www.der-postillon.com/" required>
+            </label>
+            <button type="submit" class="submit">Submit</button>
+            <h3>
+                Der <a target="_blank" rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> ist ein Kalender der ERKÄRUNG LOL
+            </h3>
+            <h3>
+                &copy; Marius Weidner und Moritz Geist 2020
+            </h3>
+        </form>
+    </div>
+</div>
+</body>
+</html>
