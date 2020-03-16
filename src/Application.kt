@@ -79,7 +79,7 @@ fun Application.module(testing: Boolean = false) {
                         text("reCAPTCHA integration fertig stellen")
                     }
                     h1{
-                        text("optinal contact field in submit")
+                        text("optional contact field in submit")
                     }
                     h1{
                         text("front page?")
