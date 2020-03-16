@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700');
-
 *{
     margin: 0;
     padding: 0;
     outline: none;
     box-sizing: border-box;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Baloo Chettan 2', cursive;
 }
 
 body{ background-color: #f45b69; }
@@ -46,8 +44,7 @@ h1, label{
     white-space: normal;
     border: 1px #17191B;
     padding: 10px 10px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
     border-radius: 5px;
     background-color: #f45b69;
 }
@@ -63,22 +60,31 @@ input[type=date]::-webkit-inner-spin-button {
     display: none;
 }
 
-.date {
-    display: block;
-    font-size: 25px;
-    border: none;
-    font-weight: lighter;
-    font-family: 'Raleway', sans-serif;
+input[type=date]::-webkit-clear-button {
+    -webkit-appearance: none;
+    display: none;
 }
 
-.text, .source {
+.date {
+    display: block;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+    font-weight: lighter;
+    margin-bottom: 30px;
+}
+
+.text, .source{
     width: 90%;
     height: 25px;
     border: none;
     border-radius: 5px;
     font-size: 20px;
-    font-weight: lighter;
     margin-bottom: 30px;
+}
+
+.source {
+    margin-bottom: 0;
 }
 
 h3{  font-size: 15px}
