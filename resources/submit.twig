@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/submit.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.google.com/recaptcha/api.js?render=6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"></script>
 </head>
 <body>
 <div class="content">
@@ -28,7 +29,9 @@
                 Ich belege mein Ereignis mit folgendem Link:
                 <input type="url" class="source" name="source" placeholder="https://www.der-postillon.com/" maxlength="1000" required>
             </label>
-            <button type="submit" class="submit">Submit</button>
+            <div class="g-recaptcha" data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP">
+                <button type="submit" class="submit">Submit</button>
+            </div>
             <h3>
                 Der <a target="_blank" rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> ist ein ganz besonderer Kalender der.. bin ich Redenschreiber oder Programmierer?
             </h3>
