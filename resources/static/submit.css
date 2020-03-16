@@ -11,18 +11,19 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 750px;
+    width: 60%;
+    height: 80%;
     transform: translate(-50%, -50%);
     box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
 }
 
 .text {
-    width: 685px;
+    width: 90px;
     overflow-y: hidden;
 }
 
 .source{
-    width: 515px;
+    width: 70%;
 }
 
 .submit > input, .submit > textarea {
@@ -44,7 +45,7 @@ body {
     color: white;
     font-size: 16px;
     text-transform: uppercase;
-    width: 150px;
+    width: 10%;
     border: 1px #17191B;
     padding: 10px 0;
     margin-top: 10px;
