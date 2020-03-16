@@ -1,9 +1,9 @@
 build:
-  script: "sh gradlew shadowJar; cp build/libs/kds-all.jar kds.jar"
+  script: "sh gradlew shadowJar ; cp build/libs/kds-all.jar kds.jar"
   artifacts:
     paths:
       - "kds.jar"
     expire_in: 3 days
 deploy:
   stage: deploy
-  script: "cp kds.jar /home/kds/run/kds.jar; sh /home/kds/notify.sh"
+  script: "cp kds.jar /home/kds/run/kds.jar; sudo /home/kds/notify.sh"
