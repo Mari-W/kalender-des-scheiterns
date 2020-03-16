@@ -27,7 +27,7 @@ fun listIdeas(): List<Idea> {
 
 fun controlIdea(idea: Idea): Boolean {
     val ideaLen = idea.idea.length
-    if (5 <= ideaLen || ideaLen <= 420) {
+    if (!(5 <= ideaLen || ideaLen <= 420)) {
         println("idea to long/short, $ideaLen")
         return false
     }
