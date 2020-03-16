@@ -11,29 +11,27 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 600px;
+    width: 750px;
     transform: translate(-50%, -50%);
-    transition: transform 300ms, box-shadow 300ms;
     box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
 }
 
 .text {
-    width: 300px;
-    height: 30px;
+    width: 685px;
+    overflow-y: hidden;
 }
 
 .source{
-    width: 300px;
+    width: 515px;
 }
 
-.submit > input {
+.submit > input, .submit > textarea {
     font-family: 'Baloo 2', cursive;
     border-radius: 5px;
     font-size: 21px;
     color: #f45b69;
     border: 10px black;
     background: white;
-    width: 300px;
     padding: 0 10px;
     margin-top: 15px;
     margin-bottom: 25px;
