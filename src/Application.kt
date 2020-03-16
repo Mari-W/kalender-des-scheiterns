@@ -15,6 +15,8 @@ import io.ktor.util.KtorExperimentalAPI
 import kotlinx.css.h1
 import kotlinx.html.body
 import kotlinx.html.h1
+import java.lang.Exception
+import java.sql.Date
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -54,17 +56,25 @@ fun Application.module(testing: Boolean = false) {
                 call.respondTwig("submitn")
             }
             post("/") {
-                if(!call.request.isMultipart()) {
+                if (!call.request.isMultipart())
                     call.respond(HttpStatusCode.Forbidden)
-                }
-                call.receiveMultipart().forEachPart {
+                call.receiveMultipart().readAllParts().map {
                     when (it) {
-                        // fields named: "text"-> expl. of event "date" -> us enc date YYYY/MM/DD "source" -> link
-                        is PartData.FormItem -> println("${it.name} ${it.value}")
-                        else -> println("NO NEVER LET THIS IN")
+                        is PartData.FormItem -> it.name to it.value
+                        else -> {
+                            "" to ""
+                        }
                     }
+                }.toMap().apply {
+                    if (containsKey("text") && containsKey("date") && containsKey("source"))
+                        try {
+                            insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
+                            call.respondRedirect("/success")
+                        } catch (e: IllegalArgumentException) {
+                            call.respond(HttpStatusCode.Forbidden)
+                        }
+                    else  call.respond(HttpStatusCode.Forbidden)
                 }
-                call.respondRedirect("/")
             }
         }
 
