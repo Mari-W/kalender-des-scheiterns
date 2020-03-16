@@ -1,19 +1,19 @@
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
     }
     
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
     }
 }
 
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'kotlin'
-apply plugin: 'application'
 
 group 'de.moeri'
-version '0.0.1'
-mainClassName = "io.ktor.server.netty.EngineMain"
 
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
@@ -23,7 +23,7 @@ sourceSets {
 }
 
 repositories {
-    mavenLocal()
+    mavenCentral()
     jcenter()
     maven { url 'https://kotlin.bintray.com/ktor' }
     maven { url 'https://kotlin.bintray.com/kotlin-js-wrappers' }
@@ -40,7 +40,14 @@ dependencies {
     implementation "io.ktor:ktor-auth:$ktor_version"
     implementation "io.ktor:ktor-gson:$ktor_version"
     implementation "org.jtwig:jtwig-core:5.87.0.RELEASE"
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
-    compile group: 'org.sql2o', name: 'sql2o', version: '1.6.0'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
+    implementation group: 'org.sql2o', name: 'sql2o', version: '1.6.0'
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'de.moeri.ApplicationKt'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
