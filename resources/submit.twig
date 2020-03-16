@@ -10,28 +10,28 @@
 </head>
 <body>
 <div>
-    <form class="submit" role="form" action="/submit" method="post">
+    <form class="submit" role="form" action="/submit" method="post" enctype="multipart/form-data">
 
         <img src="https://nicosemsrott.eu/assets/images/logo-center-black.svg" alt="Nico Semsrott’s logo">
         <img src="http://der-kalender-des-scheiterns.de/gfx/titel/der-kalender-des-scheiterns.svg" alt="Nico Semsrott’s logo" style="">
         <br>
         <br>
         <br>
-        <h1>Ich will folgendes Ereignis für den Kalender des Scheiterns einreichen: </h1>
         <label>
-            <textarea class="text" name="value" maxlength="420" placeholder="Beschreibe das Ereignis des Scheiterns (mit maxmial 420 Zeichen)" required autofocus  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+            Ich will folgendes Ereignis für den Kalender des Scheiterns einreichen:
+            <textarea class="text" name="text" maxlength="420" placeholder="Beschreibe das Ereignis des Scheiterns (mit maxmial 420 Zeichen)" required autofocus  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
         </label>
         <br>
         <br>
-        <h1>Das Geschehen ereignete sich am:</h1>
         <label>
+            Das Geschehen ereignete sich am:
             <input type="date" name="date" value="1986-03-11" min="0000-01-01" max="2020-12-31" required>
         </label>
         <br>
         <br>
-        <h1>Ich belege mein Ereignis mit folgendem Link / Quelle: </h1>
         <label>
-            <input type="text" class="source" name="source" placeholder="https://www.der-postillon.com/" required>
+            Ich belege mein Ereignis mit folgendem Link / Quelle:
+            <input type="url" class="source" name="source" placeholder="https://www.der-postillon.com/" required>
         </label>
         <br>
         <br>

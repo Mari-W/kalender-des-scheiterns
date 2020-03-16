@@ -69,7 +69,14 @@ span {
     background-color: #f45b69;
 }
 
-h1 {
+.submit > h1 {
+    color: #f45b69;
+    font-size: 32px;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.submit >label {
     color: #f45b69;
     font-size: 23px;
     font-weight: bold;

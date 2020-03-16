@@ -9,7 +9,12 @@ import io.ktor.features.*
 import org.slf4j.event.*
 import io.ktor.auth.*
 import io.ktor.gson.*
+import io.ktor.html.respondHtml
+import io.ktor.http.HttpStatusCode
 import io.ktor.util.KtorExperimentalAPI
+import kotlinx.css.h1
+import kotlinx.html.body
+import kotlinx.html.h1
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -35,15 +40,31 @@ fun Application.module(testing: Boolean = false) {
 
     routing {
         get("/") {
-            call.respondTwig("submit", mapOf("var" to Config["password"]))
+            call.respondHtml {
+                body {
+                    h1 {
+                        text("Front page :)")
+                    }
+                }
+            }
         }
 
         route("/submit") {
-            get("/"){
+            get("/") {
                 call.respondTwig("submit")
             }
-            post("/"){
-
+            post("/") {
+                if(!call.request.isMultipart()) {
+                    call.respond(HttpStatusCode.Forbidden)
+                }
+                call.receiveMultipart().forEachPart {
+                    when (it) {
+                        // fields named: "text"-> expl. of event "date" -> us enc date YYYY/MM/DD "source" -> link
+                        is PartData.FormItem -> println("${it.name} ${it.value}")
+                        else -> println("NO NEVER LET THIS IN")
+                    }
+                }
+                call.respondRedirect("/")
             }
         }
 
