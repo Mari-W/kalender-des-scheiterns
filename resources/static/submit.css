@@ -16,6 +16,16 @@ body {
     transition: transform 300ms, box-shadow 300ms;
     box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
 }
+
+.text {
+    width: 300px;
+    height: 30px;
+}
+
+.source{
+    width: 300px;
+}
+
 .submit > input {
     font-family: 'Baloo 2', cursive;
     border-radius: 5px;
@@ -23,10 +33,10 @@ body {
     color: #f45b69;
     border: 10px black;
     background: white;
-    width: 85px;
+    width: 300px;
     padding: 0 10px;
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     text-align: center;
 }
 
@@ -40,7 +50,7 @@ body {
     border: 1px #17191B;
     padding: 10px 0;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: 5px;
     background-color: #f45b69;
     -webkit-transition: background-color 300ms;
