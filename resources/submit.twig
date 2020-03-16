@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Kalender des Scheiterns</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -10,34 +10,36 @@
 </head>
 <body>
 <div>
-
     <form class="submit" role="form" action="/submit" method="post">
 
         <img src="https://nicosemsrott.eu/assets/images/logo-center-black.svg" alt="Nico Semsrott’s logo">
+        <img src="http://der-kalender-des-scheiterns.de/gfx/titel/der-kalender-des-scheiterns.svg" alt="Nico Semsrott’s logo" style="">
         <br>
         <br>
         <br>
         <h1>Ich will folgendes Ereignis für den Kalender des Scheiterns einreichen: </h1>
         <label>
-            <input type="text" class="text" name="value" placeholder="Beschreibe dein Ereignis des Scheiterns" required autofocus>
+            <textarea class="text" name="value" maxlength="420" placeholder="Beschreibe das Ereignis des Scheiterns (mit maxmial 420 Zeichen)" required autofocus  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
         </label>
+        <br>
         <br>
         <h1>Das Geschehen ereignete sich am:</h1>
         <label>
-            <input type="date" name="date" value="2001-04-01" min="0000-01-01" max="2020-12-31" required>
+            <input type="date" name="date" value="1986-03-11" min="0000-01-01" max="2020-12-31" required>
         </label>
+        <br>
         <br>
         <h1>Ich belege mein Ereignis mit folgendem Link / Quelle: </h1>
         <label>
-            <input type="text" class= "source" name="source" placeholder="https://www.der-postillon.com/" required>
+            <input type="text" class="source" name="source" placeholder="https://www.der-postillon.com/" required>
         </label>
         <br>
-        <button type="submit">Submit!</button>
+        <br>
+        <button type="submit">Submit</button>
+        <br>
+        <br>
         <h3>
-            Der <a target="_blank" rel="noopener noreferrer" href="https://www.kalenderdescheiterns.de">Kalender des Scheiterns</a> ist ein Kalender der ERKÄRUNG LOL
-        </h3>
-        <h3>
-
+            Der <a target="_blank" rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> ist ein Kalender der ERKÄRUNG LOL
         </h3>
         <h3>
             &copy; Marius Weidner und Moritz Geist 2020
