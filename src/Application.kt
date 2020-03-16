@@ -13,6 +13,8 @@ import io.ktor.html.respondHtml
 import io.ktor.http.HttpStatusCode
 import io.ktor.util.KtorExperimentalAPI
 import kotlinx.css.h1
+import kotlinx.css.html
+import kotlinx.css.p
 import kotlinx.html.body
 import kotlinx.html.h1
 import java.lang.Exception
@@ -42,15 +44,8 @@ fun Application.module(testing: Boolean = false) {
 
     routing {
         get("/") {
-            call.respondHtml {
-                body {
-                    h1 {
-                        text("Front page :)")
-                    }
-                }
-            }
+            call.respondRedirect("/submit")
         }
-
         route("/submit") {
             get("/") {
                 call.respondTwig("submit")
@@ -74,6 +69,27 @@ fun Application.module(testing: Boolean = false) {
                             call.respond(HttpStatusCode.Forbidden)
                         }
                     else  call.respond(HttpStatusCode.Forbidden)
+                }
+            }
+        }
+        get("/todo"){
+            call.respondHtml {
+                body {
+                    h1{
+                        text("reCAPTCHA integration fertig stellen")
+                    }
+                    h1{
+                        text("optinal contact field in submit")
+                    }
+                    h1{
+                        text("front page?")
+                    }
+                    h1{
+                        text("submit success page?")
+                    }
+                    h1{
+                        text("moderator page (kds-topsecret.moehritz.de) funktionalität integrieren")
+                    }
                 }
             }
         }
