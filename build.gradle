@@ -45,7 +45,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'de.moeri.ApplicationKt'
+        attributes 'Main-Class': 'ApplicationKt'
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
