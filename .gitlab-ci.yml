@@ -1,4 +1,5 @@
 build:
+  stage: build
   script: "sh gradlew build; cp build/libs/kds-all.jar kds.jar"
   artifacts:
     paths:
