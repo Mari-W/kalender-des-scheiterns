@@ -1,5 +1,5 @@
 build:
-  script: "sh gradlew build; cp build/libs/kds.jar kds.jar"
+  script: "sh gradlew build; cp build/libs/kds-all.jar kds.jar"
   artifacts:
     paths:
       - "kds.jar"
