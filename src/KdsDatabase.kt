@@ -14,7 +14,10 @@ fun insertIdea(idea: Idea) {
 }
 
 fun listIdeas(): List<Idea> {
+    db.open().use {
+        it.createQuery("SELECT * FROM kds_idea")
+    }
     return listOf(Idea("DIE PARTEI wurde gegründet", Date.valueOf("02/08/2004"), "https://www.google.com/search?q=die+partei+gr%C3%BCndung"))
 }
 
-data class Idea(val idea: String, val date: Date, val source: String)
+data class Idea(val idea: String, val date: Date, val source: String, val id: Int = 0)
