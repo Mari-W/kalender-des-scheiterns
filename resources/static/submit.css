@@ -13,7 +13,7 @@ body{ background-color: #f45b69; }
 .content{
     position: relative;
     width: 50%;
-    height: 50%;
+    height: 80%;
     padding: 10px 25px;
     margin: 10vh auto;
     background: #fff;
@@ -58,10 +58,22 @@ textarea{
     height: auto;
 }
 
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.date {
+    display: block;
+    font-size: 25px;
+    border: none;
+    font-weight: lighter;
+    font-family: 'Raleway', sans-serif;
+}
 
 .text, .source {
     width: 90%;
-    height: 23px;
+    height: 25px;
     border: none;
     border-radius: 5px;
     font-size: 20px;
@@ -74,7 +86,7 @@ h3{  font-size: 15px}
 .submit:hover{ background-color: #f45b69; }
 
 @media only screen and (min-width : 280px) {
-    .content{ width: 95% }
+    .content{ width: 95%; height: 90%}
 }
 
 @media only screen and (min-width : 480px) {
