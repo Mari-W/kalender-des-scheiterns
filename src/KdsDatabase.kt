@@ -4,8 +4,8 @@ import org.sql2o.Sql2o
 import java.sql.Date
 import java.util.regex.Pattern
 
-val urlCheck = Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
-val db: Sql2o = Sql2o("jdbc:mysql://78.47.156.57:3306/kds", "root", "moeriland42")
+private val urlCheck: Pattern = Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
+private val db: Sql2o = Sql2o("jdbc:mysql://78.47.156.57:3306/kds", "root", "moeriland42")
 
 fun insertIdea(idea: Idea) {
     if (!controlIdea(idea)) {
