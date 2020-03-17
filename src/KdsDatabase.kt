@@ -8,6 +8,9 @@ val urlCheck = Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-
 val db: Sql2o = Sql2o("jdbc:mysql://78.47.156.57:3306/kds", "root", "moeriland42")
 
 fun insertIdea(idea: Idea) {
+    if (!controlIdea(idea)) {
+        throw IllegalArgumentException()
+    }
     db.open().use {
         it.createQuery("INSERT INTO kds_idea (idea, source_link, date) VALUES (:idea, :source, :date)")
             .bind(idea)
