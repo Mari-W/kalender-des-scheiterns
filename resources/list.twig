@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Kalender des Scheiterns - Liste</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="content">
+    <table>
+        <th>
+            <td>Datum</td>
+            <td>Scheiterung</td>
+            <td>Quelle</td>
+        </th>
+        {% for i in list %}
+            <td>{{ i.date }}</td>
+            <td>{{ i.idea }}</td>
+            <td><a href="{{ i.source }}">{{ i.source }}</a></td>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

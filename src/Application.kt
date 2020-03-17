@@ -77,6 +77,11 @@ fun Application.module(testing: Boolean = false) {
                 }
             }
         }
+        route("/mod") {
+            get("/") {
+                call.respondTwig("list", mapOf("list" to listIdeas()))
+            }
+        }
 
         static("/static") {
             resources("static")
