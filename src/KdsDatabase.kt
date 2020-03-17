@@ -20,7 +20,7 @@ fun insertIdea(idea: Idea) {
 
 fun listIdeas(): List<Idea> {
     db.open().use {
-        return it.createQuery("SELECT * FROM kds_idea")
+        return it.createQuery("SELECT id, idea, date, source_link source FROM kds_idea")
             .executeAndFetch(Idea::class.java)
     }
 }
