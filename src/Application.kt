@@ -65,6 +65,11 @@ fun Application.module() {
                     }
             }
         }
+
+        get("/success"){
+            call.respondTwig("success")
+        }
+
         get("/todo") {
             call.respondHtml {
                 body {

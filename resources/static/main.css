@@ -36,7 +36,7 @@ h1, label{
     font-size: 25px;
     margin: 30px auto;
 }
-.submit{
+.button{
     cursor: pointer;
     color: white;
     font-size: 16px;
@@ -89,7 +89,7 @@ input[type=date]::-webkit-clear-button {
 
 h3{  font-size: 15px}
 
-.submit:hover{ background-color: #f45b69; }
+.button:hover{ background-color: #f45b69; }
 
 @media only screen and (min-width : 280px) {
     .content{ width: 95%; height: 95%}
@@ -100,9 +100,9 @@ h3{  font-size: 15px}
 }
 
 @media only screen and (min-width : 768px) {
-    .content{ width: 80%; height: 90% }
+    .content{ width: 80%; height: 95% }
 }
 
 @media only screen and (min-width : 992px) {
-    .content{ width: 70%;  height: 90%}
+    .content{ width: 70%;  height: 95%}
 }
