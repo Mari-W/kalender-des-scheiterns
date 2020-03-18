@@ -24,10 +24,10 @@
             <br>
             <div class="well">
                 <p>Nach dem <b><a target="_blank" rel="noopener noreferrer"
-                                  href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a></b>gibt es
+                                  href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> </b>gibt es
                     jetzt den <b>KALENDER DES SCHEITERNS 2</b>.
                     <br>Wir machen den gemeinsam. Ihr habt 7 Tage Zeit, eure Ideen einzusenden.
-                    Du Kannst entweder ein <b>selbst erlebtes oder ein historisch belegtes</b> Ereignis einreichen!
+                    Du Kannst entweder ein <b>selbst erlebtes oder ein historisch belegte Ereignis</b> einreichen!
                     Danach bekommt ihr weitere 7 Tage, um via Voting das Ereignis für die einzelnen Tage zu bestimmen.
                     Das Ereignis mit den meisten Votes wird gedruckt.
                     Mein Verlag Voland & Quist wird ihn rausbringen.
@@ -48,7 +48,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="hist" role="tabpanel" aria-labelledby="hist-tab">
                     <div class="floaty">
-                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel</p>
+                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel 🖯</p>
                         <div class="examplepic">
                             <img id="imagea" src="static/hist-example.png" class="card-img-top" alt="...">
                         </div>
@@ -58,7 +58,7 @@
                             <input hidden value="historic" name="type"/>
                             <label>
                                 Was?<br>
-                                <textarea class="text text1" name="text" maxlength="420" minlength="5"
+                                <textarea class="text text1" name="description" maxlength="420" minlength="5"
                                           placeholder="Was ist passiert?" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
@@ -81,14 +81,14 @@
                                        oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>
                             </label>
                             <div class="g-recaptcha" data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP">
-                                <button type="submit" class="btn btn-danger button">Submit</button>
+                                <button type="submit" class="btn btn-danger button"><b>Submit</b></button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pers" role="tabpanel" aria-labelledby="pers-tab">
                     <div class="floaty">
-                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel</p>
+                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel 🖯</p>
                         <div class="examplepic">
                             <img id="imageb" src="static/pers-example.png" class="card-img-top" alt="...">
                         </div>
@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label>
                                 Was?<br>
-                                <textarea class="text text1" name="text" maxlength="420" minlength="5"
+                                <textarea class="text text1" name="description" maxlength="420" minlength="5"
                                           placeholder="Was ist passiert?" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
@@ -108,9 +108,12 @@
                                 <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
                             </label>
                             <label>
-                                Bild?<br>
-                                <input type="file" class="form-control-file" id="img" name="img" accept="image/*"
-                                       style="zoom: 70%">
+                                Bild?
+                                <label for="img" class="button">
+                                    Hochladen
+                                </label>
+                                <input class="form-control-file" id="img" name="img" accept="image/*"
+                                       style="zoom: 70%" type="file"/>
                             </label>
                             <label>
                                 Wer?<br>
@@ -120,7 +123,7 @@
                                        oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>
                             </label>
                             <div class="g-recaptcha" data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP">
-                                <button type="submit" class="btn btn-danger button">Submit</button>
+                                <button type="submit" class="btn btn-danger button"><b>Submit</b></button>
                             </div>
                         </div>
                     </form>

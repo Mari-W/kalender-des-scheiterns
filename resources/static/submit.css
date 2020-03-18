@@ -14,9 +14,12 @@ body {
     padding: 100px 25px;
 }
 
-.form{ width: 100%; height: 100%; }
+.form {
+    width: 100%;
+    height: 100%;
+}
 
-h1, h2, .text, label{
+h1, h2, .text, label {
     display: block;
 }
 
@@ -32,14 +35,17 @@ label {
     margin: 20px auto;
 }
 
-.gentext{
-     color: #606060;
-     font-weight: bold;
-     font-size: 20px;
- }
+.gentext {
+    color: #606060;
+    font-weight: bold;
+    font-size: 20px;
+}
 
+input[type="file"] {
+    display: none;
+}
 
-.button{
+.button {
     cursor: pointer;
     color: white;
     font-size: 16px;
@@ -49,7 +55,9 @@ label {
     padding: 10px 10px;
     border-radius: 5px;
     background-color: #f45b69;
+    display: inline-block;
 }
+
 .button-choose {
     color: white;
     text-transform: uppercase;
@@ -60,9 +68,9 @@ label {
     background-color: #f45b69;
 }
 
-textarea{
+textarea {
     resize: none;
-    overflow:hidden;
+    overflow: hidden;
     height: auto;
 }
 
@@ -92,7 +100,8 @@ input[type=date]::-webkit-clear-button {
 .text2 {
     width: 75%;
 }
-.text, .source{
+
+.text, .source {
     height: 30px;
     border: none;
     border-radius: 5px;
@@ -113,30 +122,78 @@ input[type=date]::-webkit-clear-button {
     float: right;
 }
 
-h3{  font-size: 15px}
-
-.button:hover{ background-color: #f45b69; }
-
-@media only screen and (min-width : 280px) {
-    .content{ width: 95%; height: 95%}
-    .examplepic {height: 110%; margin-bottom: 20px; width: 100%}
-    .floaty {float:left}
+h3 {
+    font-size: 15px
 }
 
-@media only screen and (min-width : 480px) {
-    .content{ width: 93%;  height: 95% }
-    .examplepic {height: 110%; margin-bottom: 20px; width: 100%}
-    .floaty {float:left}
+.button:hover {
+    background-color: #f45b69;
 }
 
-@media only screen and (min-width : 768px) {
-    .content{ width: 85%; height: 95% }
-    .examplepic {height: 10px; margin-bottom: 0px; width: 150px}
-    .floaty {float:right}
+@media only screen and (min-width: 280px) {
+    .content {
+        width: 95%;
+        height: 95%
+    }
+
+    .examplepic {
+        height: 110%;
+        margin-bottom: 20px;
+        width: 100%
+    }
+
+    .floaty {
+        float: left
+    }
 }
 
-@media only screen and (min-width : 992px) {
-    .content{ width: 80%;  height: 95%}
-    .examplepic {height: 10px; margin-bottom: 0px; width: 150px}
-    .floaty {float:right}
+@media only screen and (min-width: 480px) {
+    .content {
+        width: 93%;
+        height: 95%
+    }
+
+    .examplepic {
+        height: 110%;
+        margin-bottom: 20px;
+        width: 100%
+    }
+
+    .floaty {
+        float: left
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .content {
+        width: 85%;
+        height: 95%
+    }
+
+    .examplepic {
+        height: 10px;
+        margin-bottom: 0px;
+        width: 150px
+    }
+
+    .floaty {
+        float: right
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .content {
+        width: 80%;
+        height: 95%
+    }
+
+    .examplepic {
+        height: 10px;
+        margin-bottom: 0px;
+        width: 150px
+    }
+
+    .floaty {
+        float: right
+    }
 }
