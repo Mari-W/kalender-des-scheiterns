@@ -1,12 +1,12 @@
-.APPROVED {
+.approved {
     background-color: lightgreen;
 }
 
-.DENIED {
+.denied {
     background-color: lightcoral;
 }
 
-.PENDING {
+.pending {
     background-color: lightgray;
 }
 
