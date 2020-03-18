@@ -44,6 +44,7 @@ fun Application.module() {
                             is PartData.FormItem -> it.name to it.value
                             is PartData.FileItem -> it.name to it.originalFileName
                             else -> {
+                                println("Forbidden PartData")
                                 call.respond(HttpStatusCode.Forbidden)
                                 return@post
                             }
@@ -51,6 +52,7 @@ fun Application.module() {
                     }.toMap().apply {
                         try {
                             if (!containsKey("type")) {
+                                println("Invalid Type")
                                 call.respond(HttpStatusCode.Forbidden)
                             } else {
                                 val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
@@ -70,13 +72,16 @@ fun Application.module() {
                                     Database.insert(entry)
                                     call.respondRedirect("/success")
                                 } else {
+                                    println("Invalid Other")
                                     call.respond(HttpStatusCode.Forbidden)
                                 }
 
                             }
                         } catch (e: IllegalArgumentException) {
+                            println("Illegal Args")
                             call.respond(HttpStatusCode.Forbidden)
                         } catch (e: NullPointerException) {
+                            println("Nullpointer")
                             call.respond(HttpStatusCode.Forbidden)
                         }
                     }
