@@ -68,7 +68,7 @@ object Database {
 
     private fun check(entry: Entry): Boolean {
         val len = entry.description.length
-        return if (!urlCheck.matcher(entry.source).matches())
+        return if (entry.type == Type.HISTORIC && !urlCheck.matcher(entry.source).matches())
             false
         else 5 <= len || len <= 420
     }
