@@ -1,0 +1,11 @@
+.APPROVED {
+    background-color: lightgreen;
+}
+
+.DENIED {
+    background-color: lightcoral;
+}
+
+.PENDING {
+    background-color: lightgray;
+}

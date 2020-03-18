@@ -10,7 +10,7 @@ private val templates = mutableMapOf<String, JtwigTemplate>()
 
 suspend fun ApplicationCall.respondTwig(template: String, model: Map<String, Any> = mapOf()) {
     if (!templates.containsKey(template))
-        templates[template] = JtwigTemplate.classpathTemplate("$template.twig")
+        templates[template] = JtwigTemplate.classpathTemplate("template/$template.twig")
     val twigModel = JtwigModel.newModel()
     model.forEach { (key, value) ->
         twigModel.with(key, value)

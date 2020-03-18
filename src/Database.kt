@@ -30,9 +30,26 @@ object Database {
         }
     }
 
+    fun changeStatus(id: Int, status: String) {
+        db.open().use {
+            it.createQuery("UPDATE entries SET status=:status WHERE id=:id ")
+                .addParameter("id", id)
+                .addParameter("status", status)
+                .executeUpdate()
+        }
+    }
+
     fun list(): List<Entry> {
         db.open().use {
             return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY MONTH(date), DAY(date)")
+                .executeAndFetch(Entry::class.java)
+        }
+    }
+
+    fun listBy(order: String): List<Entry> {
+        db.open().use {
+            return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY :order")
+                .addParameter("order", order)
                 .executeAndFetch(Entry::class.java)
         }
     }

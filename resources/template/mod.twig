@@ -1,0 +1,87 @@
+<!doctype html>
+<!--suppress HtmlUnknownTarget -->
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/mod.css">
+    <title>KDS Mod Page</title>
+</head>
+<body>
+<h1>
+    Halli hallo, heute würde ich gerne meine Liste wie folgt sortieren:
+</h1>
+
+<form action="/mod" method="post" enctype="multipart/form-data" style="display: inline">
+    <label>
+        <select name="order" class="selectpicker" required>
+            <option value="Datum" {% if order == "date" %} selected {% endif %}>Datum</option>
+            <option value="Art"{% if order == "type" %} selected {% endif %}>Art</option>
+            <option value="Status"{% if order == "status" %} selected {% endif %}>Status</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Los!</button>
+    </label>
+</form>
+
+<div class="container-fluid">
+    <div class="row align-items-start" style="background-color: gray">
+        <div class="col justify-content-start">ID</div>
+        <div class="col justify-content-start">Datum</div>
+        <div class="col justify-content-start">Art</div>
+        <div class="col justify-content-start">Beschreibung</div>
+        <div class="col justify-content-start">Quelle</div>
+        <div class="col justify-content-start">Name</div>
+        <div class="col justify-content-start">Bild</div>
+        <div class="col justify-content-start">Status</div>
+    </div>
+    {% for i in list %}
+        <div class="row align-items-start {{ i.status }}">
+            <div class="col justify-content-start">{{ i.id }}</div>
+            <div class="col justify-content-start">{{ i.date | split('-')[2] }}.{{ i.date|split("-")[1] }}
+                ({{ i.date|split("-")[0] }})
+            </div>
+            <div class="col justify-content-start">{{ i.type }}</div>
+            <div class="col justify-content-start"
+                 title="{{ i.description }}">{{ i.description | slice(0, 21) }}{% if i.source|length > 22 %}..{% endif %}</div>
+            <div class="col justify-content-start" title="{{ i.source }}"><a
+                        href="{{ i.source }}"> {{ i.source | split('//')[1] | slice(0, 21) }}{% if i.source | split('//')[1] | length > 22 %}..{% endif %}</a>
+            </div>
+            <div class="col justify-content-start">{{ i.name }}</div>
+            <div class="col justify-content-start"><a href="{{ i.picture }}">{{ i.picture }}</a></div>
+            <div class="col justify-content-start">
+                <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
+                    <label>
+                        <select name="status" class="selectpicker" required>
+                            <option value="PENDING" {% if i.status== "PENDING" %} selected {% endif %}>Pending</option>
+                            <option value="DENIED"{% if i.status== "DENIED" %} selected {% endif %}>Denied</option>
+                            <option value="APPROVED"{% if i.status== "APPROVED" %} selected {% endif %}>Approved
+                            </option>
+                        </select>
+                        <input type="text" name="id" value="{{ i.id }}" hidden>
+                        <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Ändern</button>
+                    </label>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
