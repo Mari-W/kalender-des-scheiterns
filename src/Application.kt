@@ -63,12 +63,12 @@ fun Application.module() {
                                 val okay = when (type) {
                                     Type.PERSONAL -> containsKey("description") && containsKey("date")
                                     Type.HISTORIC -> containsKey("description") && containsKey("date") && containsKey("source")
-                                     else -> false
+                                    else -> false
                                 }
                                 if (okay && type != null) {
                                     val entry = Entry(
                                         type = type,
-                                        source = if (type==Type.HISTORIC) get("source")!! else "",
+                                        source = if (type == Type.HISTORIC) get("source")!! else "",
                                         date = Date.valueOf(get("date")!!),
                                         description = get("description")!!,
                                         name = if (containsKey("name")) get("name")!! else ""
@@ -163,7 +163,7 @@ suspend fun ApplicationCall.respondTwig(template: String, model: Map<String, Any
 @KtorExperimentalAPI
 object Config {
 
-    lateinit var conf: ApplicationConfig
+    private lateinit var conf: ApplicationConfig
 
     fun init(config: ApplicationConfig) {
         conf = config
