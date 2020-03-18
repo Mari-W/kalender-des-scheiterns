@@ -132,7 +132,7 @@ h3{  font-size: 15px}
 @media only screen and (min-width : 768px) {
     .content{ width: 85%; height: 95% }
     .examplepic {height: 10px; margin-bottom: 0px; width: 150px}
-    .floaty {float:left}
+    .floaty {float:right}
 }
 
 @media only screen and (min-width : 992px) {
