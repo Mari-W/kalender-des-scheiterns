@@ -7,8 +7,6 @@ import io.ktor.routing.*
 import io.ktor.http.content.*
 import io.ktor.features.*
 import org.slf4j.event.*
-import io.ktor.auth.*
-import io.ktor.gson.*
 import io.ktor.html.respondHtml
 import io.ktor.http.HttpStatusCode
 import io.ktor.util.KtorExperimentalAPI
@@ -33,13 +31,12 @@ fun Application.module() {
         filter { call -> call.request.path().startsWith("/") }
     }
 
-
-    install(ContentNegotiation) { gson {} }
-
     routing {
+
         get("/") {
             call.respondRedirect("/submit")
         }
+
         route("/submit") {
             get("/") {
                 call.respondTwig("submit")
@@ -47,23 +44,25 @@ fun Application.module() {
             post("/") {
                 if (!call.request.isMultipart())
                     call.respond(HttpStatusCode.Forbidden)
-                call.receiveMultipart().readAllParts().map {
-                    when (it) {
-                        is PartData.FormItem -> it.name to it.value
-                        else -> {
-                            "" to ""
+                else
+                    call.receiveMultipart().readAllParts().map {
+                        when (it) {
+                            is PartData.FormItem -> it.name to it.value
+                            else -> {
+                                call.respond(HttpStatusCode.Forbidden)
+                                return@post
+                            }
                         }
+                    }.toMap().apply {
+                        if (containsKey("text") && containsKey("date") && containsKey("source"))
+                            try {
+                                DB.insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
+                                call.respondRedirect("/submit")
+                            } catch (e: IllegalArgumentException) {
+                                call.respond(HttpStatusCode.Forbidden)
+                            }
+                        else  call.respond(HttpStatusCode.Forbidden)
                     }
-                }.toMap().apply {
-                    if (containsKey("text") && containsKey("date") && containsKey("source"))
-                        try {
-                            DB.insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
-                            call.respondRedirect("/submit")
-                        } catch (e: IllegalArgumentException) {
-                            call.respond(HttpStatusCode.Forbidden)
-                        }
-                    else  call.respond(HttpStatusCode.Forbidden)
-                }
             }
         }
         get("/todo") {
