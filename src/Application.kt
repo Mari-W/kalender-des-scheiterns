@@ -42,6 +42,7 @@ fun Application.module() {
                     call.receiveMultipart().readAllParts().map {
                         when (it) {
                             is PartData.FormItem -> it.name to it.value
+                            is PartData.FileItem -> it.name to it.originalFileName
                             else -> {
                                 call.respond(HttpStatusCode.Forbidden)
                                 return@post
