@@ -17,7 +17,8 @@
     Willkommen im Mod Panel!
 </h1>
 <h3>
-    Schlechte Layouts und Designs seid ihr sicher schon von Parlamentpages gewohnt, aber Funktionalität vor Schönheit, oder so.. Viel Spaß!
+    Schlechte Layouts und Designs seid ihr sicher schon von Parlamentpages gewohnt, aber Funktionalität vor Schönheit,
+    oder so.. Viel Spaß!
 </h3>
 <h4 style="display: inline">Zeige</h4>
 <form action="/mod/show/all/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
@@ -32,7 +33,7 @@
 <form action="/mod/show/pending/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
     <button type="submit" class="btn btn-primary btn" style="display: inline">zu bearbeitende</button>
 </form>
-<h3 style="display: inline">sortiert nach</h3>
+<h4 style="display: inline">sortiert nach</h4>
 <form action="/mod/show/{{ status }}/sortby/date" method="get" enctype="multipart/form-data" style="display: inline">
     <button type="submit" class="btn btn-primary btn" style="display: inline">datum</button>
 </form>
@@ -48,7 +49,7 @@
     <button type="submit" class="btn btn-primary btn" style="display: inline">historisch</button>
 </form>
 <br>
-<br>
+<h4>Geladene Einträge: {{ list|length }}</h4>
 <div class="container-fluid">
     <div class="row align-items-start" style="background-color: gray">
         <div class="col-sm-1 justify-content-start">ID</div>
@@ -63,7 +64,7 @@
     {% for i in list %}
         <div class="row align-items-start {{ i.status|lower }}">
             <div class="col-sm-1 justify-content-start">{{ i.id }}</div>
-            <div class="col justify-content-start">{{ i.date | split('-')[1] }}-{{ i.date|split("-")[2] }}
+            <div class="col justify-content-start">{{ i.date|split('-')[1] }}-{{ i.date|split("-")[2] }}
                 ({{ i.date|split("-")[0] }})
             </div>
             <div class="col justify-content-start">{{ i.type }}</div>
@@ -80,13 +81,16 @@
                         <input type="text" name="id" value="{{ i.id }}" hidden>
                         <input type="text" name="order" value="{{ order|lower }}" hidden>
                         <input type="text" name="state" value="{{ status|lower }}" hidden>
-                        <button title="Akzeptieren" type="submit" name="status" value="APPROVED" class="btn btn-success btn-sm"
+                        <button title="Akzeptieren" type="submit" name="status" value="APPROVED"
+                                class="btn btn-success btn-sm"
                                 style="display: inline" {% if i.status== "APPROVED" %} hidden {% endif %}>✓
                         </button>
-                        <button title="Ablehnen"type="submit" name="status" value="DENIED" class="btn btn-danger btn-sm"
+                        <button title="Ablehnen" type="submit" name="status" value="DENIED"
+                                class="btn btn-danger btn-sm"
                                 style="display: inline" {% if i.status== "DENIED" %} hidden {% endif %}>✗
                         </button>
-                        <button title="Zurücksetzen zu 'zu bearbeiten' (wow ohne Gänsefüßchen wär das jetzt weird)" type="submit" name="status" value="PENDING" class="btn btn-secondary btn-sm"
+                        <button title="Zurücksetzen zu 'zu bearbeiten' (wow ohne Gänsefüßchen wär das jetzt weird)"
+                                type="submit" name="status" value="PENDING" class="btn btn-secondary btn-sm"
                                 style="display: inline" {% if i.status== "PENDING" %} hidden {% endif %}>⧖
                         </button>
                     </label>
