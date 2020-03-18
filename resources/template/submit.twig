@@ -22,30 +22,37 @@
 
             <br>
             <div class="well">
-                <p>Nach dem <a rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> gibt es jetzt den <b>KALENDER DES SCHEITERNS 2</b>.
-                    <br>Wir machen den gemeinsam. Ihr habt 7 Tage Zeit, eure Ideen einzusenden. Danach bekommt ihr weitere 7 Tage, um via Voting das Ereignis für die einzelnen Tage zu bestimmen. Das Ereignis mit den meisten Votes wird gedruckt. Mein Verlag Voland & Quist wird ihn rausbringen. Nicos Gewinn-Anteil geht an Sea-Watch.</p>
+                <p>Nach dem <a target="_blank" rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> gibt es jetzt den <b>KALENDER DES SCHEITERNS 2</b>.
+                    <br>Wir machen den gemeinsam. Ihr habt 7 Tage Zeit, eure Ideen einzusenden.
+                    Du Kannst entweder ein selbst erlebtes oder ein historisch belegtes Ereignis einreichen!
+                    Danach bekommt ihr weitere 7 Tage, um via Voting das Ereignis für die einzelnen Tage zu bestimmen.
+                    Das Ereignis mit den meisten Votes wird gedruckt.
+                    Mein Verlag Voland & Quist wird ihn rausbringen.
+                    Nicos Gewinn-Anteil geht an Sea-Watch.
+                </p>
             </div>
             <br>
             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link gentext active" id="hist-tab" data-toggle="tab" href="#hist" role="tab"
-                       aria-controls="hist" aria-selected="true">Historisches Event</a>
+                       aria-controls="hist" aria-selected="true">Historisch</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link gentext" id="pers-tab" data-toggle="tab" href="#pers" role="tab"
-                       aria-controls="pers" aria-selected="false">Eigenes Erlebnis</a>
+                       aria-controls="pers" aria-selected="false">Persönlich</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="hist" role="tabpanel" aria-labelledby="hist-tab">
                     <div class="floaty">
-                        <p style="margin-bottom: 0">Beispiel (klick mich)</p>
+                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel</p>
                         <div class="examplepic">
                             <img id="imagea" src="static/hist-example.png" class="card-img-top" alt="...">
                         </div>
                     </div>
                     <div class="form">
                         <form action="/submit" method="post" enctype="multipart/form-data">
+                            <input hidden value="historic" name="type"/>
                             <label>
                                 Was?<br>
                                 <textarea class="text text1" name="text" maxlength="420" minlength="5"
@@ -64,9 +71,9 @@
                                        maxlength="1000" required>
                             </label>
                             <label>
-                                Wer bist du?<br>
-                                <input class="text text2" name="sender" maxlength="100"
-                                          placeholder="Name / Pseudonym" required
+                                Wer?<br>
+                                <input class="text text2" name="name" maxlength="100"
+                                          placeholder="Dein Name / Pseudonym" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>
                             </label>
@@ -78,12 +85,13 @@
                 </div>
                 <div class="tab-pane fade" id="pers" role="tabpanel" aria-labelledby="pers-tab">
                     <div class="floaty">
-                        <p style="margin-bottom: 0">Beispiel (klick mich)</p>
+                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel</p>
                         <div class="examplepic">
                             <img id="imageb" src="static/pers-example.png" class="card-img-top" alt="...">
                         </div>
                     </div>
                     <form action="/submit" method="post" enctype="multipart/form-data">
+                        <input hidden value="personal" name="type"/>
                         <div class="form-group">
                             <label>
                                 Was?<br>
@@ -102,9 +110,9 @@
                                        style="zoom: 70%">
                             </label>
                             <label>
-                                Wer bist du?<br>
-                                <input class="text text2" name="sender" maxlength="100"
-                                       placeholder="Name / Pseudonym" required
+                                Wer?<br>
+                                <input class="text text2" name="name" maxlength="100"
+                                       placeholder="Dein Name / Pseudonym" required
                                        autofocus
                                        oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>
                             </label>
@@ -115,9 +123,6 @@
                     </form>
                 </div>
                 <br>
-                <p>
-                    Der <a target="_blank" rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> ist ein ganz besonderer Kalender der.. bin ich Redenschreiber oder Programmierer?
-                </p>
                 &copy; Marius Weidner & Moritz Geist 2020
             </div>
         </div>
