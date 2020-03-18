@@ -57,7 +57,7 @@ fun Application.module() {
                         if (containsKey("text") && containsKey("date") && containsKey("source"))
                             try {
                                 DB.insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
-                                call.respondRedirect("/submit")
+                                call.respondRedirect("/success")
                             } catch (e: IllegalArgumentException) {
                                 call.respond(HttpStatusCode.Forbidden)
                             }
