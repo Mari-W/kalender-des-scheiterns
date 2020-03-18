@@ -17,34 +17,35 @@
     Willkommen im Mod Panel!
 </h1>
 <h3>
-    Schlechte Layouts und Designs seid ihr sicher schon von Parlamentpages gewohnt. Also viel spaß!
-    (Aber besser funktional statt schön!)
+    Schlechte Layouts und Designs seid ihr sicher schon von Parlamentpages gewohnt, aber Funktionalität vor Schönheit, oder so.. Viel Spaß!
 </h3>
 <h4 style="display: inline">Zeige</h4>
 <form action="/mod/show/all/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">alle</button>
+    <button type="submit" class="btn btn-primary btn" style="display: inline">alle</button>
 </form>
 <form action="/mod/show/approved/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">akzeptierte</button>
+    <button type="submit" class="btn btn-primary btn" style="display: inline">akzeptierte</button>
 </form>
 <form action="/mod/show/denied/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">abgelehnte</button>
+    <button type="submit" class="btn btn-primary btn" style="display: inline">abgelehnte</button>
 </form>
 <form action="/mod/show/pending/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">zu bearbeitende</button>
+    <button type="submit" class="btn btn-primary btn" style="display: inline">zu bearbeitende</button>
 </form>
 <h3 style="display: inline">sortiert nach</h3>
 <form action="/mod/show/{{ status }}/sortby/date" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">datum</button>
+    <button type="submit" class="btn btn-primary btn" style="display: inline">datum</button>
 </form>
 <form action="/mod/show/{{ status }}/sortby/status" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">status</button>
+    <button type="submit" class="btn btn-primary btn" style="display: inline">status</button>
 </form>
-<form action="/mod/show/{{ status }}/sortby/personal" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">persönlich</button>
+<form action="/mod/show/{{ status }}/sortby/personal" method="get" enctype="multipart/form-data"
+      style="display: inline">
+    <button type="submit" class="btn btn-primary btn" style="display: inline">persönlich</button>
 </form>
-<form action="/mod/show/{{ status }}/sortby/historic" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">historisch</button>
+<form action="/mod/show/{{ status }}/sortby/historic" method="get" enctype="multipart/form-data"
+      style="display: inline">
+    <button type="submit" class="btn btn-primary btn" style="display: inline">historisch</button>
 </form>
 <br>
 <br>
@@ -61,7 +62,7 @@
         <div class="col justify-content-start">Change Status</div>
     </div>
     {% for i in list %}
-        <div class="row align-items-start {{ i.status }}">
+        <div class="row align-items-start {{ i.status|lower }}">
             <div class="col-sm justify-content-start">{{ i.id }}</div>
             <div class="col justify-content-start">{{ i.date | split('-')[2] }}.{{ i.date|split("-")[1] }}
                 ({{ i.date|split("-")[0] }})
@@ -80,14 +81,14 @@
                         <input type="text" name="id" value="{{ i.id }}" hidden>
                         <input type="text" name="order" value="{{ order|lower }}" hidden>
                         <input type="text" name="state" value="{{ status|lower }}" hidden>
-                        <button type="submit" name="status" value="APPROVED" class="btn btn-success btn-sm"
-                                style="display: inline" {% if i.status== "APPROVED" %} disabled {% endif %}>✓
+                        <button title="Akzeptieren" type="submit" name="status" value="APPROVED" class="btn btn-success btn-sm"
+                                style="display: inline" {% if i.status== "APPROVED" %} hidden {% endif %}>✓
                         </button>
-                        <button type="submit" name="status" value="DENIED" class="btn btn-danger btn-sm"
-                                style="display: inline" {% if i.status== "DENIED" %} disabled {% endif %}>✗
+                        <button title="Ablehnen"type="submit" name="status" value="DENIED" class="btn btn-danger btn-sm"
+                                style="display: inline" {% if i.status== "DENIED" %} hidden {% endif %}>✗
                         </button>
-                        <button type="submit" name="status" value="PENDING" class="btn btn-secondary btn-sm"
-                                style="display: inline" {% if i.status== "PENDING" %} disabled{% endif %}>⧖
+                        <button title="Zurücksetzen zu 'zu bearbeiten' (wow ohne Gänsefüßchen wär das jetzt weird)" type="submit" name="status" value="PENDING" class="btn btn-secondary btn-sm"
+                                style="display: inline" {% if i.status== "PENDING" %} hidden {% endif %}>⧖
                         </button>
                     </label>
                 </form>
