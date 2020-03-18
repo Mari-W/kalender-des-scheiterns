@@ -1,14 +1,18 @@
 package de.moeri
 
 import io.ktor.application.*
+import io.ktor.config.ApplicationConfig
 import io.ktor.response.*
 import io.ktor.request.*
 import io.ktor.routing.*
 import io.ktor.http.content.*
 import io.ktor.features.*
+import io.ktor.http.ContentType
 import org.slf4j.event.*
 import io.ktor.http.HttpStatusCode
 import io.ktor.util.KtorExperimentalAPI
+import org.jtwig.JtwigModel
+import org.jtwig.JtwigTemplate
 import java.sql.Date
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -139,4 +143,34 @@ fun Application.module() {
             resources("static")
         }
     }
+}
+
+private val templates = mutableMapOf<String, JtwigTemplate>()
+
+suspend fun ApplicationCall.respondTwig(template: String, model: Map<String, Any> = mapOf()) {
+    if (!templates.containsKey(template))
+        templates[template] = JtwigTemplate.classpathTemplate("template/$template.twig")
+    val twigModel = JtwigModel.newModel()
+    model.forEach { (key, value) ->
+        twigModel.with(key, value)
+    }
+    respondText(
+        templates[template]!!.render(twigModel),
+        ContentType.Text.Html
+    )
+}
+
+@KtorExperimentalAPI
+object Config {
+
+    lateinit var conf: ApplicationConfig
+
+    fun init(config: ApplicationConfig) {
+        conf = config
+    }
+
+    operator fun get(key: String): String {
+        return conf.propertyOrNull(key)?.getString() ?: "Aua"
+    }
+
 }
