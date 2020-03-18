@@ -7,9 +7,16 @@ import java.util.regex.Pattern
 
 
 @KtorExperimentalAPI
-object DB {
+object Database {
+
+    lateinit var db: Sql2o
+
+    fun init(){
+        db = Sql2o(Config["db.url"], Config["db.user"], Config["db.pass"])
+    }
+
     private val urlCheck: Pattern = Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
-    private val db: Sql2o = Sql2o(Config["db.url"], Config["db.user"], Config["db.pass"])
+
 
     fun insertIdea(idea: Idea) {
         if (!controlIdea(idea)) {

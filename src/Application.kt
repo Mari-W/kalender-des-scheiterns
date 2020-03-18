@@ -10,12 +10,9 @@ import org.slf4j.event.*
 import io.ktor.html.respondHtml
 import io.ktor.http.HttpStatusCode
 import io.ktor.util.KtorExperimentalAPI
-import kotlinx.css.h1
-import kotlinx.css.html
-import kotlinx.css.p
+import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
 import kotlinx.html.h1
-import java.lang.Exception
 import java.sql.Date
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -25,6 +22,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 fun Application.module() {
 
     Config.init(environment.config)
+    Database.init()
 
     install(CallLogging) {
         level = Level.INFO
@@ -56,17 +54,17 @@ fun Application.module() {
                     }.toMap().apply {
                         if (containsKey("text") && containsKey("date") && containsKey("source"))
                             try {
-                                DB.insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
+                                Database.insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
                                 call.respondRedirect("/success")
                             } catch (e: IllegalArgumentException) {
                                 call.respond(HttpStatusCode.Forbidden)
                             }
-                        else  call.respond(HttpStatusCode.Forbidden)
+                        else call.respond(HttpStatusCode.Forbidden)
                     }
             }
         }
 
-        get("/success"){
+        get("/success") {
             call.respondTwig("success")
         }
 
@@ -94,7 +92,7 @@ fun Application.module() {
 
         route("/mod") {
             get("/") {
-                call.respondTwig("list", mapOf("list" to DB.listIdeas()))
+                call.respondTwig("list", mapOf("list" to Database.listIdeas()))
             }
         }
 

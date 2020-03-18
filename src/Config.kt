@@ -13,6 +13,7 @@ object Config {
     }
 
     operator fun get(key: String): String {
-        return conf.propertyOrNull("kds.$key")?.getString() ?: ""
+        return conf.propertyOrNull(key)?.getString() ?: "Aua"
     }
+
 }
