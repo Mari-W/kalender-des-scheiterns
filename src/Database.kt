@@ -24,7 +24,7 @@ object Database {
             throw IllegalArgumentException()
         }
         db.open().use {
-            it.createQuery("INSERT INTO entries (type, source, date, desc, name, picture) VALUES (:type, :source, :date, :desc, :name, :picture)")
+            it.createQuery("INSERT INTO entries (type, source, date, description, name, picture) VALUES (:type, :source, :date, :description, :name, :picture)")
                 .bind(entry)
                 .executeUpdate()
         }
@@ -111,7 +111,7 @@ data class Entry(
     val description: String,
     val picture: String = "",
     val name: String = "Unknown",
-    val status: Status
+    val status: Status = Status.PENDING
 )
 
 enum class Type {
