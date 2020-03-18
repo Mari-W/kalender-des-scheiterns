@@ -85,8 +85,14 @@ input[type=date]::-webkit-clear-button {
     margin-bottom: 30px;
 }
 
-.text, .source{
+.text1 {
+    width: 75%;
+}
+
+.text2 {
     width: 90%;
+}
+.text, .source{
     height: 30px;
     border: none;
     border-radius: 5px;
@@ -98,22 +104,39 @@ input[type=date]::-webkit-clear-button {
     margin-bottom: 0;
 }
 
+.examplepic {
+    height: 10px;
+    width: 150px;
+}
+
+.floaty {
+    float: right;
+}
+
 h3{  font-size: 15px}
 
 .button:hover{ background-color: #f45b69; }
 
 @media only screen and (min-width : 280px) {
     .content{ width: 95%; height: 95%}
+    .examplepic {height: 110%; margin-bottom: 20px; width: 100%}
+    .floaty {float:left}
 }
 
 @media only screen and (min-width : 480px) {
-    .content{ width: 90%;  height: 95% }
+    .content{ width: 93%;  height: 95% }
+    .examplepic {height: 110%; margin-bottom: 20px; width: 100%}
+    .floaty {float:left}
 }
 
 @media only screen and (min-width : 768px) {
-    .content{ width: 80%; height: 95% }
+    .content{ width: 85%; height: 95% }
+    .examplepic {height: 10px; margin-bottom: 0px; width: 150px}
+    .floaty {float:right}
 }
 
 @media only screen and (min-width : 992px) {
-    .content{ width: 70%;  height: 95%}
+    .content{ width: 80%;  height: 95%}
+    .examplepic {height: 10px; margin-bottom: 0px; width: 150px}
+    .floaty {float:right}
 }

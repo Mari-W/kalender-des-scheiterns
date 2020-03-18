@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.5.0/viewer.min.css" integrity="sha256-MpORFsKmYYmQvFqOG/2AbIcy09vQBwjfZDKM+Ri/m0Y=" crossorigin="anonymous" />
     <link rel="stylesheet" href="static/submit.css">
 
     <title>Kalender des Scheiterns Voting</title>
@@ -36,11 +37,17 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="hist" role="tabpanel" aria-labelledby="hist-tab">
+                    <div class="floaty">
+                        <p style="margin-bottom: 0">Beispiel (klick mich)</p>
+                        <div class="examplepic">
+                            <img id="imagea" src="static/hist-example.png" class="card-img-top" alt="...">
+                        </div>
+                    </div>
                     <div class="form">
                         <form action="/submit" method="post" enctype="multipart/form-data">
                             <label>
                                 Was?
-                                <textarea class="text" name="text" maxlength="420" minlength="5"
+                                <textarea class="text text1" name="text" maxlength="420" minlength="5"
                                           placeholder="Was ist passiert?" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
@@ -51,7 +58,7 @@
                             </label>
                             <label>
                                 Quelle?
-                                <input type="url" class="source" name="source"
+                                <input type="url" class="source text2" name="source"
                                        placeholder="www.der-postillon.com"
                                        maxlength="1000" required>
                             </label>
@@ -66,7 +73,7 @@
                         <div class="form-group">
                             <label>
                                 Was?
-                                <textarea class="text" name="text" maxlength="420" minlength="5"
+                                <textarea class="text text1" name="text" maxlength="420" minlength="5"
                                           placeholder="Was ist passiert?" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
@@ -104,5 +111,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.5.0/viewer.min.js" integrity="sha256-mLJW+YLWH/4ebMAdPKIX1aTCIE0m2nInDT1NxX8TCBM=" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        const viewer1 = new Viewer(document.getElementById('imagea'), {
+            toolbar: false,
+            title: false,
+            movable: false,
+            rotatable: false,
+            scalable: false,
+            navbar: false
+        });
+    </script>
 </body>
 </html>
