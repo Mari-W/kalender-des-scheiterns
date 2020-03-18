@@ -33,7 +33,7 @@ fun Application.module() {
 
         route("/submit") {
             get("/") {
-                call.respondTwig("submit")
+                call.respondTwig("submit", mapOf("date" to "Uns fehlt noch der 1. August!"))
             }
             post("/") {
                 if (!call.request.isMultipart())
