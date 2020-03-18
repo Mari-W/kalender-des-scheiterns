@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="static/submit.css">
 
     <title>Kalender des Scheiterns Voting</title>
@@ -18,10 +19,9 @@
         <img src="static/nico.svg" class="card-img-top" alt="...">
         <div class="card-body content-body" style="padding: 10px 25px;">
 
+            <br>
             <div class="well">
-                <p class="h2 text-center">Jetzt mitmachen!</p>
-                <p class="h5 text-center">Du weißt nicht was der Kalender des Scheiterns ist?<br><a
-                        rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Klicke hier.</a></p>
+                <p>Nach dem <a rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> gibt es jetzt den <b>KALENDER DES SCHEITERNS 2</b>. Wir machen den gemeinsam. Ihr habt 7 Tage Zeit, eure Ideen einzusenden. Danach bekommt ihr weitere 7 Tage, um via Voting das Ereignis für die einzelnen Tage zu bestimmen. Das Ereignis mit den meisten Votes wird gedruckt. Mein Verlag Voland & Quist wird ihn rausbringen. Nicos Gewinn-Anteil geht an Sea-Watch.</p>
             </div>
             <br>
             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
@@ -39,20 +39,20 @@
                     <div class="form">
                         <form action="/submit" method="post" enctype="multipart/form-data">
                             <label>
-                                Das ist damals tolles passiert:
+                                Was?
                                 <textarea class="text" name="text" maxlength="420" minlength="5"
-                                          placeholder="Beschreibe das Ereignis" required
+                                          placeholder="Was ist passiert?" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                             </label>
                             <label {% if date %} data-toggle="tooltip" data-placement="top" title="{{ date }}" {% endif %}>
-                                Das Geschehen ereignete sich am:
+                                Wann?
                                 <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
                             </label>
                             <label>
-                                Ich belege mein Ereignis mit folgendem Link:
+                                Quelle?
                                 <input type="url" class="source" name="source"
-                                       placeholder="https://www.der-postillon.com/"
+                                       placeholder="www.der-postillon.com"
                                        maxlength="1000" required>
                             </label>
                             <div class="g-recaptcha" data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP">
@@ -65,18 +65,18 @@
                     <form action="/submit" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>
-                                Das ist mir passiert:
+                                Was?
                                 <textarea class="text" name="text" maxlength="420" minlength="5"
-                                          placeholder="Beschreibe das Ereignis" required
+                                          placeholder="Was ist passiert?" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                             </label>
                             <label {% if date %} data-toggle="tooltip" data-placement="top" title="{{ date }}" {% endif %}>
-                                Das Geschehen ereignete sich am:
+                                Wann?
                                 <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
                             </label>
                             <label>
-                                Ich habe noch ein Bild dazu!
+                                Bild?
                                 <input type="file" class="form-control-file" id="img" name="img" accept="image/*"
                                        style="zoom: 70%">
                             </label>
@@ -88,15 +88,23 @@
                 </div>
                 <br>
                 <p>
-                    Der <a target="_blank" rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> ist ein ganz besonderer Kalender der.. bin ich Redenschreiber oder Programmierer?
+                    Der <a target="_blank" rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender
+                        des Scheiterns</a> ist ein ganz besonderer Kalender der.. bin ich Redenschreiber oder
+                    Programmierer?
                 </p>
                 &copy; Marius Weidner & Moritz Geist 2020
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 </body>
 </html>

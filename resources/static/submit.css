@@ -4,7 +4,7 @@ body {
 
 .content {
     position: relative;
-    width: 70%;
+    width: 77%;
     margin: 10vh auto;
     background: #fff;
     border-radius: 8px;
@@ -22,7 +22,6 @@ h1, h2, .text, label{
 
 a {
     color: #f45b69;
-    font-size: 15px;
     white-space: pre-line;
 }
 
