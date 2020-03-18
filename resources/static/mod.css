@@ -9,3 +9,11 @@
 .PENDING {
     background-color: lightgray;
 }
+
+div.row {
+    border: 1px solid;
+    border-bottom: 0;
+}
+.container div.row:last-child {
+    border-bottom: 1px solid;
+}
