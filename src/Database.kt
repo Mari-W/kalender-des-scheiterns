@@ -32,7 +32,7 @@ object Database {
 
     fun list(): List<Entry> {
         db.open().use {
-            return it.createQuery("SELECT id, desc, date, source source FROM entries ORDER BY MONTH(date), DAY(date)")
+            return it.createQuery("SELECT id, type, date, source, desc, name, picture, status FROM entries ORDER BY MONTH(date), DAY(date)")
                 .executeAndFetch(Entry::class.java)
         }
     }
