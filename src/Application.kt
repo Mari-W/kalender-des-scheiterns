@@ -48,14 +48,36 @@ fun Application.module() {
                             }
                         }
                     }.toMap().apply {
-                        if (containsKey("text") && containsKey("date") && containsKey("source"))
-                            try {
-
-                                call.respondRedirect("/success")
-                            } catch (e: IllegalArgumentException) {
+                        try {
+                            if (!containsKey("type")) {
                                 call.respond(HttpStatusCode.Forbidden)
+                            } else {
+                                val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
+                                val okay = when (type) {
+                                    Type.PERSONAL -> containsKey("description") && containsKey("date")
+                                    Type.HISTORIC -> containsKey("description") && containsKey("date") && containsKey("source")
+                                     else -> false
+                                }
+                                if (okay && type != null) {
+                                    val entry = Entry(
+                                        type = type,
+                                        source = if (type==Type.HISTORIC) get("source")!! else "",
+                                        date = Date.valueOf(get("date")!!),
+                                        description = get("text")!!,
+                                        name = if (containsKey("name")) get("name")!! else ""
+                                    )
+                                    Database.insert(entry)
+                                    call.respondRedirect("/success")
+                                } else {
+                                    call.respond(HttpStatusCode.Forbidden)
+                                }
+
                             }
-                        else call.respond(HttpStatusCode.Forbidden)
+                        } catch (e: IllegalArgumentException) {
+                            call.respond(HttpStatusCode.Forbidden)
+                        } catch (e: NullPointerException) {
+                            call.respond(HttpStatusCode.Forbidden)
+                        }
                     }
             }
         }
@@ -69,8 +91,8 @@ fun Application.module() {
                 call.respondRedirect("/mod/show/pending/sortby/date")
             }
             get("/show/{status?}/sortby/{order?}") {
-                val status = if(call.parameters.contains("status")) call.parameters["status"] else "pending"
-                val order = if(call.parameters.contains("order")) call.parameters["order"] else "date"
+                val status = if (call.parameters.contains("status")) call.parameters["status"] else "pending"
+                val order = if (call.parameters.contains("order")) call.parameters["order"] else "date"
                 call.respondTwig(
                     "mod",
                     mapOf(

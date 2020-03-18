@@ -111,7 +111,7 @@ data class Entry(
     val description: String,
     val picture: String = "",
     val name: String = "Unknown",
-    val status: Status
+    val status: Status = Status.PENDING
 )
 
 enum class Type {
