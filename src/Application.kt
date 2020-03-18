@@ -22,10 +22,9 @@ import java.sql.Date
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
-@UseExperimental(KtorExperimentalAPI::class)
 @Suppress("unused") // Referenced in application.conf
-@kotlin.jvm.JvmOverloads
-fun Application.module(testing: Boolean = false) {
+@UseExperimental(KtorExperimentalAPI::class)
+fun Application.module() {
 
     Config.init(environment.config)
 
@@ -34,11 +33,6 @@ fun Application.module(testing: Boolean = false) {
         filter { call -> call.request.path().startsWith("/") }
     }
 
-    install(Authentication) {
-        basic("moderator") {
-            validate { if (it.name == "test" && it.password == "password") UserIdPrincipal(it.name) else null }
-        }
-    }
 
     install(ContentNegotiation) { gson {} }
 
@@ -63,7 +57,7 @@ fun Application.module(testing: Boolean = false) {
                 }.toMap().apply {
                     if (containsKey("text") && containsKey("date") && containsKey("source"))
                         try {
-                            insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
+                            DB.insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
                             call.respondRedirect("/submit")
                         } catch (e: IllegalArgumentException) {
                             call.respond(HttpStatusCode.Forbidden)
@@ -72,39 +66,36 @@ fun Application.module(testing: Boolean = false) {
                 }
             }
         }
-        get("/todo"){
+        get("/todo") {
             call.respondHtml {
                 body {
-                    h1{
+                    h1 {
                         text("reCAPTCHA integration fertig stellen")
                     }
-                    h1{
+                    h1 {
                         text("optional contact field in submit")
                     }
-                    h1{
+                    h1 {
                         text("front page?")
                     }
-                    h1{
+                    h1 {
                         text("submit success page?")
                     }
-                    h1{
+                    h1 {
                         text("moderator page (kds-topsecret.moehritz.de) funktionalität integrieren")
                     }
                 }
             }
         }
+
         route("/mod") {
             get("/") {
-                call.respondTwig("list", mapOf("list" to listIdeas()))
+                call.respondTwig("list", mapOf("list" to DB.listIdeas()))
             }
         }
 
         static("/static") {
             resources("static")
-        }
-
-        get("/json/gson") {
-            call.respond(mapOf("hello" to "world"))
         }
     }
 }
