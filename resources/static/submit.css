@@ -26,12 +26,20 @@ a {
     white-space: pre-line;
 }
 
-h1, label{
+label {
     color: #606060;
     font-weight: bold;
     font-size: 25px;
-    margin: 30px auto;
+    margin: 20px auto;
 }
+
+.gentext{
+     color: #606060;
+     font-weight: bold;
+     font-size: 25px;
+ }
+
+
 .button{
     cursor: pointer;
     color: white;
@@ -40,7 +48,15 @@ h1, label{
     white-space: normal;
     border: 1px #17191B;
     padding: 10px 10px;
-    margin-bottom: 50px;
+    border-radius: 5px;
+    background-color: #f45b69;
+}
+.button-choose {
+    color: white;
+    text-transform: uppercase;
+    white-space: normal;
+    border: 1px #17191B;
+    padding: 10px 10px;
     border-radius: 5px;
     background-color: #f45b69;
 }
@@ -72,7 +88,7 @@ input[type=date]::-webkit-clear-button {
 
 .text, .source{
     width: 90%;
-    height: 25px;
+    height: 40px;
     border: none;
     border-radius: 5px;
     font-size: 20px;
