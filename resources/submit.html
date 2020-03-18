@@ -5,28 +5,60 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="submit.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/submit.css">
 
     <title>Hello, world!</title>
 </head>
 <body>
 <div class="container">
-    <div class="card">
-        <img src="../static/nico.svg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="card content">
+        <img src="static/nico.svg" class="card-img-top" alt="...">
+        <div class="card-body content-body" style="padding: 10px 25px;">
+            <div class="form">
+                <form action="/submit" method="post" enctype="multipart/form-data">
+                    <label>
+                        Ich will folgendes Ereignis für den Kalender des Scheiterns einreichen:
+                        <textarea class="text" name="text" maxlength="420" minlength="5"
+                                  placeholder="Beschreibe das Ereignis" required
+                                  autofocus
+                                  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+                    </label>
+                    <label>
+                        Das Geschehen ereignete sich am:
+                        <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
+                    </label>
+                    <label>
+                        Ich belege mein Ereignis mit folgendem Link:
+                        <input type="url" class="source" name="source" placeholder="https://www.der-postillon.com/"
+                               maxlength="1000" required>
+                    </label>
+                    <div class="g-recaptcha" data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP">
+                        <button type="submit" class="button">Submit</button>
+                    </div>
+                    <h3>
+                        Der <a target="_blank" rel="noopener noreferrer" href="http://der-kalender-des-scheiterns.de/">Kalender
+                        des Scheiterns</a> ist ein ganz besonderer Kalender der.. bin ich Redenschreiber oder
+                        Programmierer?
+                    </h3>
+                    <h3>
+                        &copy; Marius Weidner & Moritz Geist 2020
+                    </h3>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-<p>Test</p>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>
