@@ -24,7 +24,7 @@ object DB {
 
     fun listIdeas(): List<Idea> {
         db.open().use {
-            return it.createQuery("SELECT id, idea, date, source_link source FROM kds_idea")
+            return it.createQuery("SELECT id, idea, date, source_link source FROM kds_idea ORDER BY MONTH(date), DAY(date)")
                 .executeAndFetch(Idea::class.java)
         }
     }
