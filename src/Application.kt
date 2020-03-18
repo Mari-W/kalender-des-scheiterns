@@ -65,39 +65,15 @@ fun Application.module() {
         }
 
         route("/mod") {
-            get("/") {
-                call.respondTwig("mod", mapOf("list" to Database.list(), "order" to "date"))
-            }
-            post("/") {
-                if (!call.request.isMultipart())
-                    call.respond(HttpStatusCode.Forbidden)
-                else
-                    call.receiveMultipart().readAllParts().map {
-                        when (it) {
-                            is PartData.FormItem -> it.name to it.value
-                            else -> {
-                                call.respond(HttpStatusCode.Forbidden)
-                                return@post
-                            }
-                        }
-                    }.toMap().apply {
-                        if (containsKey("order"))
-                            try {
-                                if (get("order")!! == "date")
-                                    call.respondRedirect("/mod")
-                                else
-                                    call.respondTwig(
-                                        "mod",
-                                        mapOf("list" to Database.listBy(get("order")!!), "order" to get("order")!!)
-                                    )
-                            } catch (e: IllegalArgumentException) {
-                                call.respond(HttpStatusCode.Forbidden)
-                            }
-                        else call.respond(HttpStatusCode.Forbidden)
-                    }
+            get("/{order?}") {
+                if(call.parameters.contains("order")){
+                    call.respondTwig("mod", mapOf("list" to Database.listBy(call.parameters["order"]!!), "order" to call.parameters["order"]!!))
+                } else {
+                    call.respondRedirect("/mod/date")
+                }
             }
             route("/edit") {
-                post("/status") {
+                post("/status/") {
                     if (!call.request.isMultipart())
                         call.respond(HttpStatusCode.Forbidden)
                     else
@@ -110,10 +86,10 @@ fun Application.module() {
                                 }
                             }
                         }.toMap().apply {
-                            if (containsKey("id") && containsKey("status"))
+                            if (containsKey("id") && containsKey("status") && containsKey("order"))
                                 try {
                                     Database.changeStatus(get("id")!!.toInt(), get("status")!!)
-                                    call.respondRedirect("/mod")
+                                    call.respondRedirect("/mod/${get("order")}")
                                 } catch (e: IllegalArgumentException) {
                                     call.respond(HttpStatusCode.Forbidden)
                                 }

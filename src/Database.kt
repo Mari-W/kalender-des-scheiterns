@@ -47,9 +47,19 @@ object Database {
     }
 
     fun listBy(order: String): List<Entry> {
+
+        if (order == "date")
+            return list()
+
+        var a = "ASC"
+        var b = order
+        if (order == "historic") {
+            a = "DESC"
+            b = "type"
+        } else if (order == "personal") b = "type"
+
         db.open().use {
-            return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY :order")
-                .addParameter("order", order)
+            return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY $b $a")
                 .executeAndFetch(Entry::class.java)
         }
     }

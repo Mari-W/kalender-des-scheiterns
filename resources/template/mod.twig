@@ -14,56 +14,61 @@
 </head>
 <body>
 <h1>
-    Halli hallo, heute würde ich gerne meine Liste wie folgt sortieren:
+    Halli hallo!
 </h1>
-
-<form action="/mod" method="post" enctype="multipart/form-data" style="display: inline">
-    <label>
-        <select name="order" class="selectpicker" required>
-            <option value="Datum" {% if order == "date" %} selected {% endif %}>Datum</option>
-            <option value="Art"{% if order == "type" %} selected {% endif %}>Art</option>
-            <option value="Status"{% if order == "status" %} selected {% endif %}>Status</option>
-        </select>
-        <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Los!</button>
-    </label>
+<p style="display: inline">heute würde ich gerne meine Liste wie folgt sortieren: </p>
+<form action="/mod/date" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Datum</button>
+</form>
+<form action="/mod/status" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Status</button>
+</form>
+<form action="/mod/personal" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Personal</button>
+</form>
+<form action="/mod/historic" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Historic</button>
 </form>
 
 <div class="container-fluid">
     <div class="row align-items-start" style="background-color: gray">
-        <div class="col justify-content-start">ID</div>
+        <div class="col-sm justify-content-start">ID</div>
         <div class="col justify-content-start">Datum</div>
         <div class="col justify-content-start">Art</div>
         <div class="col justify-content-start">Beschreibung</div>
         <div class="col justify-content-start">Quelle</div>
         <div class="col justify-content-start">Name</div>
         <div class="col justify-content-start">Bild</div>
-        <div class="col justify-content-start">Status</div>
+        <div class="col justify-content-start">Change Status</div>
     </div>
     {% for i in list %}
         <div class="row align-items-start {{ i.status }}">
-            <div class="col justify-content-start">{{ i.id }}</div>
+            <div class="col-sm justify-content-start">{{ i.id }}</div>
             <div class="col justify-content-start">{{ i.date | split('-')[2] }}.{{ i.date|split("-")[1] }}
                 ({{ i.date|split("-")[0] }})
             </div>
             <div class="col justify-content-start">{{ i.type }}</div>
-            <div class="col justify-content-start"
-                 title="{{ i.description }}">{{ i.description | slice(0, 21) }}{% if i.source|length > 22 %}..{% endif %}</div>
-            <div class="col justify-content-start" title="{{ i.source }}"><a
-                        href="{{ i.source }}"> {{ i.source | split('//')[1] | slice(0, 21) }}{% if i.source | split('//')[1] | length > 22 %}..{% endif %}</a>
+            <div class="col justify-content-start text-break"
+                 title="{{ i.description }}">{{ i.description }}</div>
+            <div class="col justify-content-start text-break" title="{{ i.source }}"><a
+                        href="{{ i.source }}"> {{ i.source }}</a>
             </div>
             <div class="col justify-content-start">{{ i.name }}</div>
             <div class="col justify-content-start"><a href="{{ i.picture }}">{{ i.picture }}</a></div>
             <div class="col justify-content-start">
                 <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
                     <label>
-                        <select name="status" class="selectpicker" required>
-                            <option value="PENDING" {% if i.status== "PENDING" %} selected {% endif %}>Pending</option>
-                            <option value="DENIED"{% if i.status== "DENIED" %} selected {% endif %}>Denied</option>
-                            <option value="APPROVED"{% if i.status== "APPROVED" %} selected {% endif %}>Approved
-                            </option>
-                        </select>
                         <input type="text" name="id" value="{{ i.id }}" hidden>
-                        <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Ändern</button>
+                        <input type="text" name="order" value="{{ order }}" hidden>
+                        <button type="submit" name="status" value="APPROVED" class="btn btn-success btn-sm"
+                                style="display: inline" {% if i.status== "APPROVED" %} disabled {% endif %}>✓
+                        </button>
+                        <button type="submit" name="status" value="DENIED" class="btn btn-danger btn-sm"
+                                style="display: inline" {% if i.status== "DENIED" %} disabled {% endif %}>✗
+                        </button>
+                        <button type="submit" name="status" value="PENDING" class="btn btn-secondary btn-sm"
+                                style="display: inline" {% if i.status== "PENDING" %} disabled{% endif %}>⧖
+                        </button>
                     </label>
                 </form>
             </div>
