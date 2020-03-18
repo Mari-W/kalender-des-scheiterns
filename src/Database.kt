@@ -39,30 +39,53 @@ object Database {
         }
     }
 
-    fun list(): List<Entry> {
+
+    fun list(status: String, order: String): List<Entry> {
+        val s = if (status != "all") Status.valueOf(status.toUpperCase()) else null
+        var o = order
+        var a = "ASC"
+        if (order == "historic") {
+            a = "DESC"
+            o = "type"
+        } else if (order == "personal") {
+            o = "type"
+        }
+
         db.open().use {
-            return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY MONTH(date), DAY(date)")
+            return it.createQuery(
+                    "SELECT id, type, date, source, description, name, picture, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
+                )
                 .executeAndFetch(Entry::class.java)
         }
+
+    }
+
+    /**
+    fun list(): List<Entry> {
+    db.open().use {
+    return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY MONTH(date), DAY(date)")
+    .executeAndFetch(Entry::class.java)
+    }
     }
 
     fun listBy(order: String): List<Entry> {
 
-        if (order == "date")
-            return list()
+    if (order == "date")
+    return list()
 
-        var a = "ASC"
-        var b = order
-        if (order == "historic") {
-            a = "DESC"
-            b = "type"
-        } else if (order == "personal") b = "type"
+    var a = "ASC"
+    var b = order
+    if (order == "historic") {
+    a = "DESC"
+    b = "type"
+    } else if (order == "personal") b = "type"
 
-        db.open().use {
-            return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY $b $a")
-                .executeAndFetch(Entry::class.java)
-        }
+    db.open().use {
+    return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY $b $a")
+    .executeAndFetch(Entry::class.java)
     }
+    }
+     **/
 
     private fun check(entry: Entry): Boolean {
         val len = entry.description.length

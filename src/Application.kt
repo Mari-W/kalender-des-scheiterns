@@ -65,15 +65,23 @@ fun Application.module() {
         }
 
         route("/mod") {
-            get("/{order?}") {
-                if(call.parameters.contains("order")){
-                    call.respondTwig("mod", mapOf("list" to Database.listBy(call.parameters["order"]!!), "order" to call.parameters["order"]!!))
-                } else {
-                    call.respondRedirect("/mod/date")
-                }
+            get("/") {
+                call.respondRedirect("/mod/show/pending/sortby/date")
+            }
+            get("/show/{status?}/sortby/{order?}") {
+                val status = if(call.parameters.contains("status")) call.parameters["status"] else "pending"
+                val order = if(call.parameters.contains("order")) call.parameters["order"] else "date"
+                call.respondTwig(
+                    "mod",
+                    mapOf(
+                        "list" to Database.list(status!!, order!!),
+                        "order" to order,
+                        "status" to status
+                    )
+                )
             }
             route("/edit") {
-                post("/status/") {
+                post("/status") {
                     if (!call.request.isMultipart())
                         call.respond(HttpStatusCode.Forbidden)
                     else
@@ -86,10 +94,10 @@ fun Application.module() {
                                 }
                             }
                         }.toMap().apply {
-                            if (containsKey("id") && containsKey("status") && containsKey("order"))
+                            if (containsKey("id") && containsKey("status") && containsKey("order") && containsKey("state"))
                                 try {
                                     Database.changeStatus(get("id")!!.toInt(), get("status")!!)
-                                    call.respondRedirect("/mod/${get("order")}")
+                                    call.respondRedirect("/mod/show/${get("state")}/sortby/${get("order")}")
                                 } catch (e: IllegalArgumentException) {
                                     call.respond(HttpStatusCode.Forbidden)
                                 }
