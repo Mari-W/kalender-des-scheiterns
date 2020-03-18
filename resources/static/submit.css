@@ -28,14 +28,14 @@ a {
 label {
     color: #606060;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     margin: 20px auto;
 }
 
 .gentext{
      color: #606060;
      font-weight: bold;
-     font-size: 25px;
+     font-size: 20px;
  }
 
 
@@ -87,7 +87,7 @@ input[type=date]::-webkit-clear-button {
 
 .text, .source{
     width: 90%;
-    height: 40px;
+    height: 30px;
     border: none;
     border-radius: 5px;
     font-size: 20px;
