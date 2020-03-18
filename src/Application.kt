@@ -63,7 +63,7 @@ fun Application.module() {
                                         type = type,
                                         source = if (type==Type.HISTORIC) get("source")!! else "",
                                         date = Date.valueOf(get("date")!!),
-                                        description = get("text")!!,
+                                        description = get("description")!!,
                                         name = if (containsKey("name")) get("name")!! else ""
                                     )
                                     Database.insert(entry)
