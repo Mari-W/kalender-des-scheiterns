@@ -6,7 +6,7 @@ import io.ktor.response.respondText
 import org.jtwig.JtwigModel
 import org.jtwig.JtwigTemplate
 
-val templates = mutableMapOf<String, JtwigTemplate>()
+private val templates = mutableMapOf<String, JtwigTemplate>()
 
 suspend fun ApplicationCall.respondTwig(template: String, model: Map<String, Any> = mapOf()) {
     if (!templates.containsKey(template))
