@@ -32,19 +32,16 @@ object Database {
 
     fun list(): List<Entry> {
         db.open().use {
-            return it.createQuery("SELECT id, type, date, source, desc, name, picture, status FROM entries ORDER BY MONTH(date), DAY(date)")
+            return it.createQuery("SELECT id, type, date, source, description, name, picture, status FROM entries ORDER BY MONTH(date), DAY(date)")
                 .executeAndFetch(Entry::class.java)
         }
     }
 
     private fun check(entry: Entry): Boolean {
-        val len = entry.desc.length
-        if (!(5 <= len || len <= 420)) {
-            return false
-        }
-        return if (!urlCheck.matcher(entry.source).matches()) {
-             false
-        } else false
+        val len = entry.description.length
+        return if (!urlCheck.matcher(entry.source).matches())
+            false
+        else 5 <= len || len <= 420
     }
 }
 
@@ -54,7 +51,7 @@ data class Entry(
     val type: Type,
     val source: String = "",
     val date: Date,
-    val desc: String,
+    val description: String,
     val picture: String = "",
     val name: String = "Unknown",
     val status: Status
@@ -65,7 +62,7 @@ enum class Type {
     HISTORIC
 }
 
-enum class Status{
+enum class Status {
     APPROVED,
     PENDING,
     DENIED
