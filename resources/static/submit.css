@@ -85,8 +85,14 @@ input[type=date]::-webkit-clear-button {
     margin-bottom: 30px;
 }
 
-.text, .source{
+.text1 {
+    width: 75%;
+}
+
+.text2 {
     width: 90%;
+}
+.text, .source{
     height: 30px;
     border: none;
     border-radius: 5px;
