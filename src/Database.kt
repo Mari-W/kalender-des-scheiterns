@@ -44,12 +44,19 @@ object Database {
         val s = if (status != "all") Status.valueOf(status.toUpperCase()) else null
         var o = order
         var a = "ASC"
-        if (order == "historic") {
-            a = "DESC"
-            o = "type"
-        } else if (order == "personal") {
-            o = "type"
+
+
+        when (order) {
+            "historic" -> {
+                a = "DESC"
+                o = "type"
+            }
+            "personal" -> {
+                o = "type"
+            }
+            "date" -> o = "MONTH(date), DAY(date)"
         }
+
 
         db.open().use {
             return it.createQuery(
