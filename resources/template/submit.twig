@@ -46,18 +46,18 @@
                     <div class="form">
                         <form action="/submit" method="post" enctype="multipart/form-data">
                             <label>
-                                Was?
+                                Was?<br>
                                 <textarea class="text text1" name="text" maxlength="420" minlength="5"
                                           placeholder="Was ist passiert?" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                             </label>
                             <label {% if date %} data-toggle="tooltip" data-placement="top" title="{{ date }}" {% endif %}>
-                                Wann?
+                                Wann?<br>
                                 <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
                             </label>
                             <label>
-                                Quelle?
+                                Quelle?<br>
                                 <input type="url" class="source text2" name="source"
                                        placeholder="www.der-postillon.com"
                                        maxlength="1000" required>
@@ -78,18 +78,18 @@
                     <form action="/submit" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>
-                                Was?
+                                Was?<br>
                                 <textarea class="text text1" name="text" maxlength="420" minlength="5"
                                           placeholder="Was ist passiert?" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                             </label>
                             <label {% if date %} data-toggle="tooltip" data-placement="top" title="{{ date }}" {% endif %}>
-                                Wann?
+                                Wann?<br>
                                 <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
                             </label>
                             <label>
-                                Bild?
+                                Bild?<br>
                                 <input type="file" class="form-control-file" id="img" name="img" accept="image/*"
                                        style="zoom: 70%">
                             </label>
