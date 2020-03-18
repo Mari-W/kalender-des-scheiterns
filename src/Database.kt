@@ -11,46 +11,62 @@ object Database {
 
     lateinit var db: Sql2o
 
-    fun init(){
+    fun init() {
         db = Sql2o(Config["db.url"], Config["db.user"], Config["db.pass"])
     }
 
-    private val urlCheck: Pattern = Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
+    private val urlCheck: Pattern =
+        Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
 
 
-    fun insertIdea(idea: Idea) {
-        if (!controlIdea(idea)) {
+    fun insert(entry: Entry) {
+        if (!check(entry)) {
             throw IllegalArgumentException()
         }
         db.open().use {
-            it.createQuery("INSERT INTO kds_idea (idea, source_link, date) VALUES (:idea, :source, :date)")
-                .bind(idea)
+            it.createQuery("INSERT INTO entries (type, source, date, desc, name, picture) VALUES (:type, :source, :date, :desc, :name, :picture)")
+                .bind(entry)
                 .executeUpdate()
         }
     }
 
-    fun listIdeas(): List<Idea> {
+    fun list(): List<Entry> {
         db.open().use {
-            return it.createQuery("SELECT id, idea, date, source_link source FROM kds_idea ORDER BY MONTH(date), DAY(date)")
-                .executeAndFetch(Idea::class.java)
+            return it.createQuery("SELECT id, desc, date, source source FROM entries ORDER BY MONTH(date), DAY(date)")
+                .executeAndFetch(Entry::class.java)
         }
     }
 
-    private fun controlIdea(idea: Idea): Boolean {
-        val ideaLen = idea.idea.length
-        if (!(5 <= ideaLen || ideaLen <= 420)) {
-            println("idea to long/short, $ideaLen")
+    private fun check(entry: Entry): Boolean {
+        val len = entry.desc.length
+        if (!(5 <= len || len <= 420)) {
             return false
         }
-
-        if (!urlCheck.matcher(idea.source).matches()) {
-            println("url wrong, ${idea.source}")
-            return false
-        }
-        return true
+        return if (!urlCheck.matcher(entry.source).matches()) {
+             false
+        } else false
     }
 }
 
 
+data class Entry(
+    val id: Int = 0,
+    val type: Type,
+    val source: String = "",
+    val date: Date,
+    val desc: String,
+    val picture: String = "",
+    val name: String = "Unknown",
+    val status: Status
+)
 
-data class Idea(val idea: String, val date: Date, val source: String, val id: Int = 0)
+enum class Type {
+    PERSONAL,
+    HISTORIC
+}
+
+enum class Status{
+    APPROVED,
+    PENDING,
+    DENIED
+}

@@ -7,12 +7,8 @@ import io.ktor.routing.*
 import io.ktor.http.content.*
 import io.ktor.features.*
 import org.slf4j.event.*
-import io.ktor.html.respondHtml
 import io.ktor.http.HttpStatusCode
 import io.ktor.util.KtorExperimentalAPI
-import kotlinx.coroutines.runBlocking
-import kotlinx.html.body
-import kotlinx.html.h1
 import java.sql.Date
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -54,7 +50,7 @@ fun Application.module() {
                     }.toMap().apply {
                         if (containsKey("text") && containsKey("date") && containsKey("source"))
                             try {
-                                Database.insertIdea(Idea(get("text")!!, Date.valueOf(get("date")!!), get("source")!!))
+
                                 call.respondRedirect("/success")
                             } catch (e: IllegalArgumentException) {
                                 call.respond(HttpStatusCode.Forbidden)
@@ -70,7 +66,7 @@ fun Application.module() {
 
         route("/mod") {
             get("/") {
-                call.respondTwig("list", mapOf("list" to Database.listIdeas()))
+                call.respondTwig("list", mapOf("list" to Database.list()))
             }
         }
 
