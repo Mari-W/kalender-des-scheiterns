@@ -68,28 +68,6 @@ fun Application.module() {
             call.respondTwig("success")
         }
 
-        get("/todo") {
-            call.respondHtml {
-                body {
-                    h1 {
-                        text("reCAPTCHA integration fertig stellen")
-                    }
-                    h1 {
-                        text("optional contact field in submit")
-                    }
-                    h1 {
-                        text("front page?")
-                    }
-                    h1 {
-                        text("submit success page?")
-                    }
-                    h1 {
-                        text("moderator page (kds-topsecret.moehritz.de) funktionalität integrieren")
-                    }
-                }
-            }
-        }
-
         route("/mod") {
             get("/") {
                 call.respondTwig("list", mapOf("list" to Database.listIdeas()))
