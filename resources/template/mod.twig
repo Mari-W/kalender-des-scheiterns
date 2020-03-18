@@ -10,26 +10,45 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/mod.css">
-    <title>KDS Mod Page</title>
+    <title>KDS Mod Panel</title>
 </head>
 <body>
 <h1>
-    Halli hallo!
+    Willkommen im Mod Panel!
 </h1>
-<p style="display: inline">heute würde ich gerne meine Liste wie folgt sortieren: </p>
-<form action="/mod/date" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Datum</button>
+<h3>
+    Schlechte Layouts und Designs seid ihr sicher schon von Parlamentpages gewohnt. Also viel spaß!
+    (Aber besser funktional statt schön!)
+</h3>
+<h4 style="display: inline">Zeige</h4>
+<form action="/mod/show/all/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">alle</button>
 </form>
-<form action="/mod/status" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Status</button>
+<form action="/mod/show/approved/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">akzeptierte</button>
 </form>
-<form action="/mod/personal" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Personal</button>
+<form action="/mod/show/denied/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">abgelehnte</button>
 </form>
-<form action="/mod/historic" method="get" enctype="multipart/form-data" style="display: inline">
-    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">Historic</button>
+<form action="/mod/show/pending/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">zu bearbeitende</button>
 </form>
-
+<h3 style="display: inline">sortiert nach</h3>
+<form action="/mod/show/{{ status }}/sortby/date" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">datum</button>
+</form>
+<form action="/mod/show/{{ status }}/sortby/status" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">status</button>
+</form>
+<form action="/mod/show/{{ status }}/sortby/personal" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">persönlich</button>
+</form>
+<form action="/mod/show/{{ status }}/sortby/historic" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn-sm" style="display: inline">historisch</button>
+</form>
+<br>
+<br>
+<br>
 <div class="container-fluid">
     <div class="row align-items-start" style="background-color: gray">
         <div class="col-sm justify-content-start">ID</div>
@@ -59,7 +78,8 @@
                 <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
                     <label>
                         <input type="text" name="id" value="{{ i.id }}" hidden>
-                        <input type="text" name="order" value="{{ order }}" hidden>
+                        <input type="text" name="order" value="{{ order|lower }}" hidden>
+                        <input type="text" name="state" value="{{ status|lower }}" hidden>
                         <button type="submit" name="status" value="APPROVED" class="btn btn-success btn-sm"
                                 style="display: inline" {% if i.status== "APPROVED" %} disabled {% endif %}>✓
                         </button>
