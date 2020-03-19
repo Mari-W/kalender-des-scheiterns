@@ -1,19 +1,38 @@
 package de.moeri
 
-import io.ktor.application.*
+import io.ktor.application.Application
+import io.ktor.application.ApplicationCall
+import io.ktor.application.call
+import io.ktor.application.install
 import io.ktor.config.ApplicationConfig
-import io.ktor.response.*
-import io.ktor.request.*
-import io.ktor.routing.*
-import io.ktor.http.content.*
-import io.ktor.features.*
+import io.ktor.features.CallLogging
 import io.ktor.http.ContentType
-import org.slf4j.event.*
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.*
+import io.ktor.request.isMultipart
+import io.ktor.request.path
+import io.ktor.request.receiveMultipart
+import io.ktor.response.respond
+import io.ktor.response.respondRedirect
+import io.ktor.response.respondText
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.route
+import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.yield
 import org.jtwig.JtwigModel
 import org.jtwig.JtwigTemplate
+import org.slf4j.event.Level
+import java.io.File
+import java.io.InputStream
+import java.io.OutputStream
 import java.sql.Date
+import javax.imageio.ImageIO
+
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -28,6 +47,8 @@ fun Application.module() {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
     }
+
+
 
     routing {
 
@@ -46,7 +67,20 @@ fun Application.module() {
                     call.receiveMultipart().readAllParts().map {
                         when (it) {
                             is PartData.FormItem -> it.name to it.value
-                            is PartData.FileItem -> it.name to it.originalFileName
+                            is PartData.FileItem -> {
+                                val ext = File(it.originalFileName).extension
+                                val file = File("/data", "upload-${System.currentTimeMillis().hashCode()}.$ext")
+                                it.streamProvider().use { input ->
+                                    file.outputStream().buffered().use { output -> input.copyToSuspend(output) }
+                                }
+                                try {
+                                    ImageIO.read(file) != null
+                                } catch (e: java.lang.Exception) {
+                                    println("No image")
+                                    call.respond(HttpStatusCode.Forbidden)
+                                }
+                                "picture" to file.absolutePath
+                            }
                             else -> {
                                 println("Forbidden PartData")
                                 call.respond(HttpStatusCode.Forbidden)
@@ -186,4 +220,28 @@ object Config {
         return conf.propertyOrNull(key)?.getString() ?: "Aua"
     }
 
+}
+
+suspend fun InputStream.copyToSuspend(
+    out: OutputStream,
+    bufferSize: Int = DEFAULT_BUFFER_SIZE,
+    yieldSize: Int = 4 * 1024 * 1024,
+    dispatcher: CoroutineDispatcher = Dispatchers.IO
+): Long {
+    return withContext(dispatcher) {
+        val buffer = ByteArray(bufferSize)
+        var bytesCopied = 0L
+        var bytesAfterYield = 0L
+        while (true) {
+            val bytes = read(buffer).takeIf { it >= 0 } ?: break
+            out.write(buffer, 0, bytes)
+            if (bytesAfterYield >= yieldSize) {
+                yield()
+                bytesAfterYield %= yieldSize
+            }
+            bytesCopied += bytes
+            bytesAfterYield += bytes
+        }
+        return@withContext bytesCopied
+    }
 }
