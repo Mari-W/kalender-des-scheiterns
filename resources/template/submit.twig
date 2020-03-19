@@ -17,6 +17,7 @@
         function onSubmitA() {
             document.getElementById("formA").submit();
         }
+
         function onSubmitB() {
             document.getElementById("formB").submit();
         }
@@ -90,8 +91,10 @@
                                        autofocus>
                             </label>
                             <div>
-                                <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP" data-callback="onSubmitA"
-                                        type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b></button>
+                                <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
+                                        data-callback="onSubmitA"
+                                        type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -119,12 +122,13 @@
                             </label>
                             <label style="">
                                 Bild?<br>
-                                <label for="img" class="button" style="margin-top: 10px; margin-bottom: 0; display: inline-block;">
+                                <label for="img" class="button"
+                                       style="margin-top: 10px; margin-bottom: 0; display: inline-block;">
                                     Hochladen
                                 </label>
                                 <input class="form-control-file" id="img" name="img" accept="image/*"
                                        style="zoom: 70%; height: 0" type="file"
-                                       onchange="document.getElementById('file-upload-complete').removeAttribute('hidden'); document.getElementById('file-upload-complete').innerText = this.value.split('\\').pop(-1)"/>
+                                       onchange="document.getElementById('file-upload-complete').removeAttribute('hidden');if(this.value.toString().length > 1) document.getElementById('file-upload-complete').innerText = this.value.split('\\').pop(-1)"/>
                             </label>
                             <p style="margin-bottom: 0;margin-top: 0; text-align: center; font-weight: lighter; color: #606060; display: inline-block"
                                hidden id="file-upload-complete">✓</p>
@@ -135,8 +139,10 @@
                                        autofocus>
                             </label>
                             <div>
-                                <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP" data-callback="onSubmitB"
-                                        type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b></button>
+                                <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
+                                        data-callback="onSubmitB"
+                                        type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b>
+                                </button>
                             </div>
                         </div>
                     </form>
