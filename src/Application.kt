@@ -1,5 +1,6 @@
 package de.moeri
 
+import ch.qos.logback.core.util.FileUtil
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
@@ -62,28 +63,35 @@ fun Application.module() {
             }
             post("/") {
                 if (!call.request.isMultipart())
-                    call.respond(HttpStatusCode.Forbidden)
+                    call.respond(HttpStatusCode.Forbidden.description("Oh boy, tryin' to upload different forms?"))
                 else
                     call.receiveMultipart().readAllParts().map {
                         when (it) {
-                            is PartData.FormItem -> it.name to it.value
+                            is PartData.FormItem -> {
+                                it.name to it.value
+                            }
                             is PartData.FileItem -> {
-                                val ext = File(it.originalFileName).extension
-                                val file = File("/data", "upload-${System.currentTimeMillis().hashCode()}.$ext")
-                                it.streamProvider().use { input ->
-                                    file.outputStream().buffered().use { output -> input.copyToSuspend(output) }
+                                val folder = File("images")
+                                if (!folder.exists())
+                                    folder.mkdir()
+                                val file = File(folder, "upload${System.currentTimeMillis().hashCode()}.${File(it.originalFileName!!).extension}")
+                                file.createNewFile()
+                                it.streamProvider().use { its ->
+                                    // copy the stream to the file with buffering
+                                    file.outputStream().buffered().use { s ->
+                                        // note that this is blocking
+                                        its.copyTo(s)
+                                    }
                                 }
                                 try {
                                     ImageIO.read(file) != null
                                 } catch (e: java.lang.Exception) {
-                                    println("No image")
-                                    call.respond(HttpStatusCode.Forbidden)
+                                    call.respond(HttpStatusCode.Forbidden.description("Only pictures! :angry:"))
                                 }
                                 "picture" to file.absolutePath
                             }
                             else -> {
-                                println("Forbidden PartData")
-                                call.respond(HttpStatusCode.Forbidden)
+                                call.respond(HttpStatusCode.Forbidden.description("Sorry, we only take pictures or texts :/"))
                                 return@post
                             }
                         }
@@ -92,14 +100,13 @@ fun Application.module() {
                             if (containsKey("g-recaptcha-response")) {
                                 ReCaptcha.recaptchaValidate(get("g-recaptcha-response")!!)
                             } else {
-                                println("No captcha")
-                                call.respond(HttpStatusCode.Forbidden)
+
+                                call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
                                 return@post
                             }
 
                             if (!containsKey("type")) {
-                                println("Invalid Type")
-                                call.respond(HttpStatusCode.Forbidden)
+                                call.respond(HttpStatusCode.Forbidden.description("Invalid type, only historic or personal allowed."))
                                 return@post
                             }
                             val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
@@ -119,17 +126,14 @@ fun Application.module() {
                                 Database.insert(entry)
                                 call.respondRedirect("/success")
                             } else {
-                                println("Invalid Other")
-                                call.respond(HttpStatusCode.Forbidden)
+                                call.respond(HttpStatusCode.Forbidden.description("Errör"))
                             }
 
 
                         } catch (e: IllegalArgumentException) {
-                            println("Illegal Args")
-                            call.respond(HttpStatusCode.Forbidden)
+                            call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
                         } catch (e: NullPointerException) {
-                            println("Nullpointer")
-                            call.respond(HttpStatusCode.Forbidden)
+                            call.respond(HttpStatusCode.Forbidden.description("Null,null"))
                         } catch (e: CaptchaException) {
                             call.respondRedirect("/success")
                         }
@@ -160,7 +164,7 @@ fun Application.module() {
             route("/edit") {
                 post("/status") {
                     if (!call.request.isMultipart())
-                        call.respond(HttpStatusCode.Forbidden)
+                        call.respond(HttpStatusCode.Forbidden.description("Oh boy, tryin' to upload different forms?"))
                     else
                         call.receiveMultipart().readAllParts().map {
                             when (it) {
@@ -176,9 +180,9 @@ fun Application.module() {
                                     Database.changeStatus(get("id")!!.toInt(), get("status")!!)
                                     call.respondRedirect("/mod/show/${get("state")}/sortby/${get("order")}")
                                 } catch (e: IllegalArgumentException) {
-                                    call.respond(HttpStatusCode.Forbidden)
+                                    call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
                                 }
-                            else call.respond(HttpStatusCode.Forbidden)
+                            else call.respond(HttpStatusCode.Forbidden.description("Errör"))
                         }
                 }
             }
