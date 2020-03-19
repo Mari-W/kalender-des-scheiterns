@@ -55,38 +55,49 @@ fun Application.module() {
                         }
                     }.toMap().apply {
                         try {
+                            if (containsKey("g-recaptcha-response")) {
+                                recaptchaValidate(get("g-recaptcha-response")!!)
+                            } else {
+                                println("No captcha")
+                                call.respond(HttpStatusCode.Forbidden)
+                                return@post
+                            }
+
                             if (!containsKey("type")) {
                                 println("Invalid Type")
                                 call.respond(HttpStatusCode.Forbidden)
-                            } else {
-                                val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
-                                val okay = when (type) {
-                                    Type.PERSONAL -> containsKey("description") && containsKey("date")
-                                    Type.HISTORIC -> containsKey("description") && containsKey("date") && containsKey("source")
-                                    else -> false
-                                }
-                                if (okay && type != null) {
-                                    val entry = Entry(
-                                        type = type,
-                                        source = if (type == Type.HISTORIC) get("source")!! else "",
-                                        date = Date.valueOf(get("date")!!),
-                                        description = get("description")!!,
-                                        name = if (containsKey("name")) get("name")!! else ""
-                                    )
-                                    Database.insert(entry)
-                                    call.respondRedirect("/success")
-                                } else {
-                                    println("Invalid Other")
-                                    call.respond(HttpStatusCode.Forbidden)
-                                }
-
+                                return@post
                             }
+                            val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
+                            val okay = when (type) {
+                                Type.PERSONAL -> containsKey("description") && containsKey("date")
+                                Type.HISTORIC -> containsKey("description") && containsKey("date") && containsKey("source")
+                                else -> false
+                            }
+                            if (okay && type != null) {
+                                val entry = Entry(
+                                    type = type,
+                                    source = if (type == Type.HISTORIC) get("source")!! else "",
+                                    date = Date.valueOf(get("date")!!),
+                                    description = get("description")!!,
+                                    name = if (containsKey("name")) get("name")!! else ""
+                                )
+                                Database.insert(entry)
+                                call.respondRedirect("/success")
+                            } else {
+                                println("Invalid Other")
+                                call.respond(HttpStatusCode.Forbidden)
+                            }
+
+
                         } catch (e: IllegalArgumentException) {
                             println("Illegal Args")
                             call.respond(HttpStatusCode.Forbidden)
                         } catch (e: NullPointerException) {
                             println("Nullpointer")
                             call.respond(HttpStatusCode.Forbidden)
+                        } catch (e: CaptchaException) {
+                            call.respondRedirect("/success")
                         }
                     }
             }
@@ -144,6 +155,14 @@ fun Application.module() {
         }
     }
 }
+
+private val httpClient = HttpClient(Netty)
+
+fun recaptchaValidate(token: String) {
+
+}
+
+object CaptchaException : Exception("captcha score too low")
 
 private val templates = mutableMapOf<String, JtwigTemplate>()
 
