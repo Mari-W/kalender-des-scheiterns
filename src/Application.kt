@@ -100,7 +100,6 @@ fun Application.module() {
                             if (containsKey("g-recaptcha-response")) {
                                 ReCaptcha.recaptchaValidate(get("g-recaptcha-response")!!)
                             } else {
-
                                 call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
                                 return@post
                             }
