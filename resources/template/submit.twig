@@ -17,6 +17,7 @@
         grecaptcha.ready(function () {
             grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'HISTORIC'}).then(function (token) {
                 var recaptchaResponse = document.getElementById('recaptchaResponseA');
+                console.log("UFF")
                 recaptchaResponse.value = token;
             });
             grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'PERSONAL'}).then(function (token) {
