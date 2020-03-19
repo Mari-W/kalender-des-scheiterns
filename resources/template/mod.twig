@@ -72,10 +72,12 @@
             {% if i.source|length > 1 %}
                 <div class="col justify-content-start text-break" title="{{ i.source }}"><a
                             href="{{ i.source }}"> {{ i.source }}  </a></div>
-            {% else if(i.picture|length >1) %}
-                <div class="col justify-content-start text-break"><a title="{{ i.picture }}" href="/images/{{ i.picture }}"> image (klick mich) </a></div>
-             {% else %}
-                 <div class="col justify-content-start text-break"></div>
+            {% elseif i.picture|length >1 %}
+                <div class="col justify-content-start text-break"><a title="{{ i.picture }}"
+                                                                     href="/images/{{ i.picture }}"> image (klick
+                        mich) </a></div>
+            {% else %}
+                <div class="col justify-content-start text-break"></div>
             {% endif %}
             <div class="col justify-content-start">
                 <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
