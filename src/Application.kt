@@ -171,6 +171,17 @@ fun Application.module() {
             }
         }
 
+        route("/voting") {
+            get("/") {
+                call.respondTwig(
+                    "voting", mapOf(
+                        "disbaled" to listOf(),
+                        "enabled" to listOf()
+                    )
+                )
+            }
+        }
+
         static("/static") {
             resources("static")
         }
