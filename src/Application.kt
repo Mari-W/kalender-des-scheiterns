@@ -71,10 +71,14 @@ fun Application.module() {
                                 it.name to it.value
                             }
                             is PartData.FileItem -> {
-                                val folder = File("images")
+                                val parent = File("data")
+                                if (!parent.exists())
+                                    parent.mkdir()
+                                val folder = File(parent,"images")
                                 if (!folder.exists())
                                     folder.mkdir()
-                                val file = File(folder, "upload${System.currentTimeMillis().hashCode()}.${File(it.originalFileName!!).extension}")
+                                val name = "${System.currentTimeMillis().toString().sha1()}.${File(it.originalFileName!!).extension}"
+                                val file = File(folder, name)
                                 file.createNewFile()
                                 it.streamProvider().use { its ->
 
@@ -88,7 +92,7 @@ fun Application.module() {
                                         its.copyTo(s)
                                     }
                                 }
-                                "picture" to file.name
+                                "picture" to name
                             }
                             else -> {
                                 call.respond(HttpStatusCode.Forbidden.description("Sorry, we only take pictures or texts :/"))
