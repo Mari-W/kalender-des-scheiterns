@@ -16,7 +16,7 @@ object ReCaptcha {
         }
     }
 
-    suspend fun recaptchaValidate(token: String) {
+    suspend fun validate(token: String) {
         val res = httpClient.post<RecaptchaResponse>("https://www.google.com/recaptcha/api/siteverify") {
             parameter("secret", Config["recaptcha.secret"])
             parameter("response", token)

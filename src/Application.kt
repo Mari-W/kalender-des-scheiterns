@@ -58,27 +58,18 @@ fun Application.module() {
                                 it.name to it.value
                             }
                             is PartData.FileItem -> {
-                                val parent = File("data")
-                                if (!parent.exists())
-                                    parent.mkdir()
-                                val folder = File(parent, "images")
-                                if (!folder.exists())
-                                    folder.mkdir()
+                                val folder = File(File("data").ensureItExists(), "images").ensureItExists()
                                 val name = "${System.currentTimeMillis().toString()
                                     .sha256()}.${File(it.originalFileName!!).extension}"
                                 val file = File(folder, name)
                                 file.createNewFile()
-                                it.streamProvider().use { its ->
-
+                                it.streamProvider().use { input ->
                                     try {
-                                        ImageIO.read(its) != null
+                                        ImageIO.read(input) != null
                                     } catch (e: java.lang.Exception) {
                                         call.respond(HttpStatusCode.Forbidden.description("Only pictures! :angry:"))
                                     }
-
-                                    file.outputStream().buffered().use { s ->
-                                        its.copyTo(s)
-                                    }
+                                    file.outputStream().buffered().use { output -> input.copyToSuspend(output) }
                                 }
                                 "picture" to name
                             }
@@ -92,7 +83,7 @@ fun Application.module() {
                     }.toMap().apply {
                         try {
                             if (containsKey("g-recaptcha-response")) {
-                                ReCaptcha.recaptchaValidate(get("g-recaptcha-response")!!)
+                                ReCaptcha.validate(get("g-recaptcha-response")!!)
                             } else {
                                 call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
                                 return@post
