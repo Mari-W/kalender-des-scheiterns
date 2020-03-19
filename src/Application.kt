@@ -184,7 +184,7 @@ fun Application.module() {
                             if (containsKey("id") && containsKey("status") && containsKey("order") && containsKey("state"))
                                 try {
                                     Database.changeStatus(get("id")!!.toInt(), get("status")!!)
-                                    call.respondRedirect("/mod/show/${get("state")}/sortby/${get("order")}")
+                                    call.respondRedirect("/mod/show/${get("state")}/sortby/${get("order")}#${get("id")}")
                                 } catch (e: IllegalArgumentException) {
                                     call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
                                 }

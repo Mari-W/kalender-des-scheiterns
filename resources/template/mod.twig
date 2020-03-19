@@ -61,16 +61,19 @@
         <div class="col justify-content-start">Ändere Status</div>
     </div>
     {% for i in list %}
-        <div class="row align-items-start {{ i.status|lower }}">
+        <div id="{{ i.id }}" class="row align-items-start {{ i.status|lower }}">
             <div class="col justify-content-start" title="{{ i.id }}">{{ i.date|split('-')[1] }}
                 -{{ i.date|split("-")[2] }}
                 ({{ i.date|split("-")[0] }})
             </div>
             <div class="col justify-content-start">{{ i.type }}</div>
             <div class="col justify-content-start text-break" title="{{ i.description }}">{{ i.description }}</div>
-            <div class="col justify-content-start text-break" title="{{ i.source }}"><a href="{{ i.source }}"> {% if i.source|length > 1 %} {{ i.source }} {% endif %} </a></div>
+            <div class="col justify-content-start text-break" title="{{ i.source }}"><a
+                        href="{{ i.source }}"> {% if i.source|length > 1 %} {{ i.source }} {% endif %} </a></div>
             <div class="col justify-content-start text-break">{{ i.name }}</div>
-            <div class="col justify-content-start text-break"><a title="{{ i.picture }}" href="/images/{{ i.picture }}"> {% if i.picture|length > 1 %} klick mich! {% endif %} </a></div>
+            <div class="col justify-content-start text-break"><a title="{{ i.picture }}"
+                                                                 href="/images/{{ i.picture }}"> {% if i.picture|length > 1 %} klick mich! {% endif %} </a>
+            </div>
             <div class="col justify-content-start">
                 <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
                     <label>
