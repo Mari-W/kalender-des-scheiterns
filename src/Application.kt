@@ -175,8 +175,8 @@ fun Application.module() {
             get("/") {
                 call.respondTwig(
                     "voting", mapOf(
-                        "disbaled" to listOf(),
-                        "enabled" to listOf()
+                        "disbaled" to emptyList<String>(),
+                        "enabled" to emptyList<String>()
                     )
                 )
             }
