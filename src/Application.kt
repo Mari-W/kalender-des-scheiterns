@@ -63,13 +63,13 @@ fun Application.module() {
                                     .sha256()}.${File(it.originalFileName!!).extension}"
                                 val file = File(folder, name)
                                 file.createNewFile()
-                                it.streamProvider().use { input ->
+                                val bytes = it.streamProvider().use { input ->
                                     try {
-                                        ImageIO.read(input) != null
+                                        ImageIO.write(ImageIO.read(input), "png", file)
+
                                     } catch (e: java.lang.Exception) {
                                         call.respond(HttpStatusCode.Forbidden.description("Only pictures! :angry:"))
                                     }
-                                    file.outputStream().buffered().use { output -> input.copyToSuspend(output) }
                                 }
                                 "picture" to name
                             }
