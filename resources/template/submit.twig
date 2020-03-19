@@ -15,11 +15,11 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"></script>
     <script>
         grecaptcha.ready(function () {
-            grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', { action: 'HISTORIC' }).then(function (token) {
+            grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'HISTORIC'}).then(function (token) {
                 var recaptchaResponse = document.getElementById('recaptchaResponseA');
                 recaptchaResponse.value = token;
             });
-            grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', { action: 'PERSONAL' }).then(function (token) {
+            grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'PERSONAL'}).then(function (token) {
                 var recaptchaResponse = document.getElementById('recaptchaResponseB');
                 recaptchaResponse.value = token;
             });
@@ -123,13 +123,15 @@
                             </label>
                             <label style="">
                                 Bild?<br>
-                                <label for="img" class="button" style="margin: 0; display: inline-block;">
+                                <label for="img" class="button" style="margin-top: 10px; margin-bottom: 0; display: inline-block;">
                                     Hochladen
                                 </label>
                                 <input class="form-control-file" id="img" name="img" accept="image/*"
-                                       style="zoom: 70%;" type="file" onchange="document.getElementById('file-upload-complete').removeAttribute('hidden')"/>
+                                       style="zoom: 70%; height: 0" type="file"
+                                       onchange="document.getElementById('file-upload-complete').removeAttribute('hidden'); document.getElementById('file-upload-complete').innerText = this.value.split('\\').pop(-1)"/>
                             </label>
-                            <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060; display: inline-block" hidden id="file-upload-complete">✓</p>
+                            <p style="margin-bottom: 0;margin-top: 0; text-align: center; font-weight: lighter; color: #606060; display: inline-block"
+                               hidden id="file-upload-complete">✓</p>
                             <label>
                                 Wer?<br>
                                 <input class="text text2" name="name" maxlength="32"

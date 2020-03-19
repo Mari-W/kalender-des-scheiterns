@@ -77,9 +77,7 @@ fun Application.module() {
                                 val file = File(folder, "upload${System.currentTimeMillis().hashCode()}.${File(it.originalFileName!!).extension}")
                                 file.createNewFile()
                                 it.streamProvider().use { its ->
-                                    // copy the stream to the file with buffering
                                     file.outputStream().buffered().use { s ->
-                                        // note that this is blocking
                                         its.copyTo(s)
                                     }
                                 }
