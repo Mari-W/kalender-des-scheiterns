@@ -56,7 +56,7 @@ fun Application.module() {
                     }.toMap().apply {
                         try {
                             if (containsKey("g-recaptcha-response")) {
-                                recaptchaValidate(get("g-recaptcha-response")!!)
+                                ReCaptcha.recaptchaValidate(get("g-recaptcha-response")!!)
                             } else {
                                 println("No captcha")
                                 call.respond(HttpStatusCode.Forbidden)
@@ -154,12 +154,6 @@ fun Application.module() {
             resources("static")
         }
     }
-}
-
-private val httpClient = HttpClient(Netty)
-
-fun recaptchaValidate(token: String) {
-
 }
 
 object CaptchaException : Exception("captcha score too low")
