@@ -62,7 +62,8 @@
     </div>
     {% for i in list %}
         <div class="row align-items-start {{ i.status|lower }}">
-            <div class="col justify-content-start" title="{{ i.id }}">{{ i.date|split('-')[1] }}-{{ i.date|split("-")[2] }}
+            <div class="col justify-content-start" title="{{ i.id }}">{{ i.date|split('-')[1] }}
+                -{{ i.date|split("-")[2] }}
                 ({{ i.date|split("-")[0] }})
             </div>
             <div class="col justify-content-start">{{ i.type }}</div>
@@ -72,7 +73,9 @@
                         href="{{ i.source }}"> {{ i.source }}</a>
             </div>
             <div class="col justify-content-start ext-break">{{ i.name }}</div>
-            <div class="col justify-content-start text-break">  {% if i.picture|length > 1 %}<a title="{{ i.picture }}" href="/images/{{ i.picture }}"> klick mich! </a>  {% endif %} </div>
+            <div class="col justify-content-start text-break"><a title="{{ i.picture }}"
+                                                                 href="/images/{{ i.picture }}">  {% if i.picture|length > 1 %}klick mich!{% endif %} </a>
+            </div>
             <div class="col justify-content-start">
                 <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
                     <label>
