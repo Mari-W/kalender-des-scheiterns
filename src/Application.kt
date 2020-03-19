@@ -88,7 +88,7 @@ fun Application.module() {
                                         its.copyTo(s)
                                     }
                                 }
-                                "picture" to file.absolutePath
+                                "picture" to file.name
                             }
                             else -> {
                                 call.respond(HttpStatusCode.Forbidden.description("Sorry, we only take pictures or texts :/"))
@@ -103,7 +103,6 @@ fun Application.module() {
                                 call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
                                 return@post
                             }
-
                             if (!containsKey("type")) {
                                 call.respond(HttpStatusCode.Forbidden.description("Invalid type, only historic or personal allowed."))
                                 return@post
@@ -120,7 +119,8 @@ fun Application.module() {
                                     source = if (type == Type.HISTORIC) get("source")!! else "",
                                     date = Date.valueOf(get("date")!!),
                                     description = get("description")!!,
-                                    name = if (containsKey("name")) get("name")!! else ""
+                                    name = if (containsKey("name")) get("name")!! else "",
+                                    picture = if(containsKey("picture")) get("picture")!! else ""
                                 )
                                 Database.insert(entry)
                                 call.respondRedirect("/success")
