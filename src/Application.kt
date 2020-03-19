@@ -74,10 +74,11 @@ fun Application.module() {
                                 val parent = File("data")
                                 if (!parent.exists())
                                     parent.mkdir()
-                                val folder = File(parent,"images")
+                                val folder = File(parent, "images")
                                 if (!folder.exists())
                                     folder.mkdir()
-                                val name = "${System.currentTimeMillis().toString().sha256()}.${File(it.originalFileName!!).extension}"
+                                val name = "${System.currentTimeMillis().toString()
+                                    .sha256()}.${File(it.originalFileName!!).extension}"
                                 val file = File(folder, name)
                                 file.createNewFile()
                                 it.streamProvider().use { its ->
@@ -99,6 +100,8 @@ fun Application.module() {
                                 return@post
                             }
                         }
+                    }.toMap().map {
+                        it.key to it.value.replace("<", "(").replace(">", ")")
                     }.toMap().apply {
                         try {
                             if (containsKey("g-recaptcha-response")) {
@@ -124,7 +127,7 @@ fun Application.module() {
                                     date = Date.valueOf(get("date")!!),
                                     description = get("description")!!,
                                     name = if (containsKey("name")) get("name")!! else "",
-                                    picture = if(containsKey("picture")) get("picture")!! else ""
+                                    picture = if (containsKey("picture")) get("picture")!! else ""
                                 )
                                 Database.insert(entry)
                                 call.respondRedirect("/success")

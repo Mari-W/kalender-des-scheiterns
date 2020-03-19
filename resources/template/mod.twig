@@ -68,9 +68,9 @@
             </div>
             <div class="col justify-content-start">{{ i.type }}</div>
             <div class="col justify-content-start text-break" title="{{ i.description }}">{{ i.description }}</div>
-            <div class="col justify-content-start text-break" title="{{ i.source }}"><a href="{{ i.source }}"> lol{#{% if i.source|length > 1 %} {{ i.source }} {% endif %}#} </a></div>
+            <div class="col justify-content-start text-break" title="{{ i.source }}"><a href="{{ i.source }}"> {% if i.source|length > 1 %} {{ i.source }} {% endif %} </a></div>
             <div class="col justify-content-start text-break">{{ i.name }}</div>
-            <div class="col justify-content-start text-break"><a title="{{ i.picture }}" href="/images/{{ i.picture }}"> lol {#{% if i.picture|length > 1 %} klick mich! {% endif %} #}</a></div>
+            <div class="col justify-content-start text-break"><a title="{{ i.picture }}" href="/images/{{ i.picture }}"> {% if i.picture|length > 1 %} klick mich! {% endif %} </a></div>
             <div class="col justify-content-start">
                 <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
                     <label>
