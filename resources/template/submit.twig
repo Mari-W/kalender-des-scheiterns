@@ -12,19 +12,14 @@
           integrity="sha256-MpORFsKmYYmQvFqOG/2AbIcy09vQBwjfZDKM+Ri/m0Y=" crossorigin="anonymous"/>
     <link rel="stylesheet" href="static/submit.css">
 
-    <script src="https://www.google.com/recaptcha/api.js?render=6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
-        grecaptcha.ready(function () {
-            grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'HISTORIC'}).then(function (token) {
-                var recaptchaResponse = document.getElementById('recaptchaResponseA');
-                console.log("UFF");
-                recaptchaResponse.value = token;
-            });
-            grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'PERSONAL'}).then(function (token) {
-                var recaptchaResponse = document.getElementById('recaptchaResponseB');
-                recaptchaResponse.value = token;
-            });
-        });
+        function onSubmitA() {
+            document.getElementById("formA").submit();
+        }
+        function onSubmitB() {
+            document.getElementById("formB").submit();
+        }
     </script>
 
     <title>Kalender des Scheiterns - Einreichen</title>
@@ -69,7 +64,7 @@
                         </div>
                     </div>
                     <div class="form">
-                        <form action="/submit" method="post" enctype="multipart/form-data">
+                        <form id="formA" action="/submit" method="post" enctype="multipart/form-data">
                             <input hidden value="historic" name="type"/>
                             <label>
                                 Was?<br>
@@ -94,10 +89,10 @@
                                        placeholder="Dein Name / Pseudonym" required
                                        autofocus>
                             </label>
-                            <div class="g-recaptcha" data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP">
-                                <button type="submit" class="btn btn-danger button"><b>Abschicken</b></button>
+                            <div>
+                                <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP" data-callback="onSubmit"
+                                        type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b></button>
                             </div>
-                            <input type="hidden" name="g-recaptcha-response" id="recaptchaResponseA">
                         </form>
                     </div>
                 </div>
@@ -108,7 +103,7 @@
                             <img id="imageb" src="static/pers-example.png" class="card-img-top" alt="...">
                         </div>
                     </div>
-                    <form action="/submit" method="post" enctype="multipart/form-data">
+                    <form id="formB" action="/submit" method="post" enctype="multipart/form-data">
                         <input hidden value="personal" name="type"/>
                         <div class="form-group">
                             <label>
@@ -139,11 +134,11 @@
                                        placeholder="Dein Name / Pseudonym" required
                                        autofocus>
                             </label>
-                            <div class="g-recaptcha" data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP">
-                                <button type="submit" class="btn btn-danger button"><b>Abschicken</b></button>
+                            <div>
+                                <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP" data-callback="onSubmit"
+                                        type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b></button>
                             </div>
                         </div>
-                        <input type="hidden" name="g-recaptcha-response" id="recaptchaResponseB">
                     </form>
                 </div>
                 <br>
