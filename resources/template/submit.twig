@@ -12,6 +12,20 @@
           integrity="sha256-MpORFsKmYYmQvFqOG/2AbIcy09vQBwjfZDKM+Ri/m0Y=" crossorigin="anonymous"/>
     <link rel="stylesheet" href="static/submit.css">
 
+    <script src="https://www.google.com/recaptcha/api.js?render=6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', { action: 'HISTORIC' }).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponseA');
+                recaptchaResponse.value = token;
+            });
+            grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', { action: 'PERSONAL' }).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponseB');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
+
     <title>Kalender des Scheiterns - Einreichen</title>
 </head>
 <body>
@@ -82,6 +96,7 @@
                             <div class="g-recaptcha" data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP">
                                 <button type="submit" class="btn btn-danger button"><b>Abschicken</b></button>
                             </div>
+                            <input type="hidden" name="g-recaptcha-response" id="recaptchaResponseA">
                         </form>
                     </div>
                 </div>
@@ -125,6 +140,7 @@
                                 <button type="submit" class="btn btn-danger button"><b>Abschicken</b></button>
                             </div>
                         </div>
+                        <input type="hidden" name="g-recaptcha-response" id="recaptchaResponseB">
                     </form>
                 </div>
                 <br>
@@ -145,8 +161,6 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.5.0/viewer.min.js"
         integrity="sha256-mLJW+YLWH/4ebMAdPKIX1aTCIE0m2nInDT1NxX8TCBM=" crossorigin="anonymous"></script>
-<script src="https://www.google.com/recaptcha/api.js?render=6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"></script>
-
 
 <script type="text/javascript">
     const viewer1 = new Viewer(document.getElementById('imagea'), {

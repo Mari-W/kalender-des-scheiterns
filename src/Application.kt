@@ -130,7 +130,7 @@ fun Application.module() {
                         } catch (e: NullPointerException) {
                             println("Nullpointer")
                             call.respond(HttpStatusCode.Forbidden)
-                        } catch (e: CaptchaException) {
+                        } catch (e: ReCaptcha.CaptchaException) {
                             call.respondRedirect("/success")
                         }
                     }
@@ -189,8 +189,6 @@ fun Application.module() {
         }
     }
 }
-
-object CaptchaException : Exception("captcha score too low")
 
 private val templates = mutableMapOf<String, JtwigTemplate>()
 
