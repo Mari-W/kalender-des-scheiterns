@@ -52,7 +52,6 @@
 <h4>Geladene Einträge: {{ list|length }}</h4>
 <div class="container-fluid">
     <div class="row align-items-start" style="background-color: gray">
-        <div class="col-sm-1 justify-content-start">ID</div>
         <div class="col justify-content-start">Datum</div>
         <div class="col justify-content-start">Art</div>
         <div class="col justify-content-start">Beschreibung</div>
@@ -63,8 +62,7 @@
     </div>
     {% for i in list %}
         <div class="row align-items-start {{ i.status|lower }}">
-            <div class="col-sm-1 justify-content-start">{{ i.id }}</div>
-            <div class="col justify-content-start">{{ i.date|split('-')[1] }}-{{ i.date|split("-")[2] }}
+            <div class="col justify-content-start" title="{{ i.id }}">{{ i.date|split('-')[1] }}-{{ i.date|split("-")[2] }}
                 ({{ i.date|split("-")[0] }})
             </div>
             <div class="col justify-content-start">{{ i.type }}</div>
@@ -74,7 +72,7 @@
                         href="{{ i.source }}"> {{ i.source }}</a>
             </div>
             <div class="col justify-content-start ext-break">{{ i.name }}</div>
-            <div class="col justify-content-start text-break"><a title="{{ i.picture }}" href="/images/{{ i.picture }}">klick mich!</a></div>
+            <div class="col justify-content-start text-break">  {% if i.picture|length > 1 %}<a title="{{ i.picture }}" href="/images/{{ i.picture }}"> klick mich! </a>  {% endif %} </div>
             <div class="col justify-content-start">
                 <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
                     <label>
