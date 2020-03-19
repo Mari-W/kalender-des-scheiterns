@@ -72,9 +72,8 @@
             <div class="col justify-content-start text-break" title="{{ i.source }}"><a
                         href="{{ i.source }}"> {{ i.source }}</a>
             </div>
-            <div class="col justify-content-start ext-break">{{ i.name }}</div>
-            <div class="col justify-content-start text-break"><a title="{{ i.picture }}"
-                                                                 href="/images/{{ i.picture }}">  {% if i.picture|length > 1 %}klick mich!{% endif %} </a>
+            <div class="col justify-content-start text-break">{{ i.name }}</div>
+            <div class="col justify-content-start text-break"><a title="{{ i.picture }}" href="/images/{{ i.picture }}">  {% if i.picture|length > 1 %} klick mich! {% endif %} </a>
             </div>
             <div class="col justify-content-start">
                 <form action="/mod/edit/status" method="post" enctype="multipart/form-data">
