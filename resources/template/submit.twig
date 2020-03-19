@@ -106,14 +106,15 @@
                                 Wann?<br>
                                 <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
                             </label>
-                            <label>
+                            <label style="">
                                 Bild?<br>
-                                <label for="img" class="button" style="margin: 0">
+                                <label for="img" class="button" style="margin: 0; display: inline-block;">
                                     Hochladen
                                 </label>
                                 <input class="form-control-file" id="img" name="img" accept="image/*"
-                                       style="zoom: 70%" type="file"/>
+                                       style="zoom: 70%;" type="file" onchange="document.getElementById('file-upload-complete').removeAttribute('hidden')"/>
                             </label>
+                            <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060; display: inline-block" hidden id="file-upload-complete">✓</p>
                             <label>
                                 Wer?<br>
                                 <input class="text text2" name="name" maxlength="32"
