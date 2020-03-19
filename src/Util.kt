@@ -1,5 +1,6 @@
 package de.moeri
 
+import java.io.File
 import java.security.MessageDigest
 
 object HashUtils {
@@ -27,4 +28,10 @@ object HashUtils {
 
 fun String.sha256(): String {
     return HashUtils.sha256(this)
+}
+
+fun File.ensureItExists(): File {
+    if (!exists())
+        mkdir()
+    return this
 }
