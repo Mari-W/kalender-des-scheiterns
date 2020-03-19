@@ -10,7 +10,7 @@ import io.ktor.util.KtorExperimentalAPI
 
 @KtorExperimentalAPI
 object ReCaptcha {
-    val httpClient = HttpClient() {
+    private val httpClient = HttpClient {
         install(JsonFeature) {
             serializer = GsonSerializer()
         }
