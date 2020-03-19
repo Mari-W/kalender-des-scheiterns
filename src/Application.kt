@@ -77,14 +77,16 @@ fun Application.module() {
                                 val file = File(folder, "upload${System.currentTimeMillis().hashCode()}.${File(it.originalFileName!!).extension}")
                                 file.createNewFile()
                                 it.streamProvider().use { its ->
+
+                                    try {
+                                        ImageIO.read(its) != null
+                                    } catch (e: java.lang.Exception) {
+                                        call.respond(HttpStatusCode.Forbidden.description("Only pictures! :angry:"))
+                                    }
+
                                     file.outputStream().buffered().use { s ->
                                         its.copyTo(s)
                                     }
-                                }
-                                try {
-                                    ImageIO.read(file) != null
-                                } catch (e: java.lang.Exception) {
-                                    call.respond(HttpStatusCode.Forbidden.description("Only pictures! :angry:"))
                                 }
                                 "picture" to file.absolutePath
                             }
