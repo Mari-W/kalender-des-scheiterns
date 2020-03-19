@@ -1,13 +1,9 @@
 package de.moeri
 
-import ch.qos.logback.core.util.FileUtil
 import io.ktor.application.Application
-import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.application.install
-import io.ktor.config.ApplicationConfig
 import io.ktor.features.CallLogging
-import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.isMultipart
@@ -15,22 +11,13 @@ import io.ktor.request.path
 import io.ktor.request.receiveMultipart
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
-import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
 import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.yield
-import org.jtwig.JtwigModel
-import org.jtwig.JtwigTemplate
 import org.slf4j.event.Level
 import java.io.File
-import java.io.InputStream
-import java.io.OutputStream
 import java.sql.Date
 import javax.imageio.ImageIO
 

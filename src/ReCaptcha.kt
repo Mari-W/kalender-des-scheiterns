@@ -10,7 +10,7 @@ import io.ktor.util.KtorExperimentalAPI
 
 @KtorExperimentalAPI
 object ReCaptcha {
-    private val httpClient = HttpClient() {
+    private val httpClient = HttpClient {
         install(JsonFeature) {
             serializer = GsonSerializer()
         }
@@ -44,7 +44,7 @@ object ReCaptcha {
         val action: String,
         @SerializedName("challenge_ts") val challengeTs: String,
         val hostname: String,
-        @SerializedName("erros-codes") val errorCodes: Array<String>?) {}
+        @SerializedName("erros-codes") val errorCodes: Array<String>?)
 
     object CaptchaException : Exception("captcha score too low")
 }
