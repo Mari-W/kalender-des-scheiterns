@@ -77,7 +77,7 @@ fun Application.module() {
                                 val folder = File(parent,"images")
                                 if (!folder.exists())
                                     folder.mkdir()
-                                val name = "${System.currentTimeMillis().toString().sha1()}.${File(it.originalFileName!!).extension}"
+                                val name = "${System.currentTimeMillis().toString().sha256()}.${File(it.originalFileName!!).extension}"
                                 val file = File(folder, name)
                                 file.createNewFile()
                                 it.streamProvider().use { its ->

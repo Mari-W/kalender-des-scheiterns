@@ -5,23 +5,10 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 object HashUtils {
-    fun sha512(input: String) = hashString("SHA-512", input)
 
     fun sha256(input: String) = hashString("SHA-256", input)
 
-    fun sha1(input: String) = hashString("SHA-1", input)
 
-    /**
-     * Supported algorithms on Android:
-     *
-     * Algorithm	Supported API Levels
-     * MD5          1+
-     * SHA-1	    1+
-     * SHA-224	    1-8,22+
-     * SHA-256	    1+
-     * SHA-384	    1+
-     * SHA-512	    1+
-     */
     private fun hashString(type: String, input: String): String {
         val HEX_CHARS = "0123456789ABCDEF"
         val bytes = MessageDigest
@@ -39,6 +26,7 @@ object HashUtils {
     }
 }
 
-fun String.sha1(): String {
-    return HashUtils.sha1(this)
+
+fun String.sha256(): String {
+    return HashUtils.sha256(this)
 }
