@@ -52,8 +52,8 @@ object Database {
                         """
             ).executeAndFetch(DateAmount::class.java)
             val ret = mutableListOf<DateAmount>()
-            var month = 1
-            var day = 0
+            var month: Short = 1
+            var day: Short = 0
             for (dateAmount in old) {
                 while (month < dateAmount.month) {
                     if (day > 31) {
@@ -61,8 +61,11 @@ object Database {
                         month++
                     }
                     while (day < dateAmount.day) {
-                        ret.add(DateAmount(month.toShort(), day.toShort(), "#FF0000"))
+                        ret.add(DateAmount(month, day, "#FF0000"))
                         day++
+                    }
+                    if (month == dateAmount.month) {
+                        break
                     }
                     if (month > 12) {
                         break
