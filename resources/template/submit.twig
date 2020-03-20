@@ -76,7 +76,7 @@
                         Das Ereignis mit den meisten Votes wird gedruckt.
                         Mein Verlag Voland & Quist wird ihn rausbringen.
                         Mein Gewinn-Anteil geht an <a target="_blank" rel="noopener noreferrer"
-                                                      href="https://sea-watch.org/en/?gclid=EAIaIQobChMIiNmX1Pmm6AIVT0TTCh1cXwpyEAAYASAAEgLJH_D_BwE"><b>Sea-Watch</b></a>.
+                                                      href="https://sea-watch.org/"><b>Sea-Watch</b></a>.
                     </p>
                     <style>.embed-container {
                             position: relative;
@@ -128,8 +128,6 @@
                             </label>
                             <label>
                                 Wer?<br>
-                                <i style="font-weight: lighter; font-size: 15px">Der Name, den du hier angibst, wird
-                                    veröffentlicht, wenn dein Ereignis gewinnt.</i>
                                 <input class="text text1" name="name" maxlength="32"
                                 <input class="text text2" name="name" maxlength="32"
                                        placeholder="Dein Name / Pseudonym" required
@@ -232,9 +230,9 @@
         dataSource: [
             {% for e in dates %}
             {
-                startDate: Date.parse('2020-{{ e|split('-')[1] }}-{{ e|split('-')[2] }}'),
-                endDate: Date.parse('2020-{{ e|split('-')[1] }}-{{ e|split('-')[2] }}'),
-                color: "#CE2E77"
+                startDate: Date.parse('2020-{{ e.month }}-{{ e.day }}'),
+                endDate: Date.parse('2020-{{ e.month }}-{{ e.day }}'),
+                color: "{{ e.color }}"
             },
             {% endfor %}
         ],

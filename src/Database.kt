@@ -39,22 +39,20 @@ object Database {
         }
     }
 
+
     /**
      * should return list of string which already have a submission
      */
-    fun dates(): List<String> {
-        return listOf(
-            "1986-03-14",
-            "1996-08-22",
-            "1111-04-01",
-            "2001-04-01",
-            "1986-03-11",
-            "2020-01-13",
-            "2020-03-18",
-            "2020-01-17",
-            "2020-03-19",
-            "2020-03-03"
-        )
+    fun dates(): List<DateAmount> {
+        return db.open().use {
+            it.createQuery(
+                """
+                SELECT x.month, x.day, co.color FROM colors co JOIN (
+                    SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)) x
+                ON co.from_num <= x.cnt AND x.cnt <= co.to_num;
+            """
+            ).executeAndFetch(DateAmount::class.java)
+        }
     }
 
 
@@ -77,9 +75,9 @@ object Database {
 
         db.open().use {
             return it.createQuery(
-                "SELECT id, type, date, source, description, name, picture, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "")+" ORDER BY $o $a "
+                "SELECT id, type, date, source, description, name, picture, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
             )
-            .executeAndFetch(Entry::class.java)
+                .executeAndFetch(Entry::class.java)
         }
 
     }
@@ -102,6 +100,12 @@ data class Entry(
     val picture: String = "",
     val name: String = "Unknown",
     val status: Status = Status.PENDING
+)
+
+data class DateAmount(
+    val month: Short,
+    val day: Short,
+    val color: String
 )
 
 enum class Type {
