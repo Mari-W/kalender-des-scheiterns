@@ -49,7 +49,7 @@ object Database {
                 """
                 SELECT x.month, x.day, co.color FROM colors co JOIN (
                     SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)) x
-                ON co.from_num <= x.cnt AND x.cnt <= co.to_num;
+                ON co.from_num <= x.cnt AND x.cnt <= co.to_num ORDER BY month, day ASC;
             """
             ).executeAndFetch(DateAmount::class.java)
         }
