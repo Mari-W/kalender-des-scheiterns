@@ -78,10 +78,24 @@
                         Mein Gewinn-Anteil geht an <a target="_blank" rel="noopener noreferrer"
                                                       href="https://sea-watch.org/en/?gclid=EAIaIQobChMIiNmX1Pmm6AIVT0TTCh1cXwpyEAAYASAAEgLJH_D_BwE"><b>Sea-Watch</b></a>.
                     </p>
-                    <div id="video">
-                        <iframe class="videoextern" width="640" height="360"
-                                src="https://www.youtube.com/embed/2_3TlzlHk4s"
-                                frameborder="0" allowfullscreen></iframe>
+                    <style>.embed-container {
+                            position: relative;
+                            padding-bottom: 56.25%;
+                            height: 0;
+                            overflow: hidden;
+                            max-width: 100%;
+                        }
+
+                        .embed-container iframe, .embed-container object, .embed-container embed {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                        }</style>
+                    <div class='embed-container'>
+                        <iframe src='https://www.youtube.com/embed/2_3TlzlHk4s' frameborder='0'
+                                allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="hist" role="tabpanel" aria-labelledby="hist-tab">
@@ -114,6 +128,8 @@
                             </label>
                             <label>
                                 Wer?<br>
+                                <i style="font-weight: lighter; font-size: 15px">Der Name, den du hier angibst, wird
+                                    veröffentlicht, wenn dein Ereignis gewinnt.</i>
                                 <input class="text text2" name="name" maxlength="32"
                                        placeholder="Dein Name / Pseudonym" required
                                        autofocus>
@@ -163,6 +179,8 @@
                                 hidden id="file-upload-complete">✓</p>#}
                             <label>
                                 Wer?<br>
+                                <i style="font-weight: lighter; font-size: 15px">Der Name, den du hier angibst, wird
+                                    veröffentlicht, wenn dein Ereignis gewinnt.</i>
                                 <input class="text text2" name="name" maxlength="32"
                                        placeholder="Dein Name / Pseudonym" required
                                        autofocus>
