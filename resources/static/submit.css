@@ -97,10 +97,6 @@ input[type=date]::-webkit-clear-button {
     width: 75%;
 }
 
-.text2 {
-    width: 75%;
-}
-
 .text, .source {
     height: 30px;
     border: none;
@@ -193,6 +189,10 @@ h3 {
     .floaty {
         float: left
     }
+
+    .text1 {
+        width: 100%;
+    }
 }
 
 @media only screen and (min-width: 480px) {
@@ -209,6 +209,10 @@ h3 {
 
     .floaty {
         float: left
+    }
+
+    .text1 {
+        width: 100%;
     }
 }
 
@@ -227,6 +231,10 @@ h3 {
     .floaty {
         float: right
     }
+
+    .text1 {
+        width: 75%;
+    }
 }
 
 @media only screen and (min-width: 992px) {
@@ -243,5 +251,9 @@ h3 {
 
     .floaty {
         float: right
+    }
+
+    .text1 {
+        width: 75%;
     }
 }
