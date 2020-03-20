@@ -1,6 +1,5 @@
 package de.moeri
 
-import io.ktor.html.insert
 import io.ktor.util.KtorExperimentalAPI
 import org.sql2o.Sql2o
 import java.sql.Date
@@ -62,6 +61,11 @@ object Database {
                     }
                     while (day < dateAmount.day) {
                         ret.add(DateAmount(month.toShort(), day.toShort(), "#FF0000"))
+                        day++
+                    }
+                    month++
+                    if (month > 12) {
+                        break
                     }
                 }
                 ret.add(dateAmount)
