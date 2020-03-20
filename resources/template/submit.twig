@@ -4,10 +4,22 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script>
+    <script src="https://unpkg.com/js-year-calendar@latest/locales/js-year-calendar.de.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"
+          href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="static/voting.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.5.0/viewer.min.css"
           integrity="sha256-MpORFsKmYYmQvFqOG/2AbIcy09vQBwjfZDKM+Ri/m0Y=" crossorigin="anonymous"/>
     <link rel="stylesheet" href="static/submit.css">
@@ -32,34 +44,50 @@
         <img src="static/nico.svg" class="card-img-top" alt="...">
         <div class="card-body content-body" style="padding: 10px 25px;">
 
-            <br>
-            <div class="well">
-                <p>Nach dem <b><a target="_blank" rel="noopener noreferrer"
-                                  href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> </b>gibt es
-                    jetzt den <b>KALENDER DES SCHEITERNS 2</b>.
-                    <br>Wir machen den gemeinsam. Ihr habt 7 Tage Zeit, eure Ideen einzusenden.
-                    Du kannst entweder ein <b>selbst erlebtes oder ein historisch belegte Ereignis</b> einreichen!
-                    Danach bekommt ihr weitere 7 Tage, um via Voting das Ereignis für die einzelnen Tage zu bestimmen.
-                    Das Ereignis mit den meisten Votes wird gedruckt.
-                    Mein Verlag Voland & Quist wird ihn rausbringen.
-                    Mein Gewinn-Anteil geht an <b>Sea-Watch</b>.
-                </p>
-            </div>
-            <br>
-            <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <ul class="nav nav-tabs justify-content-center" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link gentext active" id="hist-tab" data-toggle="tab" href="#hist" role="tab"
-                       aria-controls="hist" aria-selected="true">Historisch</a>
+                    <a class="nav-link gentext active" id="info-tab" data-toggle="tab" href="#info" role="tab"
+                       aria-controls="info" aria-selected="true">Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link gentext" id="hist-tab" data-toggle="tab" href="#hist" role="tab"
+                       aria-controls="hist" aria-selected="false">Historisch</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link gentext" id="pers-tab" data-toggle="tab" href="#pers" role="tab"
                        aria-controls="pers" aria-selected="false">Persönlich</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link gentext" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+                       aria-controls="overview" aria-selected="false">Overview</a>
+                </li>
             </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="hist" role="tabpanel" aria-labelledby="hist-tab">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <br>
+                    <p>Nach dem <b><a target="_blank" rel="noopener noreferrer"
+                                      href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> </b>gibt es
+                        jetzt den <b>KALENDER DES SCHEITERNS 2</b>.
+                        <br>Wir machen den gemeinsam. Ihr habt 7 Tage Zeit, eure Ideen einzusenden.
+                        Ihr könnt entweder ein <b>selbst erlebtes oder ein historisch belegtes Ereignis</b> einreichen!
+                        Danach bekommt ihr weitere 7 Tage, um via Voting das Ereignis für die einzelnen Tage zu bestimmen.
+                        Das Ereignis mit den meisten Votes wird gedruckt.
+                        Mein Verlag Voland & Quist wird ihn rausbringen.
+                        Mein Gewinn-Anteil geht an <a target="_blank" rel="noopener noreferrer"
+                                                      href="https://sea-watch.org/en/?gclid=EAIaIQobChMIiNmX1Pmm6AIVT0TTCh1cXwpyEAAYASAAEgLJH_D_BwE"><b>Sea-Watch</b></a>.
+                    </p>
+                    <div class="video-container" style="float: left; margin-right: 20px; width: 853px; height: 480px;margin-bottom:15px">
+                        <iframe width="100%" height="100%"
+                                src="https://www.youtube.com/embed/6pxK1zUyAb0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                frameborder="0"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="hist" role="tabpanel" aria-labelledby="hist-tab">
                     <div class="floaty">
-                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel</p>
+                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060"> Beispiel
+                            (klick mich)</p>
                         <div class="examplepic">
                             <img id="imagea" src="static/hist-example.png" class="card-img-top" alt="...">
                         </div>
@@ -101,7 +129,8 @@
                 </div>
                 <div class="tab-pane fade" id="pers" role="tabpanel" aria-labelledby="pers-tab">
                     <div class="floaty">
-                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel</p>
+                        <p style="margin-bottom: 0; text-align: center; font-weight: bold; color: #606060">Beispiel
+                            (klick mich)</p>
                         <div class="examplepic">
                             <img id="imageb" src="static/pers-example.png" class="card-img-top" alt="...">
                         </div>
@@ -116,22 +145,22 @@
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                             </label>
-                            <label {% if date %} data-toggle="tooltip" data-placement="top" title="{{ date }}" {% endif %}>
+                            <label>
                                 Wann?<br>
                                 <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
                             </label>
-                            <label style="">
-                                Bild?<br>
-                                <label for="img" class="button"
-                                       style="margin-top: 10px; margin-bottom: 0; display: inline-block;">
-                                    Hochladen
-                                </label>
-                                <input class="form-control-file" id="img" name="img" accept="image/*"
-                                       style="zoom: 70%; height: 0" type="file"
-                                       onchange="document.getElementById('file-upload-complete').removeAttribute('hidden');if(this.value.toString().length > 1) document.getElementById('file-upload-complete').innerText = this.value.split('\\').pop(-1)"/>
-                            </label>
-                            <p style="margin-bottom: 0;margin-top: 0; text-align: center; font-weight: lighter; color: #606060; display: inline-block"
-                               hidden id="file-upload-complete">✓</p>
+                            {# <label style="">
+                                 Bild?<br>
+                                 <label for="img" class="button"
+                                        style="margin-top: 10px; margin-bottom: 0; display: inline-block;">
+                                     Hochladen
+                                 </label>
+                                 <input class="form-control-file" id="img" name="img" accept="image/*"
+                                        style="zoom: 70%; height: 0" type="file"
+                                        onchange="document.getElementById('file-upload-complete').removeAttribute('hidden');if(this.value.toString().length > 1) document.getElementById('file-upload-complete').innerText = this.value.split('\\').pop(-1)"/>
+                             </label>
+                             <p style="margin-bottom: 0;margin-top: 0; text-align: center; font-weight: lighter; color: #606060; display: inline-block"
+                                hidden id="file-upload-complete">✓</p>#}
                             <label>
                                 Wer?<br>
                                 <input class="text text2" name="name" maxlength="32"
@@ -146,6 +175,13 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="tab-pane fade" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                    <br>
+                    <p style="margin-right: 20px">Übersicht der Tage, bei denen bereits jemand einen Vorschlag gemacht hat: </p>
+                    <br>
+                    <br>
+                    <div id="calendar" class="calendar"></div>
                 </div>
                 <br>
                 &copy; Marius Weidner & Moritz Geist 2020
@@ -165,6 +201,24 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.5.0/viewer.min.js"
         integrity="sha256-mLJW+YLWH/4ebMAdPKIX1aTCIE0m2nInDT1NxX8TCBM=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    const calendar = new Calendar('.calendar', {
+        language: 'de',
+        enableRangeSelection: false,
+        dataSource: [
+            {% for e in dates %}
+            {
+                startDate: Date.parse('2020-{{ e|split('-')[1] }}-{{ e|split('-')[2] }}'),
+                endDate: Date.parse('2020-{{ e|split('-')[1] }}-{{ e|split('-')[2] }}'),
+                color: "#f45b69"
+            },
+            {% endfor %}
+        ],
+    });
+
+
+</script>
 
 <script type="text/javascript">
     const viewer1 = new Viewer(document.getElementById('imagea'), {

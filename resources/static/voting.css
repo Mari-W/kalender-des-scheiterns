@@ -1,6 +1,6 @@
 body {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #f45b69;
 }
 
 .calendar .calendar-header {
@@ -14,7 +14,7 @@ body {
 }
 
 .calendar .calendar-header .year-title:not(.year-neighbor):not(.year-neighbor2) {
-    border-bottom: 2px solid #f45b69;
+    border-bottom: 2px solid #f5f5f5;
 }
 
 .calendar .months-container .month-container {
@@ -29,8 +29,8 @@ body {
 }
 
 .calendar table.month th.month-title {
-    background-color: #f45b69;
-    color: white;
+    background-color: #f5f5f5;
+    color: #f45b69;
     padding: 12px;
     font-weight: 400;
 }
@@ -46,7 +46,7 @@ body {
     padding: 8px;
     border-radius: 100%;
 }
-.calendar-header {
+.calendar-header, .day-header, .old-day {
     visibility: hidden;
     display: none;
 }

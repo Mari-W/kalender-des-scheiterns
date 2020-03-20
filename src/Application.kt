@@ -46,7 +46,7 @@ fun Application.module() {
 
         route("/submit") {
             get("/") {
-                call.respondTwig("submit", mapOf("date" to "Wie wär's mit dem 1. August?"))
+                call.respondTwig("submit", mapOf("dates" to Database.dates()))
             }
             post("/") {
                 if (!call.request.isMultipart())
@@ -57,7 +57,7 @@ fun Application.module() {
                             is PartData.FormItem -> {
                                 it.name to it.value
                             }
-                            is PartData.FileItem -> {
+                            /*is PartData.FileItem -> {
                                 val folder = File(File("data").ensureItExists(), "images").ensureItExists()
                                 val name = "${System.currentTimeMillis().toString()
                                     .sha256()}.${File(it.originalFileName!!).extension}"
@@ -71,9 +71,9 @@ fun Application.module() {
                                     }
                                 }
                                 "picture" to name
-                            }
+                            }*/
                             else -> {
-                                call.respond(HttpStatusCode.Forbidden.description("Sorry, we only take pictures or texts :/"))
+                                call.respond(HttpStatusCode.Forbidden.description("Sorry, we only take texts :/"))
                                 return@post
                             }
                         }

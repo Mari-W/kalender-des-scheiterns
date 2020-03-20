@@ -39,6 +39,24 @@ object Database {
         }
     }
 
+    /**
+     * should return list of string which already have a submission
+     */
+    fun dates(): List<String> {
+        return listOf(
+            "1986-03-14",
+            "1996-08-22",
+            "1111-04-01",
+            "2001-04-01",
+            "1986-03-11",
+            "2020-01-13",
+            "2020-03-18",
+            "2020-01-17",
+            "2020-03-19",
+            "2020-03-03"
+        )
+    }
+
 
     fun list(status: String, order: String): List<Entry> {
         val s = if (status != "all") Status.valueOf(status.toUpperCase()) else null
@@ -59,9 +77,9 @@ object Database {
 
         db.open().use {
             return it.createQuery(
-                    "SELECT id, type, date, source, description, name, picture, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
-                )
-                .executeAndFetch(Entry::class.java)
+                "SELECT id, type, date, source, description, name, picture, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "")+" ORDER BY $o $a "
+            )
+            .executeAndFetch(Entry::class.java)
         }
 
     }
