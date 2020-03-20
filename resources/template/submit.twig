@@ -112,7 +112,7 @@
                             <label>
                                 Was?<br>
                                 <textarea class="text text1" name="description" maxlength="420" minlength="5"
-                                          placeholder="Es war einmal.." required
+                                          placeholder="Es war einmal.. (max 420 Zeichen)" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                             </label>
@@ -128,17 +128,19 @@
                             </label>
                             <label>
                                 Wer?<br>
-                                <i style="font-weight: lighter; font-size: 15px">Der Name, den du hier angibst, wird
-                                    veröffentlicht, wenn dein Ereignis gewinnt.</i>
                                 <input class="text text2" name="name" maxlength="32"
                                        placeholder="Dein Name / Pseudonym" required
-                                       autofocus>
+                                       autofocus style="margin-bottom: 0">
+                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">*Der Name, den du hier angibst, wird
+                                    veröffentlicht, wenn dein Ereignis gewinnt.</i>
                             </label>
                             <div>
                                 <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
                                         data-callback="onSubmitA"
                                         type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b>
                                 </button>
+                                <br>
+                                <i style="font-weight: lighter; font-size: 15px; color: #606060; margin-top: 10px;">*Redaktionelle Änderungen behalten wir uns vor.</i>
                             </div>
                         </form>
                     </div>
@@ -157,7 +159,7 @@
                             <label>
                                 Was?<br>
                                 <textarea class="text text1" name="description" maxlength="420" minlength="5"
-                                          placeholder="Als ich wieder einmal.." required
+                                          placeholder="Als ich wieder einmal.. (max 420 Zeichen)" required
                                           autofocus
                                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                             </label>
@@ -179,17 +181,19 @@
                                 hidden id="file-upload-complete">✓</p>#}
                             <label>
                                 Wer?<br>
-                                <i style="font-weight: lighter; font-size: 15px">Der Name, den du hier angibst, wird
-                                    veröffentlicht, wenn dein Ereignis gewinnt.</i>
                                 <input class="text text2" name="name" maxlength="32"
                                        placeholder="Dein Name / Pseudonym" required
-                                       autofocus>
+                                       autofocus style="margin-bottom: 0">
+                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">*Der Name, den du hier angibst, wird
+                                    veröffentlicht, wenn dein Ereignis gewinnt.</i>
                             </label>
                             <div>
                                 <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
                                         data-callback="onSubmitB"
                                         type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b>
                                 </button>
+                                <br>
+                                <i style="font-weight: lighter; font-size: 15px; color: #606060; margin-top: 10px;">*Redaktionelle Änderungen behalten wir uns vor.</i>
                             </div>
                         </div>
                     </form>
@@ -227,7 +231,7 @@
             {
                 startDate: Date.parse('2020-{{ e|split('-')[1] }}-{{ e|split('-')[2] }}'),
                 endDate: Date.parse('2020-{{ e|split('-')[1] }}-{{ e|split('-')[2] }}'),
-                color: "#f45b69"
+                color: "#CE2E77"
             },
             {% endfor %}
         ],
