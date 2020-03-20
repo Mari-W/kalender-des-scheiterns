@@ -1,5 +1,6 @@
 package de.moeri
 
+import io.ktor.html.insert
 import io.ktor.util.KtorExperimentalAPI
 import org.sql2o.Sql2o
 import java.sql.Date
@@ -39,22 +40,35 @@ object Database {
         }
     }
 
-
     /**
      * should return list of string which already have a submission
      */
     fun dates(): List<DateAmount> {
         return db.open().use {
-            it.createQuery(
+            val old = it.createQuery(
                 """
-                SELECT x.month, x.day, co.color FROM colors co JOIN (
-                    SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)) x
-                ON co.from_num <= x.cnt AND x.cnt <= co.to_num ORDER BY month, day ASC;
-            """
+                            SELECT x.month, x.day, co.color FROM colors co JOIN (
+                                SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)) x
+                            ON co.from_num <= x.cnt AND x.cnt <= co.to_num ORDER BY month, day ASC;
+                        """
             ).executeAndFetch(DateAmount::class.java)
+            val ret = mutableListOf<DateAmount>()
+            var month = 0
+            var day = 32
+            for (dateAmount in old) {
+                while (month < dateAmount.month) {
+                    if (day > 31) {
+                        day = 0
+                    }
+                    while (day < dateAmount.day) {
+                        ret.add(DateAmount(month.toShort(), day.toShort(), "#FF0000"))
+                    }
+                }
+                ret.add(dateAmount)
+            }
+            return ret.toList()
         }
     }
-
 
     fun list(status: String, order: String): List<Entry> {
         val s = if (status != "all") Status.valueOf(status.toUpperCase()) else null
@@ -89,7 +103,6 @@ object Database {
         else 5 <= len || len <= 420
     }
 }
-
 
 data class Entry(
     val id: Int = 0,
