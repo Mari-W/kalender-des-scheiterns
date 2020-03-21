@@ -43,20 +43,33 @@ object Database {
      */
     fun dates(): List<DateEvent> {
         return db.open().use {
-            val old = it.createQuery("SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)")
-                .executeAndFetch(DateAmount::class.java)
+            val old =
+                it.createQuery("SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)")
+                    .executeAndFetch(DateAmount::class.java)
             val ret = mutableListOf<DateEvent>()
             var last: DateAmount? = null
             for (dateAmount in old) {
                 if (last == null) {
                     if (dateAmount.month != 1 || dateAmount.month != 1) {
-                        ret.add(DateEvent(1 , 1, dateAmount.month, dateAmount.day-1, "#FF0000"))
+                        if (dateAmount.day == 1) {
+                            ret.add(DateEvent(1, 1, dateAmount.month - 1, dateAmount.day, "#FF0000"))
+                        } else {
+                            ret.add(DateEvent(1, 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
+                        }
                     }
                 } else {
-                    ret.add(DateEvent(last.month , last.day+1, dateAmount.month, dateAmount.day-1, "#FF0000"))
+                    ret.add(DateEvent(last.month, last.day + 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
                 }
                 last = dateAmount
-                ret.add(DateEvent(dateAmount.month, dateAmount.day, dateAmount.month, dateAmount.day, dateAmount.getColor()))
+                ret.add(
+                    DateEvent(
+                        dateAmount.month,
+                        dateAmount.day,
+                        dateAmount.month,
+                        dateAmount.day,
+                        dateAmount.getColor()
+                    )
+                )
             }
             if (last == null) {
                 ret.add(DateEvent(1, 1, 12, 31, "#FF0000"))
@@ -88,8 +101,8 @@ object Database {
 
         db.open().use {
             return it.createQuery(
-                "SELECT id, type, date, source, description, name, picture, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
-            )
+                    "SELECT id, type, date, source, description, name, picture, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
+                )
                 .executeAndFetch(Entry::class.java)
         }
 
@@ -133,6 +146,7 @@ data class DateAmount(
         }
     }
 }
+
 data class DateEvent(
     val fromMonth: Int,
     val fromDay: Int,
