@@ -5,7 +5,6 @@ import org.sql2o.Sql2o
 import java.sql.Date
 import java.util.regex.Pattern
 
-
 @KtorExperimentalAPI
 object Database {
 
@@ -42,38 +41,23 @@ object Database {
     /**
      * should return list of string which already have a submission
      */
-    fun dates(): List<DateAmount> {
+    fun dates(): List<DateEvent> {
         return db.open().use {
-            val old = it.createQuery(
-                """
-                            SELECT x.month, x.day, co.color FROM colors co JOIN (
-                                SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)) x
-                            ON co.from_num <= x.cnt AND x.cnt <= co.to_num ORDER BY month, day ASC;
-                        """
-            ).executeAndFetch(DateAmount::class.java)
-            val ret = mutableListOf<DateAmount>()
-            var month: Short = 1
-            var day: Short = 0
+            val old = it.createQuery("SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)) x").executeAndFetch(DateAmount::class.java)
+            val ret = mutableListOf<DateEvent>()
+            var last: DateAmount? = null
             for (dateAmount in old) {
-                while (month < dateAmount.month) {
-                    if (day > 31) {
-                        day = 0
-                        month++
+                if (last == null) {
+                    if (dateAmount.month != 1 || dateAmount.month != 1) {
+                        ret.add(DateEvent(1 , 1, dateAmount.month, dateAmount.day-1, "#FF00000"))
                     }
-                    while (day < dateAmount.day) {
-                        ret.add(DateAmount(month, day, "#FF0000"))
-                        day++
-                    }
-                    if (month == dateAmount.month) {
-                        break
-                    }
-                    if (month > 12) {
-                        break
-                    }
+                } else {
+                    ret.add(DateEvent(last.month , last.day+1, dateAmount.month, dateAmount.day-1, "#FF00000"))
                 }
-                ret.add(dateAmount)
+                last = dateAmount
+                ret.add(DateEvent(dateAmount.month, dateAmount.day, dateAmount.month, dateAmount.day, dateAmount.getColor()))
             }
-            return ret.toList()
+            ret.toList()
         }
     }
 
@@ -123,8 +107,29 @@ data class Entry(
 )
 
 data class DateAmount(
-    val month: Short,
-    val day: Short,
+    val month: Int,
+    val day: Int,
+    val cnt: Int
+) {
+    fun getColor(): String {
+        return when {
+            cnt < 3 -> {
+                "#FF0000"
+            }
+            cnt < 10 -> {
+                "#FFF700"
+            }
+            else -> {
+                "#00FF00"
+            }
+        }
+    }
+}
+data class DateEvent(
+    val fromMonth: Int,
+    val fromDay: Int,
+    val toMonth: Int,
+    val toDay: Int,
     val color: String
 )
 
