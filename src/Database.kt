@@ -50,10 +50,10 @@ object Database {
             for (dateAmount in old) {
                 if (last == null) {
                     if (dateAmount.month != 1 || dateAmount.month != 1) {
-                        ret.add(DateEvent(1 , 1, dateAmount.month, dateAmount.day-1, "#FF00000"))
+                        ret.add(DateEvent(1 , 1, dateAmount.month, dateAmount.day-1, "#FF0000"))
                     }
                 } else {
-                    ret.add(DateEvent(last.month , last.day+1, dateAmount.month, dateAmount.day-1, "#FF00000"))
+                    ret.add(DateEvent(last.month , last.day+1, dateAmount.month, dateAmount.day-1, "#FF0000"))
                 }
                 last = dateAmount
                 ret.add(DateEvent(dateAmount.month, dateAmount.day, dateAmount.month, dateAmount.day, dateAmount.getColor()))
