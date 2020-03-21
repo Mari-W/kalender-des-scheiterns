@@ -52,14 +52,16 @@ object Database {
                 if (last == null) {
                     if (dateAmount.month != 1 || dateAmount.day != 1) {
                         if (dateAmount.day == 1) {
-                            ret.add(DateEvent(1, 1, dateAmount.month - 1, 31, "#FF0000"))
+                            ret.add(DateEvent(1, 1, dateAmount.month - 1,
+                                monthLen[dateAmount.month - 1] ?: error("month not found lol in if"), "#FF0000"))
                         } else {
                             ret.add(DateEvent(1, 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
                         }
                     }
                 } else {
                     if (dateAmount.day == 1) {
-                        ret.add(DateEvent(last.month, last.day + 1, dateAmount.month - 1, 31, "#FF0000"))
+                        ret.add(DateEvent(last.month, last.day + 1, dateAmount.month - 1,
+                            monthLen[dateAmount.month - 1] ?: error("month not found lol in else"), "#FF0000"))
                     } else {
                         ret.add(DateEvent(last.month, last.day + 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
                     }
@@ -169,3 +171,18 @@ enum class Status {
     PENDING,
     DENIED
 }
+
+private val monthLen = mapOf(
+    1 to 31,
+    2 to 29,
+    3 to 31,
+    4 to 30,
+    5 to 31,
+    6 to 30,
+    7 to 31,
+    8 to 31,
+    9 to 30,
+    10 to 31,
+    11 to 30,
+    12 to 31
+)
