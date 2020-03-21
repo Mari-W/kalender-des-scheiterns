@@ -52,13 +52,17 @@ object Database {
                 if (last == null) {
                     if (dateAmount.month != 1 || dateAmount.month != 1) {
                         if (dateAmount.day == 1) {
-                            ret.add(DateEvent(1, 1, dateAmount.month - 1, dateAmount.day, "#FF0000"))
+                            ret.add(DateEvent(1, 1, dateAmount.month - 1, 31, "#FF0000"))
                         } else {
                             ret.add(DateEvent(1, 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
                         }
                     }
                 } else {
-                    ret.add(DateEvent(last.month, last.day + 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
+                    if (dateAmount.day == 1) {
+                        ret.add(DateEvent(last.month, last.day + 1, dateAmount.month - 1, 31, "#FF0000"))
+                    } else {
+                        ret.add(DateEvent(last.month, last.day + 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
+                    }
                 }
                 last = dateAmount
                 ret.add(
