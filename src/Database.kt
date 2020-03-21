@@ -43,7 +43,8 @@ object Database {
      */
     fun dates(): List<DateEvent> {
         return db.open().use {
-            val old = it.createQuery("SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)) x").executeAndFetch(DateAmount::class.java)
+            val old = it.createQuery("SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)")
+                .executeAndFetch(DateAmount::class.java)
             val ret = mutableListOf<DateEvent>()
             var last: DateAmount? = null
             for (dateAmount in old) {
