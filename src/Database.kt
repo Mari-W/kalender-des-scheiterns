@@ -58,6 +58,13 @@ object Database {
                 last = dateAmount
                 ret.add(DateEvent(dateAmount.month, dateAmount.day, dateAmount.month, dateAmount.day, dateAmount.getColor()))
             }
+            if (last == null) {
+                ret.add(DateEvent(1, 1, 12, 31, "#FF0000"))
+            } else {
+                if (last.month != 12 && last.day != 31) {
+                    ret.add(DateEvent(last.month, last.day, 12, 31, "#FF0000"))
+                }
+            }
             ret.toList()
         }
     }
