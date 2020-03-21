@@ -50,7 +50,7 @@ object Database {
             var last: DateAmount? = null
             for (dateAmount in old) {
                 if (last == null) {
-                    if (dateAmount.month != 1 || dateAmount.month != 1) {
+                    if (dateAmount.month != 1 || dateAmount.day != 1) {
                         if (dateAmount.day == 1) {
                             ret.add(DateEvent(1, 1, dateAmount.month - 1, 31, "#FF0000"))
                         } else {
