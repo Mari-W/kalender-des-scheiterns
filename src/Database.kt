@@ -38,9 +38,7 @@ object Database {
         }
     }
 
-    /**
-     * should return list of string which already have a submission
-     */
+
     fun dates(): List<DateEvent> {
         return db.open().use {
             val old =
@@ -128,7 +126,6 @@ data class Entry(
     val source: String = "",
     val date: Date,
     val description: String,
-    val picture: String = "",
     val name: String = "Unknown",
     val status: Status = Status.PENDING
 )

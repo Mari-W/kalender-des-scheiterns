@@ -57,21 +57,6 @@ fun Application.module() {
                             is PartData.FormItem -> {
                                 it.name to it.value
                             }
-                            /*is PartData.FileItem -> {
-                                val folder = File(File("data").ensureItExists(), "images").ensureItExists()
-                                val name = "${System.currentTimeMillis().toString()
-                                    .sha256()}.${File(it.originalFileName!!).extension}"
-                                val file = File(folder, name)
-                                file.createNewFile()
-                                val bytes = it.streamProvider().use { input ->
-                                    try {
-                                        ImageIO.write(ImageIO.read(input), "png", file)
-                                    } catch (e: java.lang.Exception) {
-                                        call.respond(HttpStatusCode.Forbidden.description("Only pictures! :angry:"))
-                                    }
-                                }
-                                "picture" to name
-                            }*/
                             else -> {
                                 call.respond(HttpStatusCode.Forbidden.description("Sorry, we only take texts :/"))
                                 return@post
@@ -104,7 +89,6 @@ fun Application.module() {
                                     date = Date.valueOf(get("date")!!),
                                     description = get("description")!!,
                                     name = if (containsKey("name")) get("name")!! else "",
-                                    picture = if (containsKey("picture")) get("picture")!! else ""
                                 )
                                 Database.insert(entry)
                                 call.respondRedirect("/success")
