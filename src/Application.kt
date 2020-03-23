@@ -81,7 +81,8 @@ fun Application.module() {
                                 source = if (type == Type.HISTORIC) get("source")!! else "",
                                 date = Date.valueOf(get("date")!!),
                                 description = get("description")!!,
-                                name = if (containsKey("name")) get("name")!! else ""
+                                name = if (containsKey("name")) get("name")!! else "",
+                                email = if (containsKey("email")) get("email")!! else ""
                             )
                             Database.insert(entry)
                             call.respondRedirect("/success")

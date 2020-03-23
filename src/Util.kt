@@ -30,17 +30,6 @@ object HashUtils {
     }
 }
 
-
-fun String.sha256(): String {
-    return HashUtils.sha256(this)
-}
-
-fun File.ensureItExists(): File {
-    if (!exists())
-        mkdir()
-    return this
-}
-
 private val templates = mutableMapOf<String, JtwigTemplate>()
 
 suspend fun ApplicationCall.respondTwig(template: String, model: Map<String, Any> = mapOf()) {

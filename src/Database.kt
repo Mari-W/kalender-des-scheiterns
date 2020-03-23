@@ -23,7 +23,7 @@ object Database {
             throw IllegalArgumentException()
         }
         db.open().use {
-            it.createQuery("INSERT INTO entries (type, source, date, description, name) VALUES (:type, :source, :date, :description, :name)")
+            it.createQuery("INSERT INTO entries (type, source, date, description, name, email) VALUES (:type, :source, :date, :description, :name, :email)")
                 .bind(entry)
                 .executeUpdate()
         }
@@ -105,7 +105,7 @@ object Database {
 
         db.open().use {
             return it.createQuery(
-                    "SELECT id, type, date, source, description, name, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
+                    "SELECT id, type, date, source, description, name, email, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
                 )
                 .executeAndFetch(Entry::class.java)
         }
@@ -127,6 +127,7 @@ data class Entry(
     val date: Date,
     val description: String,
     val name: String = "Unknown",
+    val email: String = "Unknown",
     val status: Status = Status.PENDING
 )
 
