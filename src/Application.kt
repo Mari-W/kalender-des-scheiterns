@@ -84,8 +84,11 @@ fun Application.module() {
                                 name = if (containsKey("name")) get("name")!! else "",
                                 email = if (containsKey("email")) get("email")!! else ""
                             )
-                            Database.insert(entry)
-                            call.respondRedirect("/success")
+                            call.respondTwig("respond", mapOf(
+                                "message" to if(Database.insert(entry))
+                                    "Dein Ereignis wurde erfolgreich eingetragen!"
+                                else "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, versuch es morgen wieder!"
+                            ))
                         } else {
                             call.respond(HttpStatusCode.Forbidden.description("Errör"))
                         }
@@ -101,12 +104,7 @@ fun Application.module() {
                 }
         }
 
-
-        get("/success") {
-            call.respondTwig("success")
-        }
-
-        get("/imprint"){
+        get("/imprint") {
             call.respondTwig("imprint")
         }
 
@@ -150,17 +148,6 @@ fun Application.module() {
                             else call.respond(HttpStatusCode.Forbidden.description("Errör"))
                         }
                 }
-            }
-        }
-
-        route("/voting") {
-            get("/") {
-                call.respondTwig(
-                    "voting", mapOf(
-                        "disbaled" to emptyList<String>(),
-                        "enabled" to emptyList<String>()
-                    )
-                )
             }
         }
 

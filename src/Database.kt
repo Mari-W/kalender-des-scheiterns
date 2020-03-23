@@ -18,14 +18,21 @@ object Database {
         Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
 
 
-    fun insert(entry: Entry) {
+    fun insert(entry: Entry): Boolean {
         if (!check(entry)) {
             throw IllegalArgumentException()
         }
         db.open().use {
-            it.createQuery("INSERT INTO entries (type, source, date, description, name, email) VALUES (:type, :source, :date, :description, :name, :email)")
-                .bind(entry)
+            val limit = it.createQuery("SELECT rate_limit();")
                 .executeUpdate()
+                .result
+            if (limit.toBoolean()) {
+                it.createQuery("INSERT INTO entries (type, source, date, description, name, email) VALUES (:type, :source, :date, :description, :name, :email)")
+                    .bind(entry)
+                    .executeUpdate()
+                return true
+            }
+            return false
         }
     }
 
@@ -50,16 +57,24 @@ object Database {
                 if (last == null) {
                     if (dateAmount.month != 1 || dateAmount.day != 1) {
                         if (dateAmount.day == 1) {
-                            ret.add(DateEvent(1, 1, dateAmount.month - 1,
-                                monthLen[dateAmount.month - 1] ?: error("month not found lol in if"), "#FF0000"))
+                            ret.add(
+                                DateEvent(
+                                    1, 1, dateAmount.month - 1,
+                                    monthLen[dateAmount.month - 1] ?: error("month not found lol in if"), "#FF0000"
+                                )
+                            )
                         } else {
                             ret.add(DateEvent(1, 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
                         }
                     }
                 } else {
                     if (dateAmount.day == 1) {
-                        ret.add(DateEvent(last.month, last.day + 1, dateAmount.month - 1,
-                            monthLen[dateAmount.month - 1] ?: error("month not found lol in else"), "#FF0000"))
+                        ret.add(
+                            DateEvent(
+                                last.month, last.day + 1, dateAmount.month - 1,
+                                monthLen[dateAmount.month - 1] ?: error("month not found lol in else"), "#FF0000"
+                            )
+                        )
                     } else {
                         ret.add(DateEvent(last.month, last.day + 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
                     }
@@ -105,8 +120,8 @@ object Database {
 
         db.open().use {
             return it.createQuery(
-                    "SELECT id, type, date, source, description, name, email, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
-                )
+                "SELECT id, type, date, source, description, name, email, status FROM entries " + (if (s != null) "WHERE status = '$s'" else "") + " ORDER BY $o $a "
+            )
                 .executeAndFetch(Entry::class.java)
         }
 
