@@ -39,6 +39,9 @@ fun Application.module() {
         get("/") {
             call.respondTwig("info", mapOf("dates" to Database.dates()))
         }
+        get("/a") {
+            call.respondTwig("submit_pers", mapOf("dates" to Database.dates()))
+        }
         post("/") {
             if (!call.request.isMultipart())
                 call.respond(HttpStatusCode.Forbidden.description("Oh boy, tryin' to upload different forms?"))
