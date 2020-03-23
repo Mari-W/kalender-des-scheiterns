@@ -1,0 +1,41 @@
+body {
+    background-color: #cf2e78;
+}
+
+.outer-container {
+    background-color: white;
+    width: 77%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 15px;
+}
+
+.center {
+    display: block;
+    margin-left: -1px;
+    margin-right: -1px;
+}
+
+.navbar-top {
+    background-color: #cf2e78;
+    text-align: center;
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 13pt;
+}
+
+.menu-items1 {
+    padding-top: 28px;
+    color: white;
+}
+.menu-items2 {
+    padding-top: 15px;
+    color: white;
+}
+.menu-items3 {
+    padding-top: 3px;
+    color: white;
+}
+
+.menu-active {
+    background-color: #8c1f52;
+}
