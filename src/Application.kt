@@ -106,6 +106,10 @@ fun Application.module() {
             call.respondTwig("success")
         }
 
+        get("/imprint"){
+            call.respondTwig("imprint")
+        }
+
         route("/mod") {
             get("/") {
                 call.respondRedirect("/mod/show/pending/sortby/date")
