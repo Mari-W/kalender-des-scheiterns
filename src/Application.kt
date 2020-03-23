@@ -4,7 +4,6 @@ import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CallLogging
-import io.ktor.features.origin
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.isMultipart
@@ -18,10 +17,7 @@ import io.ktor.routing.route
 import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
 import org.slf4j.event.Level
-import java.io.File
 import java.sql.Date
-import javax.imageio.ImageIO
-
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -41,77 +37,75 @@ fun Application.module() {
 
     routing {
 
+
         get("/") {
-            call.respondRedirect("/submit")
-            println(call.request.origin.remoteHost)
+            call.respondTwig("submit", mapOf("dates" to Database.dates()))
         }
-
-        route("/submit") {
-            get("/") {
-                call.respondTwig("submit", mapOf("dates" to Database.dates()))
-            }
-            post("/") {
-                if (!call.request.isMultipart())
-                    call.respond(HttpStatusCode.Forbidden.description("Oh boy, tryin' to upload different forms?"))
-                else
-                    call.receiveMultipart().readAllParts().map {
-                        when (it) {
-                            is PartData.FormItem -> {
-                                it.name to it.value
-                            }
-                            else -> {
-                                call.respond(HttpStatusCode.Forbidden.description("Sorry, we only take texts :/"))
-                                return@post
-                            }
+        post("/") {
+            if (!call.request.isMultipart())
+                call.respond(HttpStatusCode.Forbidden.description("Oh boy, tryin' to upload different forms?"))
+            else
+                call.receiveMultipart().readAllParts().map {
+                    when (it) {
+                        is PartData.FormItem -> {
+                            it.name to it.value
                         }
-                    }.toMap().map {
-                        it.key to it.value.replace("<", "(").replace(">", ")")
-                    }.toMap().apply {
-                        try {
-                            if (containsKey("g-recaptcha-response")) {
-                                ReCaptcha.validate(get("g-recaptcha-response")!!)
-                            } else {
-                                call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
-                                return@post
-                            }
-                            if (!containsKey("type")) {
-                                call.respond(HttpStatusCode.Forbidden.description("Invalid type, only historic or personal allowed."))
-                                return@post
-                            }
-                            val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
-                            val okay = when (type) {
-                                Type.PERSONAL -> containsKey("description") && containsKey("date")
-                                Type.HISTORIC -> containsKey("description") && containsKey("date") && containsKey("source")
-                                else -> false
-                            }
-                            if (okay && type != null) {
-                                val entry = Entry(
-                                    type = type,
-                                    source = if (type == Type.HISTORIC) get("source")!! else "",
-                                    date = Date.valueOf(get("date")!!),
-                                    description = get("description")!!,
-                                    name = if (containsKey("name")) get("name")!! else ""
-                                )
-                                Database.insert(entry)
-                                call.respondRedirect("/success")
-                            } else {
-                                call.respond(HttpStatusCode.Forbidden.description("Errör"))
-                            }
-
-
-                        } catch (e: IllegalArgumentException) {
-                            call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
-                        } catch (e: NullPointerException) {
-                            call.respond(HttpStatusCode.Forbidden.description("Null,null"))
-                        } catch (e: ReCaptcha.CaptchaException) {
-                            call.respondRedirect("/success")
+                        else -> {
+                            call.respond(HttpStatusCode.Forbidden.description("Sorry, we only take texts :/"))
+                            return@post
                         }
                     }
-            }
+                }.toMap().map {
+                    it.key to it.value.replace("<", "(").replace(">", ")")
+                }.toMap().apply {
+                    try {
+                        if (containsKey("g-recaptcha-response")) {
+                            ReCaptcha.validate(get("g-recaptcha-response")!!)
+                        } else {
+                            call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
+                            return@post
+                        }
+                        if (!containsKey("type")) {
+                            call.respond(HttpStatusCode.Forbidden.description("Invalid type, only historic or personal allowed."))
+                            return@post
+                        }
+                        val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
+                        val okay = when (type) {
+                            Type.PERSONAL -> containsKey("description") && containsKey("date")
+                            Type.HISTORIC -> containsKey("description") && containsKey("date") && containsKey("source")
+                            else -> false
+                        }
+                        if (okay && type != null) {
+                            val entry = Entry(
+                                type = type,
+                                source = if (type == Type.HISTORIC) get("source")!! else "",
+                                date = Date.valueOf(get("date")!!),
+                                description = get("description")!!,
+                                name = if (containsKey("name")) get("name")!! else "",
+                                email = if (containsKey("email")) get("email")!! else ""
+                            )
+                            call.respondTwig("respond", mapOf(
+                                "message" to if(Database.insert(entry))
+                                    "Dein Ereignis wurde erfolgreich eingetragen!"
+                                else "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, versuch es morgen wieder!"
+                            ))
+                        } else {
+                            call.respond(HttpStatusCode.Forbidden.description("Errör"))
+                        }
+
+
+                    } catch (e: IllegalArgumentException) {
+                        call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
+                    } catch (e: NullPointerException) {
+                        call.respond(HttpStatusCode.Forbidden.description("Null,null"))
+                    } catch (e: ReCaptcha.CaptchaException) {
+                        call.respondRedirect("/success")
+                    }
+                }
         }
 
-        get("/success") {
-            call.respondTwig("success")
+        get("/imprint") {
+            call.respondTwig("imprint")
         }
 
         route("/mod") {
@@ -154,17 +148,6 @@ fun Application.module() {
                             else call.respond(HttpStatusCode.Forbidden.description("Errör"))
                         }
                 }
-            }
-        }
-
-        route("/voting") {
-            get("/") {
-                call.respondTwig(
-                    "voting", mapOf(
-                        "disbaled" to emptyList<String>(),
-                        "enabled" to emptyList<String>()
-                    )
-                )
             }
         }
 

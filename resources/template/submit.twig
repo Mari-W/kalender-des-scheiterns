@@ -65,18 +65,15 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
                     <br>
-                    <p>Nach dem <b><a target="_blank" rel="noopener noreferrer"
-                                      href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> </b>gibt
-                        es
-                        jetzt den <b>KALENDER DES SCHEITERNS 2</b>.
-                        <br>Wir machen den gemeinsam. Ihr habt 7 Tage Zeit, eure Ideen einzusenden.
-                        Ihr könnt entweder ein <b>selbst erlebtes oder ein historisch belegtes Ereignis</b> einreichen!
-                        Danach bekommt ihr weitere 7 Tage, um via Voting das Ereignis für die einzelnen Tage zu
-                        bestimmen.
-                        Das Ereignis mit den meisten Votes wird gedruckt.
-                        Mein Verlag Voland & Quist wird ihn rausbringen.
-                        Mein Gewinn-Anteil geht an <a target="_blank" rel="noopener noreferrer"
-                                                      href="https://sea-watch.org/"><b>Sea-Watch</b></a>.
+                    <p>
+                        Nach dem <b><a target="_blank" rel="noopener noreferrer"
+                                       href="http://der-kalender-des-scheiterns.de/">Kalender des Scheiterns</a> </b> gibt es jetzt den <b>KALENDER DES SCHEITERNS 2.</b><br> Wir machen den
+                        gemeinsam. Ihr habt zunächst bis [Tag, Uhrzeit (7Tage Laufzeit)], eure Ideen einzusenden. Ihr
+                        könnt entweder <b>selbst erlebte oder historisch belegte Ereignisse</b> einreichen! Unter "Eingereichte
+                        Ereignisse" könnt ihr den aktuellen Stand einsehen. Mein Team sucht nach der Frist die besten
+                        Vorschläge aus. Mein Verlag Voland & Quist wird ihn rausbringen. Mein Gewinn-Anteil geht an
+                        <a target="_blank" rel="noopener noreferrer"
+                           href="https://sea-watch.org/"><b>Sea-Watch</b></a>.
                     </p>
                     <style>.embed-container {
                             position: relative;
@@ -107,7 +104,7 @@
                         </div>
                     </div>
                     <div class="form">
-                        <form id="formA" action="/submit" method="post" enctype="multipart/form-data">
+                        <form id="formA" action="/" method="post" enctype="multipart/form-data">
                             <input hidden value="historic" name="type"/>
                             <label>
                                 Was?<br>
@@ -128,25 +125,27 @@
                             </label>
                             <label>
                                 Wer?<br>
-                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">Der Name, den du hier angibst, wird veröffentlicht, wenn dein Ereignis gewinnt.</i>
-                                <input class="text text2" name="name" maxlength="32"
-                                       placeholder="Dein Name / Pseudonym" required
+                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">Der Name, den du hier
+                                    angibst, wird veröffentlicht, wenn dein Ereignis gewinnt. (optional)</i>
+                                <input class="text text1" name="name" maxlength="32"
+                                       placeholder="Dein Name / Pseudonym"
                                        autofocus style="margin-bottom: 0">
                             </label>
-                            {#<label>
+                            <label>
                                 Email?<br>
-                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">Deine Email wird nirgendwo veröffentlicht und nur im Falle von Rückfragen verwendet.</i>
-                                <input type="email" class="text text1" name="email" maxlength="32"
-                                       placeholder="Dein Email-Addresse" required
+                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">Deine Email wird nicht veröffentlicht und nur im Falle von Rückfragen verwendet. (optional)</i>
+                                <input type="email" class="text text1" name="email" maxlength="256"
+                                       placeholder="Deine Email-Addresse"
                                        autofocus style="margin-bottom: 0">
-                            </label>#}
+                            </label>
                             <div>
                                 <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
                                         data-callback="onSubmitA"
                                         type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b>
                                 </button>
                                 <br>
-                                <i style="font-size: 15px; color: #606060; margin-top: 10px;">*Redaktionelle Änderungen behalten wir uns vor.</i>
+                                <i style="font-size: 15px; color: #606060; margin-top: 10px;">*Redaktionelle Änderungen
+                                    behalten wir uns vor.</i>
                             </div>
                         </form>
                     </div>
@@ -159,7 +158,7 @@
                             <img id="imageb" src="static/pers-example.png" class="card-img-top" alt="...">
                         </div>
                     </div>
-                    <form id="formB" action="/submit" method="post" enctype="multipart/form-data">
+                    <form id="formB" action="/" method="post" enctype="multipart/form-data">
                         <input hidden value="personal" name="type"/>
                         <div class="form-group">
                             <label>
@@ -175,25 +174,27 @@
                             </label>
                             <label>
                                 Wer?<br>
-                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">Der Name, den du hier angibst, wird veröffentlicht, wenn dein Ereignis gewinnt.</i>
+                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">Der Name, den du hier
+                                    angibst, wird veröffentlicht, wenn dein Ereignis gewinnt. (optional)</i>
                                 <input class="text text1" name="name" maxlength="32"
-                                       placeholder="Dein Name / Pseudonym" required
+                                       placeholder="Dein Name / Pseudonym"
                                        autofocus style="margin-bottom: 0">
                             </label>
-                            {#<label>
+                            <label>
                                 Email?<br>
-                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">Deine Email wird nirgendwo veröffentlicht und nur im Falle von Rückfragen verwendet.</i>
-                                <input type="email" class="text text1" name="email" maxlength="32"
-                                       placeholder="Dein Email-Addresse" required
+                                <i style="font-weight: lighter; font-size: 15px; color: #606060;">Deine Email wird nirgendwo veröffentlicht und nur im Falle von Rückfragen verwendet. (optional)</i>
+                                <input type="email" class="text text1" name="email" maxlength="256"
+                                       placeholder="Deine Email-Addresse"
                                        autofocus style="margin-bottom: 0">
-                            </label>#}
+                            </label>
                             <div>
                                 <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
                                         data-callback="onSubmitB"
                                         type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b>
                                 </button>
                                 <br>
-                                <i style="font-size: 15px; color: #606060; margin-top: 10px;">*Redaktionelle Änderungen behalten wir uns vor.</i>
+                                <i style="font-size: 15px; color: #606060; margin-top: 10px;">*Redaktionelle Änderungen
+                                    behalten wir uns vor.</i>
                             </div>
                         </div>
                     </form>
@@ -204,7 +205,7 @@
                     <div id="calendar" class="calendar"></div>
                 </div>
                 <br>
-                &copy; Marius Weidner & Moritz Geist 2020
+                &copy; Marius Weidner & Moritz Geist 2020 <a href="/imprint">Impressum</a>
             </div>
         </div>
     </div>

@@ -21,14 +21,14 @@
         <img src="static/nico.svg" class="card-img-top" alt="...">
         <div class="card-body content-body" style="padding: 10px 25px;">
             <br>
-            <h1> Vielen Dank für deinen Beitrag! </h1>
+            <h1> {{ message }} </h1>
             <br>
-            <form action="/submit" method="get">
-                <button type="submit" class="button"> Ich will nochmal!</button>
+            <form action="/" method="get">
+                <button type="submit" class="button"> Zurück zur Hauptseite!</button>
             </form>
             <br>
             <br>
-            &copy; Marius Weidner & Moritz Geist 2020
+            &copy; Marius Weidner & Moritz Geist 2020 <a href="/imprint">Impressum</a>
         </div>
     </div>
 </div>
