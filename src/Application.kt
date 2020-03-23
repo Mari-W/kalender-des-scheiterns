@@ -4,6 +4,7 @@ import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CallLogging
+import io.ktor.features.origin
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.isMultipart
@@ -42,6 +43,7 @@ fun Application.module() {
 
         get("/") {
             call.respondRedirect("/submit")
+            println(call.request.origin.remoteHost)
         }
 
         route("/submit") {
