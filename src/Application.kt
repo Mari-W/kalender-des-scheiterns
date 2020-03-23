@@ -36,10 +36,8 @@ fun Application.module() {
 
 
     routing {
-
-
         get("/") {
-            call.respondTwig("submit", mapOf("dates" to Database.dates()))
+            call.respondTwig("info", mapOf("dates" to Database.dates()))
         }
         post("/") {
             if (!call.request.isMultipart())
@@ -92,8 +90,6 @@ fun Application.module() {
                         } else {
                             call.respond(HttpStatusCode.Forbidden.description("Errör"))
                         }
-
-
                     } catch (e: IllegalArgumentException) {
                         call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
                     } catch (e: NullPointerException) {
