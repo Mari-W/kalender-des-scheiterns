@@ -70,10 +70,10 @@ body {
     height: 80%;
 }
 
-a:link, a:visited {
+.textlink:link, .textlink:visited {
     color: #000000;
 }
-a:hover, a:active {
+.textlink:hover, .textlink:active {
     color: #8c1f52;
     text-decoration: none;
 }
@@ -95,6 +95,7 @@ a:hover, a:active {
 .form-label-extra {
     color: #cdcdcd;
     font-size: 9.5pt;
+    font-family: 'Roboto', sans-serif;
     font-weight: 300;
     display: inline;
 }
