@@ -19,6 +19,7 @@ suspend fun ApplicationCall.respondTwig(template: String, model: Map<String, Any
     model.forEach { (key, value) ->
         twigModel.with(key, value)
     }
+    twigModel.with("template", template)
     respondText(
         templates[template]!!.render(twigModel),
         ContentType.Text.Html
