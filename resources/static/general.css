@@ -1,6 +1,6 @@
 body {
     background-color: #cf2e78;
-    font-size: 22pt;
+    font-size: 22px;
 }
 
 .outer-container {
@@ -26,8 +26,9 @@ body {
     background-color: #cf2e78;
     text-align: center;
     font-family: 'Roboto Slab', sans-serif;
-    font-size: 22pt;
+    font-size: 22px;
 }
+
 .menu-items {
     color: white;
  }

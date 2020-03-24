@@ -37,12 +37,21 @@ fun Application.module() {
 
     routing {
         get("/") {
-            call.respondTwig("info", mapOf("dates" to Database.dates()))
+            call.respondTwig("info")
         }
-        get("/a") {
-            call.respondTwig("submit_pers", mapOf("dates" to Database.dates()))
+        get("status") {
+            call.respondTwig("status", mapOf("dates" to Database.dates()))
         }
-        post("/") {
+        get("events") {
+            call.respondTwig("events")
+        }
+        get("/submit_personal") {
+            call.respondTwig("submit_pers")
+        }
+        get("/submit_historic") {
+            call.respondTwig("submit_hist")
+        }
+        post("/submit") {
             if (!call.request.isMultipart())
                 call.respond(HttpStatusCode.Forbidden.description("Oh boy, tryin' to upload different forms?"))
             else
