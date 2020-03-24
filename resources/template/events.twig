@@ -1,10 +1,14 @@
 {% include 'header.twig' %}
 
+{% if message != "" %}
+    <p style="font-family: 'Roboto Slab', serif; font-size: 22px">{{ message }}</p>
+{% endif %}
+
 {% for e in dates %}
-    <p style="color: #cf2e78; size: 22px; margin-top: 20px; font-family: 'Roboto Slab', serif;"><b>{{ e.date|date("dd.MM.yyyy") }}</b></p>
+    <p id="{{ e.date|date("dd.MM")|replace({'0': ''}) }}" style="color: #cf2e78; size: 22px; margin-top: 20px; font-family: 'Roboto Slab', serif;"><b>{{ e.date|date("dd.MM.yyyy") }}</b></p>
     <p style="font-family: 'Roboto Slab', serif; font-size: 22px">{% if e.type == "HISTORIC" %} HISTORISCH {% else %} PERSÖNLICH {% endif %}</p>
     <p class="text-break" style="font-size: 22px">{{ e.description }}</p>
-    <p class="form-label-extra" style="font-size: 13px; margin-top:  -40px">{{ e.name }}</p>
+    <p class="form-label-extra" style="font-size: 13px;">{{ e.name }}</p>
 {% endfor %}
 
 {% include 'footer.twig' %}
