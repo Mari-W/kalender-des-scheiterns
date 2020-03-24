@@ -172,7 +172,33 @@ data class DateEvent(
     val toMonth: Int,
     val toDay: Int,
     val color: String
-)
+) {
+    val name: String
+        get() = when {
+            color == "#FF0000" -> {
+                "Keine eingetragenen Ereignisse. :("
+            }
+            color == "#FFF700" -> {
+                "Ein paar Ereignisse wurden schon eingetragen."
+            }
+            else -> {
+                "Wir haben bereits einige eingetragene Ereignisse."
+            }
+        }
+    val details: String
+        get() = when {
+            color == "#FF0000" -> {
+                "Sei einer der ersten, der an diesem Tag etwas einträgt!"
+            }
+            color == "#FFF700" -> {
+                "Füge weitere hinzu um die Auswahl zu vervollständigen!"
+            }
+            else -> {
+                "Vielleicht weißt du uns ja mit den roten Stellen weiter zu helfen!"
+            }
+        }
+}
+
 
 enum class Type {
     PERSONAL,

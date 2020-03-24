@@ -37,7 +37,7 @@ fun Application.module() {
 
     routing {
         get("/") {
-            call.respondTwig("info")
+            call.respondRedirect("info")
         }
         get("info") {
             call.respondTwig("info")
@@ -53,6 +53,12 @@ fun Application.module() {
         }
         get("submit_historic") {
             call.respondTwig("submit_hist")
+        }
+        get("success"){
+            call.respondTwig("respond", mapOf("message" to "Dein Ereignis wurde erfolgreich eingetragen!"))
+        }
+        get("limit"){
+            call.respondTwig("respond", mapOf("message" to "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, versuch es morgen wieder!"))
         }
         post("submit") {
             if (!call.request.isMultipart())
@@ -94,14 +100,10 @@ fun Application.module() {
                                 source = if (type == Type.HISTORIC) get("source")!! else "",
                                 date = Date.valueOf(get("date")!!),
                                 description = get("description")!!,
-                                name = if (containsKey("name")) get("name")!! else "",
-                                email = if (containsKey("email")) get("email")!! else ""
+                                name = get("name")?:"" ,
+                                email = get("email")?: ""
                             )
-                            call.respondTwig("respond", mapOf(
-                                "message" to if(Database.insert(entry))
-                                    "Dein Ereignis wurde erfolgreich eingetragen!"
-                                else "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, versuch es morgen wieder!"
-                            ))
+
                         } else {
                             call.respond(HttpStatusCode.Forbidden.description("Errör"))
                         }
