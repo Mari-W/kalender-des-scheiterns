@@ -1,36 +1,5 @@
-<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% include 'header.twig' %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.5.0/viewer.min.css"
-          integrity="sha256-MpORFsKmYYmQvFqOG/2AbIcy09vQBwjfZDKM+Ri/m0Y=" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="static/submit.css">
+<p class="h1">message</p>
 
-    <title>Kalender des Scheiterns - Danke</title>
-</head>
-<body>
-
-<div class="container">
-    <div class="card content">
-        <img src="static/nico.svg" class="card-img-top" alt="...">
-        <div class="card-body content-body" style="padding: 10px 25px;">
-            <br>
-            <h1> {{ message }} </h1>
-            <br>
-            <form action="/" method="get">
-                <button type="submit" class="button"> Zurück zur Hauptseite!</button>
-            </form>
-            <br>
-            <br>
-            &copy; Marius Weidner & Moritz Geist 2020 <a href="/imprint">Impressum</a>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+{% include 'footer.twig' %}
