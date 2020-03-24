@@ -46,16 +46,6 @@ object Database {
         }
     }
 
-    fun lastEntries(): List<Entry>{
-        db.open().use {
-            return it.createQuery("SELECT * FROM (\n" +
-                    "    SELECT * FROM entries WHERE status='APPROVED' ORDER BY id ASC LIMIT 50\n" +
-                    ") sub\n" +
-                    "ORDER BY MONTH(date), DAY(date)")
-                .executeAndFetch(Entry::class.java)
-        }
-    }
-
 
     fun dates(): List<DateEvent> {
         return db.open().use {
