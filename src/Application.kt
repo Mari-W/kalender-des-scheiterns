@@ -39,19 +39,22 @@ fun Application.module() {
         get("/") {
             call.respondTwig("info")
         }
+        get("info") {
+            call.respondTwig("info")
+        }
         get("status") {
             call.respondTwig("status", mapOf("dates" to Database.dates()))
         }
         get("events") {
             call.respondTwig("events")
         }
-        get("/submit_personal") {
+        get("submit_personal") {
             call.respondTwig("submit_pers")
         }
-        get("/submit_historic") {
+        get("submit_historic") {
             call.respondTwig("submit_hist")
         }
-        post("/submit") {
+        post("submit") {
             if (!call.request.isMultipart())
                 call.respond(HttpStatusCode.Forbidden.description("Oh boy, tryin' to upload different forms?"))
             else
