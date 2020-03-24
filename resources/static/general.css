@@ -87,6 +87,10 @@ body {
     font-weight: bold;
 }
 
+.imprint-size {
+    font-size: 10pt;
+}
+
 .footer {
     color: #cdcdcd;
     font-size: smaller;
