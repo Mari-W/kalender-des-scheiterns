@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <form>
+            <form id="form" action="/submit" method="post" enctype="multipart/form-data">
                 <label class="form-label">
                     <div class="form-label-div"></div>
                     WAS?<br>
@@ -16,68 +16,50 @@
                 <label class="form-label">
                     <div class="form-label-div"></div>
                     WANN?<br>
-                    <input type="date" class="form-input form-date" data-date-format="tt/mm/yyyy" name="date" min="0000-01-01" max="2020-12-31"
+                    <input type="date" class="form-input form-date" data-date-format="tt/mm/yyyy" name="date"
+                           min="0000-01-01" max="2020-12-31"
                            required>
                 </label>
 
                 <label class="form-label">
                     <div class="form-label-div"></div>
                     QUELLE?<br>
-                    <input class="form-input" type="url" name="source" maxlength="1000" placeholder="der-postillion.com">
+                    <input class="form-input" type="url" name="source" maxlength="1000"
+                           placeholder="der-postillion.com">
                 </label>
 
                 <label class="form-label">
                     <div class="form-label-div"></div>
-                    WER?<div class="form-label-extra">Dieser Name wird im Kalender gedruckt</div><br>
+                    WER?
+                    <div class="form-label-extra">Dieser Name wird im Kalender gedruckt</div>
+                    <br>
                     <input class="form-input" name="name" maxlength="32" placeholder="Dein Name / Pseudonym">
                 </label>
 
                 <label class="form-label ">
                     <div class="form-label-div"></div>
-                        WIE? <div class="form-label-extra">kann man dich bei Nachfragen erreichen?</div><br>
-                    <input class="form-input" type="email" name="email" maxlength="32" placeholder="scheitern@beispiel.com">
+                    WIE?
+                    <div class="form-label-extra">kann man dich bei Nachfragen erreichen?</div>
+                    <br>
+                    <input class="form-input" type="email" name="email" maxlength="32"
+                           placeholder="scheitern@beispiel.com">
                 </label>
                 <label><input hidden value="historic" name="type"/></label>
+                <div>
+                    <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
+                            data-callback="onSubmit"
+                            type="submit" class="g-recaptcha submit-button"><b>ABSCHICKEN</b>
+                    </button>
+                    <br>
+                    <i class="form-label-extra">*Redaktionelle Änderungen behalten wir uns vor.</i>
+                </div>
             </form>
-
-
-            <div class="form">
-                <form id="formA" action="/" method="post" enctype="multipart/form-data">
-                    <label>
-                        Quelle?<br>
-                        <input type="url" class="source text1" name="source"
-                               placeholder="www.der-postillon.com"
-                               maxlength="1000" required>
-                    </label>
-                    <label>
-                        Wer?<br>
-                        <i style="font-weight: lighter; font-size: 15px; color: #606060;">Der Name, den du hier
-                            angibst, wird veröffentlicht, wenn dein Ereignis gewinnt. (optional)</i>
-                        <input class="text text1" type="url" name="name" maxlength="1000"
-                               placeholder="der-postillion.de">
-                    </label>
-                    <label>
-                        Email?<br>
-                        <i style="font-weight: lighter; font-size: 15px; color: #606060;">Deine Email wird nicht
-                            veröffentlicht und nur im Falle von Rückfragen verwendet. (optional)</i>
-                        <input type="email" class="text text1" name="email" maxlength="256"
-                               placeholder="Deine Email-Addresse"
-                               autofocus style="margin-bottom: 0">
-                    </label>
-                    <div>
-                        <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
-                                data-callback="onSubmitA"
-                                type="submit" class="g-recaptcha btn btn-danger button"><b>Abschicken</b>
-                        </button>
-                        <br>
-                        <i style="font-size: 15px; color: #606060; margin-top: 10px;">*Redaktionelle Änderungen
-                            behalten wir uns vor.</i>
-                    </div>
-                </form>
-            </div>
         </div>
         <div class="col">
-
+            <div class="examplepic">
+                <img id="imageb" src="static/hist_example.png" class="card-img-top" alt="beispielbild">
+                <p class="form-label-extra exampletext">BEISPIEL</p>
+            </div>
         </div>
     </div>
 </div>

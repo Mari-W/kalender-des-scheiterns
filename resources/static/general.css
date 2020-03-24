@@ -26,7 +26,7 @@ body {
     background-color: #cf2e78;
     text-align: center;
     font-family: 'Roboto Slab', sans-serif;
-    font-size: 22px;
+    font-size: 21px;
 }
 
 .menu-items {
@@ -104,44 +104,52 @@ body {
 .form-input {
     width: 100%;
     margin-top: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
 
     background-color: #e6e6e6;
     border: none;
 
     padding: 5px;
     font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
 }
 
 .form-textarea {
+    height: 90px;
     min-height: 55px;
 }
 
 .form-input::-webkit-input-placeholder {
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+
 }
 
 .form-input:-moz-placeholder { /* Firefox 18- */
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
 }
 
 .form-input::-moz-placeholder {  /* Firefox 19+ */
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
 }
 
 .form-input:-ms-input-placeholder {
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
 }
 
 .form-input::placeholder {
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
 }
 input[type=date]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -159,4 +167,29 @@ input[type=date]::-webkit-clear-button {
     border-radius: 5px;
     font-weight: lighter;
     margin-bottom: 30px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 4px;
+    font-size: 30px;
+    background-color: #cf2e78;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    font-weight: lighter;
+    font-family: 'Roboto Slab', sans-serif;
+}
+
+.examplepic {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.exampletext {
+    font-size: 13px;
+    margin-left: 10px;
+    position: relative;
+    bottom: 10px;
 }
