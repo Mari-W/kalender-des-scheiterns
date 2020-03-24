@@ -4,6 +4,7 @@ import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CallLogging
+import io.ktor.features.origin
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.isMultipart
@@ -54,11 +55,14 @@ fun Application.module() {
         get("submit_historic") {
             call.respondTwig("submit_hist")
         }
-        get("success"){
+        get("success") {
             call.respondTwig("respond", mapOf("message" to "Dein Ereignis wurde erfolgreich eingetragen!"))
         }
-        get("limit"){
-            call.respondTwig("respond", mapOf("message" to "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, versuch es morgen wieder!"))
+        get("limit") {
+            call.respondTwig(
+                "respond",
+                mapOf("message" to "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, versuch es morgen wieder!")
+            )
         }
         post("submit") {
             if (!call.request.isMultipart())
@@ -100,10 +104,13 @@ fun Application.module() {
                                 source = if (type == Type.HISTORIC) get("source")!! else "",
                                 date = Date.valueOf(get("date")!!),
                                 description = get("description")!!,
-                                name = get("name")?:"" ,
-                                email = get("email")?: ""
+                                name = get("name") ?: "",
+                                email = get("email") ?: ""
                             )
-
+                            when {
+                                Database.insert(call.request.origin.remoteHost, entry) -> call.respondRedirect("success")
+                                else -> call.respondRedirect("limit")
+                            }
                         } else {
                             call.respond(HttpStatusCode.Forbidden.description("Errör"))
                         }

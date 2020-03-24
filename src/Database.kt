@@ -18,12 +18,13 @@ object Database {
         Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
 
 
-    fun insert(entry: Entry): Boolean {
+    fun insert(ip: String, entry: Entry): Boolean {
         if (!check(entry)) {
             throw IllegalArgumentException()
         }
         db.open().use {
             val limit = it.createQuery("SELECT rate_limit();")
+                .addParameter("ip", ip)
                 .executeUpdate()
                 .result
             if (limit.toBoolean()) {
@@ -174,11 +175,11 @@ data class DateEvent(
     val color: String
 ) {
     val name: String
-        get() = when {
-            color == "#FF0000" -> {
+        get() = when (color) {
+            "#FF0000" -> {
                 "Keine eingetragenen Ereignisse. :("
             }
-            color == "#FFF700" -> {
+            "#FFF700" -> {
                 "Ein paar Ereignisse wurden schon eingetragen."
             }
             else -> {
@@ -186,11 +187,11 @@ data class DateEvent(
             }
         }
     val details: String
-        get() = when {
-            color == "#FF0000" -> {
+        get() = when (color) {
+            "#FF0000" -> {
                 "Sei einer der ersten, der an diesem Tag etwas einträgt!"
             }
-            color == "#FFF700" -> {
+            "#FFF700" -> {
                 "Füge weitere hinzu um die Auswahl zu vervollständigen!"
             }
             else -> {
