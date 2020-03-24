@@ -47,7 +47,7 @@ fun Application.module() {
             call.respondTwig("status", mapOf("dates" to Database.dates()))
         }
         get("events") {
-            call.respondTwig("events")
+            call.respondTwig("events", mapOf("dates" to Database.lastEntries()))
         }
         get("submit_personal") {
             call.respondTwig("submit_pers")
