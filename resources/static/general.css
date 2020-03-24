@@ -40,7 +40,7 @@ body {
  }
 
 .menu-items1 {
-    padding-top: 43px;
+    padding-top: 44px;
 }
 .menu-items2 {
     padding-top: 31px;
@@ -71,11 +71,11 @@ body {
 }
 
 .textlink:link, .textlink:visited {
-    color: #000000;
+    color: #8c1f52;
 }
+
 .textlink:hover, .textlink:active {
     color: #8c1f52;
-    text-decoration: none;
 }
 
 .imprint:link, .imprint:visited {
