@@ -122,7 +122,7 @@ fun Application.module() {
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
                     } catch (e: ReCaptcha.CaptchaException) {
-                        call.respondRedirect("/success")
+                        call.respondRedirect("/events/success")
                     }
                 }
         }
