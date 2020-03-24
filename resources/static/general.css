@@ -1,6 +1,6 @@
 body {
     background-color: #cf2e78;
-    font-size: 18px;
+    font-size: 16.5pt;
 }
 
 .outer-container {
@@ -26,7 +26,7 @@ body {
     background-color: #cf2e78;
     text-align: center;
     font-family: 'Roboto Slab', sans-serif;
-    font-size: 21px;
+    font-size: 16.5pt;
 }
 
 .menu-items {
@@ -36,6 +36,7 @@ body {
 .menu-items:hover {
     color: white;
     background-color: #9d1f60;
+    text-decoration: none;
  }
 
 .menu-items1 {
@@ -69,11 +70,21 @@ body {
     height: 80%;
 }
 
+a:link, a:visited {
+    color: #000000;
+}
+a:hover, a:active {
+    color: #8c1f52;
+    text-decoration: none;
+}
+
 .imprint:link, .imprint:visited {
     color: #cf2e78;
+    font-weight: bold;
 }
 .imprint:hover, .imprint:active {
     color: #8c1f52;
+    font-weight: bold;
 }
 
 .footer {
@@ -83,15 +94,15 @@ body {
 }
 .form-label-extra {
     color: #cdcdcd;
-    font-size: 11px;
-    font-weight: lighter;
+    font-size: 9.5pt;
+    font-weight: 300;
     display: inline;
 }
 
 .form-label-div {
-    width: 10px;
+    width: 10pt;
     display: inline-block;
-    height: 30px;
+    height: 30pt;
 }
 
 .form-label {
@@ -113,44 +124,45 @@ body {
 
     padding: 5px;
     font-family: 'Roboto', sans-serif;
-    font-weight: lighter;
+    font-weight: 300;
 }
 
 .form-textarea {
-    height: 90px;
-    min-height: 55px;
+    height: 60pt;
+    min-height: 55pt;
+    max-height: 420pt;
 }
 
 .form-input::-webkit-input-placeholder {
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
-    font-weight: lighter;
-
+    font-weight: 300;
 }
 
 .form-input:-moz-placeholder { /* Firefox 18- */
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
-    font-weight: lighter;
+    font-weight: 300;
 }
 
 .form-input::-moz-placeholder {  /* Firefox 19+ */
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
-    font-weight: lighter;
+    font-weight: 300;
 }
 
 .form-input:-ms-input-placeholder {
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
-    font-weight: lighter;
+    font-weight: 300;
 }
 
 .form-input::placeholder {
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
-    font-weight: lighter;
+    font-weight: 300;
 }
+
 input[type=date]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     display: none;
