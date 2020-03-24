@@ -34,8 +34,6 @@ fun Application.module() {
         filter { call -> call.request.path().startsWith("/") }
     }
 
-
-
     routing {
         get("/") {
             call.respondRedirect("info")
