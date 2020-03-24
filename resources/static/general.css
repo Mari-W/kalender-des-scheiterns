@@ -1,6 +1,6 @@
 body {
     background-color: #cf2e78;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .outer-container {
@@ -79,8 +79,84 @@ body {
 .footer {
     color: #cdcdcd;
     font-size: smaller;
+    font-weight: lighter;
+}
+.form-label-extra {
+    color: #cdcdcd;
+    font-size: 11px;
+    font-weight: lighter;
+    display: inline;
+}
+
+.form-label-div {
+    width: 10px;
+    display: inline-block;
+    height: 30px;
 }
 
 .form-label {
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: bold;
+    width: 100%;
+}
+.nobr { white-space: nowrap }
 
+.form-input {
+    width: 100%;
+    margin-top: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+    background-color: #e6e6e6;
+    border: none;
+
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-textarea {
+    min-height: 55px;
+}
+
+.form-input::-webkit-input-placeholder {
+    color: #b3b3b3;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-input:-moz-placeholder { /* Firefox 18- */
+    color: #b3b3b3;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-input::-moz-placeholder {  /* Firefox 19+ */
+    color: #b3b3b3;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-input:-ms-input-placeholder {
+    color: #b3b3b3;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-input::placeholder {
+    color: #b3b3b3;
+    font-family: 'Roboto', sans-serif;
+}
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type=date]::-webkit-clear-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.formdate {
+    display: block;
+    border: none;
+    border-radius: 5px;
+    font-weight: lighter;
+    margin-bottom: 30px;
 }

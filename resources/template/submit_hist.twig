@@ -4,28 +4,45 @@
     <div class="row">
         <div class="col">
             <form>
-                <label>Was?</label>
+                <label class="form-label">
+                    <div class="form-label-div"></div>
+                    WAS?<br>
+                    <textarea class="form-input form-textarea" name="description" maxlength="250" minlength="5"
+                              placeholder="Es war einmal.. (max. 250 Zeichen)" required
+                              autofocus
+                              oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+                </label>
+
+                <label class="form-label">
+                    <div class="form-label-div"></div>
+                    WANN?<br>
+                    <input type="date" class="form-input form-date" data-date-format="tt/mm/yyyy" name="date" min="0000-01-01" max="2020-12-31"
+                           required>
+                </label>
+
+                <label class="form-label">
+                    <div class="form-label-div"></div>
+                    QUELLE?<br>
+                    <input class="form-input" type="url" name="source" maxlength="1000" placeholder="der-postillion.com">
+                </label>
+
+                <label class="form-label">
+                    <div class="form-label-div"></div>
+                    WER?<div class="form-label-extra">Dieser Name wird im Kalender gedruckt</div><br>
+                    <input class="form-input" name="name" maxlength="32" placeholder="Dein Name / Pseudonym">
+                </label>
+
+                <label class="form-label ">
+                    <div class="form-label-div"></div>
+                        WIE? <div class="form-label-extra">kann man dich bei Nachfragen erreichen?</div><br>
+                    <input class="form-input" type="email" name="email" maxlength="32" placeholder="scheitern@beispiel.com">
+                </label>
+                <label><input hidden value="historic" name="type"/></label>
             </form>
-
-
-
-
 
 
             <div class="form">
                 <form id="formA" action="/" method="post" enctype="multipart/form-data">
-                    <input hidden value="historic" name="type"/>
-                    <label>
-                        Was?<br>
-                        <textarea class="text text1" name="description" maxlength="250" minlength="5"
-                                  placeholder="Es war einmal.. (max. 250 Zeichen)" required
-                                  autofocus
-                                  oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
-                    </label>
-                    <label {% if date %} data-toggle="tooltip" data-placement="top" title="{{ date }}" {% endif %}>
-                        Wann?<br>
-                        <input type="date" class="date" name="date" min="0000-01-01" max="2020-12-31" required>
-                    </label>
                     <label>
                         Quelle?<br>
                         <input type="url" class="source text1" name="source"
@@ -36,13 +53,13 @@
                         Wer?<br>
                         <i style="font-weight: lighter; font-size: 15px; color: #606060;">Der Name, den du hier
                             angibst, wird veröffentlicht, wenn dein Ereignis gewinnt. (optional)</i>
-                        <input class="text text1" name="name" maxlength="32"
-                               placeholder="Dein Name / Pseudonym"
-                               autofocus style="margin-bottom: 0">
+                        <input class="text text1" type="url" name="name" maxlength="1000"
+                               placeholder="der-postillion.de">
                     </label>
                     <label>
                         Email?<br>
-                        <i style="font-weight: lighter; font-size: 15px; color: #606060;">Deine Email wird nicht veröffentlicht und nur im Falle von Rückfragen verwendet. (optional)</i>
+                        <i style="font-weight: lighter; font-size: 15px; color: #606060;">Deine Email wird nicht
+                            veröffentlicht und nur im Falle von Rückfragen verwendet. (optional)</i>
                         <input type="email" class="text text1" name="email" maxlength="256"
                                placeholder="Deine Email-Addresse"
                                autofocus style="margin-bottom: 0">
