@@ -57,9 +57,11 @@
             }
         },
         clickDay: function (e) {
-            day = e.date.getDay() + 1
-            month = e.date.getMonth() + 1
-            window.open("events#" + day + "." + month, "_self")
+            if(e.color !== "#FF0000") {
+                day = e.date.getDay() + 1
+                month = e.date.getMonth() + 1
+                window.open("events#" + day + "." + month, "_self")
+            }
         }
     });
 </script>

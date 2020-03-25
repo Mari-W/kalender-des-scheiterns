@@ -154,10 +154,10 @@ data class DateAmount(
 ) {
     fun getColor(): String {
         return when {
-            cnt < 3 -> {
+            cnt < 1 -> {
                 "#FF0000"
             }
-            cnt < 10 -> {
+            cnt < 7 -> {
                 "#FFF700"
             }
             else -> {
