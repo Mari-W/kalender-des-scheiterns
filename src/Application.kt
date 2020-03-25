@@ -50,8 +50,8 @@ fun Application.module() {
                     "dates" to Database.list(
                         "approved", "date"),
                     "message" to when (call.parameters["state"]) {
-                        "success"  -> "Dein Ereignis wurde erfolgreich eingetragen, schau dir an, was andere eintragen!"
-                        "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, schau dir doch stattdessen die Einträge der anderen an!"
+                        "success"  -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was der*die anderen für Einträge gemacht haben. Sie laufen chronologisch nach Einsendedatum ein."
+                        "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie laufen chronologisch nach Einsendedatum ein."
                         else -> "Hier könnt ihr die eingereichten Ereignisse ansehen. Sie laufen chronologisch nach Einsendedatum ein."
                     }
                 )
