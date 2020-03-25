@@ -23,7 +23,7 @@ object Database {
             throw IllegalArgumentException()
         }
         db.open().use {
-            val limit = it.createQuery("SELECT rate_limit();")
+            val limit = it.createQuery("SELECT rate_limit(:ip);")
                 .addParameter("ip", ip)
                 .executeUpdate()
                 .result
