@@ -1,13 +1,13 @@
 body {
-    background-color: #cf2e78 !important;
+    background-color: #cf2e78;
     font-size: 16.5pt;
 }
 
 .outer-container {
     background-color: white;
     width: 77%;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding-left: 0;
+    padding-right: 0;
     padding-top: 15px;
 }
 
@@ -266,4 +266,27 @@ input[type=date]::-webkit-clear-button {
 
 .event-tooltip-content:not(:last-child) {
     border-bottom: 1px solid #ccc;
+}
+
+.card-header {
+    margin: 10px 25px 20px;
+    padding: 15px;
+    background-color: #f5f5f5;
+}
+
+.cal-green {
+    color: #00d800;
+}
+
+.cal-yellow {
+    color: #c5ba00;
+}
+
+.cal-red {
+    color: #d30000;
+}
+
+.events-type {
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: 700;
 }
