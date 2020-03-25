@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/general.css">
+    <link rel="stylesheet" href="/static/general.css">
     <title>Der Kalender des Scheiterns</title>
 </head>
 <body>
@@ -24,19 +24,19 @@
     <div style="height: 15px"></div>
     <div class="container-fluid navbar-top">
         <div class="row">
-            <a href="info" class="col menu-items menu-items1{% if template == 'info' %} menu-active{% endif %}">
+            <a href="/info" class="col menu-items menu-items1{% if template == 'info' %} menu-active{% endif %}">
                 <p>INFO</p>
             </a>
-            <a href="submit_historic" class="col menu-items menu-items3{% if template == 'submit_hist' %} menu-active{% endif %}">
+            <a href="/submit_historic" class="col menu-items menu-items3{% if template == 'submit_hist' %} menu-active{% endif %}">
                 <p>HISTORISCHES<br>EREIGNIS<br>EINREICHEN</p>
             </a>
-            <a href="submit_personal" class="col menu-items menu-items3{% if template == 'submit_pers' %} menu-active{% endif %}">
+            <a href="/submit_personal" class="col menu-items menu-items3{% if template == 'submit_pers' %} menu-active{% endif %}">
                 <p>PERSÖNLICHES<br>EREIGNIS<br>EINREICHEN</p>
             </a>
-            <a href="status" class="col menu-items menu-items2{% if template == 'status' %} menu-active{% endif %}">
+            <a href="/status" class="col menu-items menu-items2{% if template == 'status' %} menu-active{% endif %}">
                 <p>STATUS-<br>ÜBERSICHT</p>
             </a>
-            <a href="events" class="col menu-items menu-items2{% if template == 'events' %} menu-active{% endif %}">
+            <a href="/events" class="col menu-items menu-items2{% if template == 'events' %} menu-active{% endif %}">
                 <p>EINGEREICHTE<br>EREIGNISSE</p>
             </a>
         </div>
