@@ -65,7 +65,7 @@
                     return;
                 }
             }
-            day = e.date.getUTCDate() + 1;
+            day = e.date.getUTCDate();
             month = e.date.getUTCMonth() + 1;
             window.open("events#" + day + "." + month, "_self")
         }
