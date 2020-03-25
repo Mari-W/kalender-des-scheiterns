@@ -1,9 +1,16 @@
 {% include 'header.twig' %}
 
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+    function onSubmit() {
+        document.getElementById("form").submit();
+    }
+</script>
+
 <div class="container">
     <div class="row">
         <div class="col">
-            <form id="form" action="/submit" method="post" enctype="multipart/form-data">
+            <form action="/submit" method="post" enctype="multipart/form-data">
                 <label class="form-label">
                     <div class="form-label-div"></div>
                     WAS?<br>
@@ -47,8 +54,8 @@
                 <label><input hidden value="historic" name="type"/></label>
                 <div>
                     <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
-                            data-callback="onSubmitA"
-                            type="submit" class="g-recaptcha submit-button" id="formA"><b>ABSCHICKEN</b>
+                            data-callback="onSubmit"
+                            type="submit" class="g-recaptcha submit-button" id="form"><b>ABSCHICKEN</b>
                     </button>
                     <br>
                     <i class="form-label-extra">*Redaktionelle Änderungen behalten wir uns vor.</i>
