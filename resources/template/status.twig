@@ -57,11 +57,14 @@
             }
         },
         clickDay: function (e) {
-            if(e.color !== "#FF0000") {
-                day = e.date.getDay() + 1
-                month = e.date.getMonth() + 1
-                window.open("events#" + day + "." + month, "_self")
+            for(var i in e.events){
+                if (e.events[i].color === "#FF0000"){
+                    return;
+                }
             }
+            day = e.date.getDay() + 1;
+            month = e.date.getMonth() + 1;
+            window.open("events#" + day + "." + month, "_self")
         }
     });
 </script>
