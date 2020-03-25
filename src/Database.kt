@@ -176,22 +176,22 @@ data class DateEvent(
     val name: String
         get() = when (color) {
             "#FF0000" -> {
-                "Keine eingetragenen Ereignisse. :("
+                "Keine eingetragenen Ereignisse :("
             }
             "#FFF700" -> {
-                "Ein paar Ereignisse wurden schon eingetragen."
+                "Ein paar Ereignisse wurden schon eingetragen"
             }
             else -> {
-                "Wir haben bereits einige eingetragene Ereignisse."
+                "Wir haben bereits einige eingetragene Ereignisse"
             }
         }
     val details: String
         get() = when (color) {
             "#FF0000" -> {
-                "Sei einer der ersten, der an diesem Tag etwas einträgt!"
+                "Sei eine*r der ersten, die*der an diesem Tag etwas einträgt!"
             }
             "#FFF700" -> {
-                "Füge weitere hinzu um die Auswahl zu vervollständigen!"
+                "Füge weitere hinzu, um die Auswahl zu vervollständigen!"
             }
             else -> {
                 "Vielleicht weißt du uns ja mit den roten Stellen weiter zu helfen!"
