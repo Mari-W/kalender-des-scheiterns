@@ -57,8 +57,13 @@
             }
         },
         clickDay: function (e) {
-            day = e.date.getDay() + 1
-            month = e.date.getMonth() + 1
+            for(var i in e.events){
+                if (e.events[i].color === "#FF0000"){
+                    return;
+                }
+            }
+            day = e.date.getUTCDate() + 1;
+            month = e.date.getUTCMonth() + 1;
             window.open("events#" + day + "." + month, "_self")
         }
     });
