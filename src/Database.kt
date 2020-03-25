@@ -25,8 +25,7 @@ object Database {
         db.open().use {
             val limit = it.createQuery("SELECT rate_limit(:ip);")
                 .addParameter("ip", ip)
-                .executeUpdate()
-                .result
+                .executeScalar(Int::class.java)
             if (limit.toBoolean()) {
                 it.createQuery("INSERT INTO entries (type, source, date, description, name, email) VALUES (:type, :source, :date, :description, :name, :email)")
                     .bind(entry)
