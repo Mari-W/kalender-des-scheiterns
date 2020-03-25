@@ -44,23 +44,25 @@ fun Application.module() {
         get("status") {
             call.respondTwig("status", mapOf("dates" to Database.dates()))
         }
-        get("events") {
-            call.respondTwig("events", mapOf("dates" to Database.list("approved", "date")))
+        get("events/{state?}") {
+            call.respondTwig(
+                "events", mapOf(
+                    "dates" to Database.list(
+                        "approved", "date"),
+                    "message" to when (call.parameters["state"]) {
+                        "success"  -> "Dein Ereignis wurde erfolgreich eingetragen! Schau dir an, was andere eintragen:"
+                        "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, schau dir doch stattdessen die Einträge der anderen an:"
+                        null -> ""
+                        else -> ""
+                    }
+                )
+            )
         }
         get("submit_personal") {
             call.respondTwig("submit_pers")
         }
         get("submit_historic") {
             call.respondTwig("submit_hist")
-        }
-        get("success") {
-            call.respondTwig("respond", mapOf("message" to "Dein Ereignis wurde erfolgreich eingetragen!"))
-        }
-        get("limit") {
-            call.respondTwig(
-                "respond",
-                mapOf("message" to "Du kannst maxmimal 10 Ereignisse pro Tag eintragen, versuch es morgen wieder!")
-            )
         }
         post("submit") {
             if (!call.request.isMultipart())
@@ -106,8 +108,11 @@ fun Application.module() {
                                 email = get("email") ?: ""
                             )
                             when {
-                                Database.insert(call.request.origin.remoteHost, entry) -> call.respondRedirect("success")
-                                else -> call.respondRedirect("limit")
+                                Database.insert(
+                                    call.request.origin.remoteHost,
+                                    entry
+                                ) -> call.respondRedirect("events/success")
+                                else -> call.respondRedirect("events/limit")
                             }
                         } else {
                             call.respond(HttpStatusCode.Forbidden.description("Errör"))
@@ -117,7 +122,7 @@ fun Application.module() {
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
                     } catch (e: ReCaptcha.CaptchaException) {
-                        call.respondRedirect("/success")
+                        call.respondRedirect("/events/success")
                     }
                 }
         }
