@@ -22,6 +22,7 @@ body {
     margin-right: -1px;
 }
 
+
 .navbar-top {
     background-color: #cf2e78;
     text-align: center;
@@ -47,7 +48,9 @@ body {
 }
 
 .menu-items-mobile {
-    text-align: center;
+    display: block;
+    padding: 5px;
+    text-align: center !important;
     color: white;
     background-color: #cf2e78;
 }

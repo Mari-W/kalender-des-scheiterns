@@ -21,22 +21,27 @@
 
 <div class="container" style="background-color: white; height: 100%; width: 100%;">
     <img src="/static/mobile.svg" alt="Header" style="width: 100%; text-align: center" class="overflow">
-    <div class="container-fluid navbar-top-mobile">
-        <div class="col">
-            <a href="/mobile/info" class="row menu-items-mobile {% if template == 'info' %} menu-active{% endif %}">
-                <p>INFO</p>
+    <div style="height: 25px"></div>
+    <div class="navbar-top-mobile">
+        <div class="col" style="width: 100%;">
+            <a style="font-size: 10.5pt" href="/mobile/info" class="menu-items-mobile row text-center{% if template == 'info_mobile' %} menu-active{% endif %}">
+                INFO
             </a>
-            <a href="/mobile/submit_historic" class="row menu-items-mobile {% if template == 'submit_hist' %} menu-active{% endif %}">
-                <p>HISTORISCHES EREIGNIS EINREICHEN</p>
+            <div style="height: 5px"></div>
+            <a style="font-size: 10.5pt" href="/mobile/submit_historic" class="row menu-items-mobile text-center{% if template == 'submit_hist_mobile' %} menu-active{% endif %}">
+                HISTORISCHES EREIGNIS EINREICHEN
             </a>
-            <a href="/mobile/submit_personal" class="row menu-items-mobile {% if template == 'submit_pers' %} menu-active{% endif %}">
-                <p>PERSÖNLICHES EREIGNIS EINREICHEN</p>
+            <div style="height: 5px"></div>
+            <a style="font-size: 10.5pt" href="/mobile/submit_personal" class="row menu-items-mobile text-center{% if template == 'submit_pers_mobile' %} menu-active{% endif %}">
+                PERSÖNLICHES EREIGNIS EINREICHEN
             </a>
-            <a href="/mobile//status" class="row menu-items-mobile {% if template == 'status' %} menu-active{% endif %}">
-                <p>STATUS-ÜBERSICHT</p>
+            <div style="height: 5px"></div>
+            <a style="font-size: 10.5pt" href="/mobile//status" class="row menu-items-mobile text-center {% if template == 'status_mobile' %} menu-active{% endif %}">
+                STATUS-ÜBERSICHT
             </a>
-            <a href="/mobile/events" class="row menu-items-mobile {% if template == 'events' %} menu-active{% endif %}">
-                <p>EINGEREICHTE EREIGNISSE</p>
+            <div style="height: 5px"></div>
+            <a style="font-size: 10.5pt" href="/mobile/events" class="row menu-items-mobile text-center {% if template == 'events' %} menu-active{% endif %}">
+                EINGEREICHTE EREIGNISSE
             </a>
         </div>
     </div>

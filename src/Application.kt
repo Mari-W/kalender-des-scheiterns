@@ -133,6 +133,28 @@ fun Application.module() {
             get("/info"){
                 call.respondTwig("info_mobile")
             }
+            get("status") {
+                call.respondTwig("status", mapOf("dates" to Database.dates()))
+            }
+            get("events/{state?}") {
+                call.respondTwig(
+                    "events", mapOf(
+                        "dates" to Database.list(
+                            "approved", "date"),
+                        "message" to when (call.parameters["state"]) {
+                            "success"  -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was der*die anderen für Einträge gemacht haben. Sie werden chronologisch nach Ereignisdatum angezeigt."
+                            "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie werden chronologisch nach Ereignisdatum angezeigt."
+                            else -> "Hier könnt ihr die eingereichten Ereignisse ansehen. Sie werden chronologisch nach Ereignisdatum angezeigt."
+                        }
+                    )
+                )
+            }
+            get("submit_personal") {
+                call.respondTwig("submit_pers")
+            }
+            get("submit_historic") {
+                call.respondTwig("submit_hist")
+            }
         }
 
         get("/imprint") {
