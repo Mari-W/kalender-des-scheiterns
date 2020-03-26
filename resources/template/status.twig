@@ -6,14 +6,22 @@
 <script src="https://unpkg.com/tippy.js@4"></script>
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css"/>
 
-<div style="margin-right: 20%">
-    Hier könnt ihr sehen, wie viele Eintragungen es schon gibt:
-<br>
-    <ul>
-        <li style="color: #ff007a; font-size: 18pt"><div style="font-weight: lighter; color: black">Für diesen Tag haben wir bereits genug Auswahl</div></li>
-        <li style="color: #ffed5e; font-size: 18pt"><div style="font-weight: lighter; color: black">Hier ist es schon ereignisreicher</div></li>
-        <li style="color: #47cfad; font-size: 18pt"><div style="font-weight: lighter; color: black">Hier gibt es noch keine Ereignisse</div></li>
-    </ul>
+<div class="container">
+    <div style="margin-right: 20%">
+        Hier könnt ihr sehen, wie viele Eintragungen es schon gibt:
+        <br>
+        <ul>
+            <li style="color: #ff007a; font-size: 18pt">
+                <div style="font-weight: lighter; color: black">Für diesen Tag haben wir bereits genug Auswahl</div>
+            </li>
+            <li style="color: #ffed5e; font-size: 18pt">
+                <div style="font-weight: lighter; color: black">Hier ist es schon ereignisreicher</div>
+            </li>
+            <li style="color: #47cfad; font-size: 18pt">
+                <div style="font-weight: lighter; color: black">Hier gibt es noch keine Ereignisse</div>
+            </li>
+        </ul>
+    </div>
 </div>
 <div style="height: 30px"></div>
 
@@ -61,8 +69,8 @@
             }
         },
         clickDay: function (e) {
-            for(var i in e.events){
-                if (e.events[i].color === "#ff007a"){
+            for (var i in e.events) {
+                if (e.events[i].color === "#ff007a") {
                     return;
                 }
             }
