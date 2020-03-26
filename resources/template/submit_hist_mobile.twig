@@ -6,13 +6,12 @@
         document.getElementById("form").submit();
     }
 </script>
+<div style="height: 20px"></div>
+<div class="examplepic">
+    <img id="imageb" src="/static/hist_example.png" class="card-img-top" alt="beispielbild">
+    <p class="form-label-extra-mobile exampletext">BEISPIEL</p>
+</div>
 <div class="row">
-    <div class="col">
-        <div class="examplepic">
-            <img id="imageb" src="/static/hist_example.png" class="card-img-top" alt="beispielbild">
-            <p class="form-label-extra-mobile exampletext">BEISPIEL</p>
-        </div>
-    </div>
     <div class="col">
         <form id="form" action="/submit" method="post" enctype="multipart/form-data">
             <label class="form-label">
