@@ -1,0 +1,24 @@
+{% include 'header_mobile.twig' %}
+
+<style>
+    text {
+        size: 10.5pt
+    }
+</style>
+
+{% if message != "" %}
+    <div class="card card-header" style="font-size: 10.5pt">{{ message }}</div>
+{% endif %}
+
+{% for e in dates %}
+    <div style="font-size: 10.5pt; font-weight: normal">
+        <p id="{{ e.date|date("dd.MM")|replace({'0': ''}) }}" style="color: #cf2e78; margin-top: 20px; font-family: 'Roboto Slab', serif;"><b>{{ e.date|date("dd.MM.yyyy") }}</b></p>
+        <p class="events-type">{% if e.type == "HISTORIC" %} HISTORISCH {% else %} PERSÖNLICH {% endif %}</p>
+        {{ e.description }}
+        <br>
+        von: {{ e.name }}
+        <hr>
+    </div>
+{% endfor %}
+
+{% include 'footer_mobile.twig' %}

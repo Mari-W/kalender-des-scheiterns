@@ -130,15 +130,15 @@ fun Application.module() {
             get("/"){
                 call.respond("You are on mobile!")
             }
-            get("/info"){
+            get("info"){
                 call.respondTwig("info_mobile")
             }
             get("status") {
-                call.respondTwig("status", mapOf("dates" to Database.dates()))
+                call.respondTwig("status_mobile", mapOf("dates" to Database.dates()))
             }
             get("events/{state?}") {
                 call.respondTwig(
-                    "events", mapOf(
+                    "events_mobile", mapOf(
                         "dates" to Database.list(
                             "approved", "date"),
                         "message" to when (call.parameters["state"]) {
@@ -150,10 +150,10 @@ fun Application.module() {
                 )
             }
             get("submit_personal") {
-                call.respondTwig("submit_pers")
+                call.respondTwig("submit_pers_mobile")
             }
             get("submit_historic") {
-                call.respondTwig("submit_hist")
+                call.respondTwig("submit_hist_mobile")
             }
         }
 

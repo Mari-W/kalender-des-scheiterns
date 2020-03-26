@@ -1,0 +1,71 @@
+{% include 'header_mobile.twig' %}
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+    function onSubmit() {
+        document.getElementById("form").submit();
+    }
+</script>
+<div class="row">
+    <div class="col">
+        <div class="examplepic">
+            <img id="imageb" src="/static/hist_example.png" class="card-img-top" alt="beispielbild">
+            <p class="form-label-extra-mobile exampletext">BEISPIEL</p>
+        </div>
+    </div>
+    <div class="col">
+        <form id="form" action="/submit" method="post" enctype="multipart/form-data">
+            <label class="form-label">
+                <div class="form-label-div"></div>
+                WAS?<br>
+                <textarea class="form-input form-textarea" name="description" maxlength="250" minlength="5"
+                          placeholder="Es war einmal.. (max. 250 Zeichen)" required
+                          autofocus
+                          oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+            </label>
+
+            <label class="form-label">
+                <div class="form-label-div"></div>
+                WANN?<br>
+                <input type="date" class="form-input form-date" data-date-format="tt/mm/yyyy" name="date"
+                       min="0000-01-01" max="2020-12-31"
+                       required>
+            </label>
+
+            <label class="form-label">
+                <div class="form-label-div"></div>
+                QUELLE?<br>
+                <input class="form-input" type="url" name="source" maxlength="1000"
+                       placeholder="der-postillion.com">
+            </label>
+
+            <label class="form-label">
+                <div class="form-label-div"></div>
+                WER?
+                <div class="form-label-extra-mobile">Dieser Name wird im Kalender gedruckt</div>
+                <br>
+                <input class="form-input" name="name" maxlength="32" placeholder="Dein Name / Pseudonym">
+            </label>
+
+            <label class="form-label ">
+                <div class="form-label-div"></div>
+                WIE?
+                <div class="form-label-extra-mobile">kann man dich bei Nachfragen erreichen?</div>
+                <br>
+                <input class="form-input" type="email" name="email" maxlength="32"
+                       placeholder="scheitern@beispiel.com">
+            </label>
+            <label><input hidden value="historic" name="type"/></label>
+            <div>
+                <button data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
+                        data-callback="onSubmit"
+                        type="submit" class="g-recaptcha submit-button"><b>ABSCHICKEN</b>
+                </button>
+                <br>
+                <i class="form-label-extra-mobile">*Redaktionelle Änderungen behalten wir uns vor.</i>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% include 'footer_mobile.twig' %}
