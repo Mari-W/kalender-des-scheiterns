@@ -2,6 +2,7 @@ package de.moeri
 
 import io.ktor.application.ApplicationCall
 import io.ktor.http.ContentType
+import io.ktor.request.accept
 import io.ktor.request.userAgent
 import io.ktor.response.respondText
 import org.jtwig.JtwigModel
@@ -15,7 +16,7 @@ private val templates = mutableMapOf<String, JtwigTemplate>()
 
 suspend fun ApplicationCall.respondTwig(template: String, model: Map<String, Any> = mapOf(), mobile: Boolean = true) {
     var template = template
-    if (mobile && request.userAgent()?.matches(Regex("/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/"))?:false) {
+    if (mobile && request.userAgent() != null && request.accept() != null && UAgentInfo (request.userAgent()!!, request.accept()!!).detectMobileQuick()){
         template = "${template}_mobile"
     }
     if (!templates.containsKey(template))
