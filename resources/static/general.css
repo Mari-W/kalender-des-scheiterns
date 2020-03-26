@@ -29,6 +29,13 @@ body {
     font-size: 16.5pt;
 }
 
+.navbar-top-mobile {
+    background-color: white;
+    text-align: center;
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 16.5pt;
+}
+
 .menu-items {
     color: white;
  }
