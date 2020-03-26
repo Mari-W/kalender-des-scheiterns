@@ -131,7 +131,7 @@ fun Application.module() {
                 call.respond("You are on mobile!")
             }
             get("/info"){
-                call.respond("Mobile Info")
+                call.respondTwig("info_mobile")
             }
         }
 
