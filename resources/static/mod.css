@@ -9,6 +9,9 @@
 .pending {
     background-color: lightgray;
 }
+.chosen  {
+    background-color: gold;
+}
 
 div.row {
     border: 1px solid;

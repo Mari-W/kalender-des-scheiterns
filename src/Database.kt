@@ -208,7 +208,8 @@ enum class Type {
 enum class Status {
     APPROVED,
     PENDING,
-    DENIED
+    DENIED,
+    CHOSEN
 }
 
 private val monthLen = mapOf(

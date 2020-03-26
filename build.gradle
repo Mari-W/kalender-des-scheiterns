@@ -45,6 +45,7 @@ dependencies {
     implementation "org.jtwig:jtwig-core:5.87.0.RELEASE"
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
     implementation group: 'org.sql2o', name: 'sql2o', version: '1.6.0'
+    implementation "org.apache.poi:poi-ooxml:3.17"
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }
 

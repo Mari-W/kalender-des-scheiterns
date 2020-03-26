@@ -33,6 +33,9 @@
 <form action="/mod/show/pending/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
     <button type="submit" class="btn btn-primary btn" style="display: inline">zu bearbeitende</button>
 </form>
+<form action="/mod/show/chosen/sortby/{{ order }}" method="get" enctype="multipart/form-data" style="display: inline">
+    <button type="submit" class="btn btn-primary btn" style="display: inline">ausgewählte</button>
+</form>
 <h4 style="display: inline">sortiert nach</h4>
 <form action="/mod/show/{{ status }}/sortby/date" method="get" enctype="multipart/form-data" style="display: inline">
     <button type="submit" class="btn btn-primary btn" style="display: inline">datum</button>
@@ -50,6 +53,10 @@
 </form>
 <br>
 <h4>Geladene Einträge: {{ list|length }}</h4>
+<form action="/mod/download" method="get" enctype="multipart/form-data"
+      style="display: inline">
+    <button type="submit" class="btn btn-danger btn" style="display: inline">Erstelle Excel der Ausgewählten</button>
+</form>
 <div class="container-fluid">
     <div class="row align-items-start" style="background-color: gray">
         <div class="col justify-content-start">Datum</div>
@@ -91,6 +98,10 @@
                         <button title="Zurücksetzen zu 'zu bearbeiten' (wow ohne Gänsefüßchen wär das jetzt weird)"
                                 type="submit" name="status" value="PENDING" class="btn btn-secondary btn-sm"
                                 style="display: inline" {% if i.status== "PENDING" %} hidden {% endif %}>⧖
+                        </button>
+                        <button title="Auswählen"
+                                type="submit" name="status" value="CHOSEN" class="btn btn-warning btn-sm"
+                                style="display: inline" {% if i.status== "CHOSEN" %} hidden {% endif %}>★
                         </button>
                     </label>
                 </form>

@@ -10,7 +10,9 @@ import io.ktor.http.content.*
 import io.ktor.request.isMultipart
 import io.ktor.request.path
 import io.ktor.request.receiveMultipart
+import io.ktor.response.header
 import io.ktor.response.respond
+import io.ktor.response.respondFile
 import io.ktor.response.respondRedirect
 import io.ktor.routing.get
 import io.ktor.routing.post
@@ -18,6 +20,7 @@ import io.ktor.routing.route
 import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
 import org.slf4j.event.Level
+import java.io.File
 import java.sql.Date
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -173,6 +176,11 @@ fun Application.module() {
                         "status" to status
                     )
                 )
+            }
+            get("/download"){
+                ExcelWriter.gen()
+                call.response.header("Content-Disposition", "attachment; filename=\"kds-chosen-events-export.xlsx\"")
+                call.respondFile(File("kds-chosen-events-export.xlsx"))
             }
             route("/edit") {
                 post("/status") {
