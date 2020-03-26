@@ -60,11 +60,11 @@ object Database {
                             ret.add(
                                 DateEvent(
                                     1, 1, dateAmount.month - 1,
-                                    monthLen[dateAmount.month - 1] ?: error("month not found lol in if"), "#FF0000"
+                                    monthLen[dateAmount.month - 1] ?: error("month not found lol in if"), "#ff007a"
                                 )
                             )
                         } else {
-                            ret.add(DateEvent(1, 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
+                            ret.add(DateEvent(1, 1, dateAmount.month, dateAmount.day - 1, "#ff007a"))
                         }
                     }
                 } else {
@@ -72,11 +72,11 @@ object Database {
                         ret.add(
                             DateEvent(
                                 last.month, last.day + 1, dateAmount.month - 1,
-                                monthLen[dateAmount.month - 1] ?: error("month not found lol in else"), "#FF0000"
+                                monthLen[dateAmount.month - 1] ?: error("month not found lol in else"), "#ff007a"
                             )
                         )
                     } else {
-                        ret.add(DateEvent(last.month, last.day + 1, dateAmount.month, dateAmount.day - 1, "#FF0000"))
+                        ret.add(DateEvent(last.month, last.day + 1, dateAmount.month, dateAmount.day - 1, "#ff007a"))
                     }
                 }
                 last = dateAmount
@@ -91,10 +91,10 @@ object Database {
                 )
             }
             if (last == null) {
-                ret.add(DateEvent(1, 1, 12, 31, "#FF0000"))
+                ret.add(DateEvent(1, 1, 12, 31, "#ff007a"))
             } else {
                 if (last.month != 12 && last.day != 31) {
-                    ret.add(DateEvent(last.month, last.day, 12, 31, "#FF0000"))
+                    ret.add(DateEvent(last.month, last.day, 12, 31, "#ff007a"))
                 }
             }
             ret.toList()
@@ -162,13 +162,13 @@ data class DateAmount(
     fun getColor(): String {
         return when {
             cnt < 1 -> {
-                "#FF0000"
+                "#ff007a"
             }
             cnt < 7 -> {
-                "#FFF700"
+                "#ffed5e"
             }
             else -> {
-                "#00FF00"
+                "#47cfad"
             }
         }
     }
@@ -183,10 +183,10 @@ data class DateEvent(
 ) {
     val name: String
         get() = when (color) {
-            "#FF0000" -> {
+            "#ff007a" -> {
                 "Keine eingetragenen Ereignisse :("
             }
-            "#FFF700" -> {
+            "#ffed5e" -> {
                 "Ein paar Ereignisse wurden schon eingetragen"
             }
             else -> {
@@ -195,10 +195,10 @@ data class DateEvent(
         }
     val details: String
         get() = when (color) {
-            "#FF0000" -> {
+            "#ff007a" -> {
                 "Sei eine*r der ersten, die*der an diesem Tag etwas einträgt!"
             }
-            "#FFF700" -> {
+            "#ffed5e" -> {
                 "Füge weitere hinzu, um die Auswahl zu vervollständigen!"
             }
             else -> {

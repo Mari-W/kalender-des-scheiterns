@@ -5,7 +5,7 @@ body {
 
 .outer-container {
     background-color: white;
-    width: 77%;
+    width: 65%;
     padding-left: 0;
     padding-right: 0;
     padding-top: 15px;
@@ -39,7 +39,7 @@ body {
 
 .menu-items {
     color: white;
- }
+}
 
 .menu-items:hover {
     color: white;
@@ -65,9 +65,11 @@ body {
 .menu-items1 {
     padding-top: 44px;
 }
+
 .menu-items2 {
     padding-top: 31px;
 }
+
 .menu-items3 {
     padding-top: 13px;
 }
@@ -105,6 +107,7 @@ body {
     color: #cf2e78;
     font-weight: bold;
 }
+
 .imprint:hover, .imprint:active {
     color: #8c1f52;
     font-weight: bold;
@@ -121,19 +124,20 @@ body {
 }
 
 .form-label-extra {
-    color: #a9a9a9;
+    margin-left: 3px;
+    color: black;
     font-size: 9.5pt;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight: 200;
     display: inline;
 }
 
 
 .form-label-extra-mobile {
     color: #a9a9a9;
-    font-size: 7.5pt;
+    font-size: 10pt;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight: 200;
     display: inline;
 }
 
@@ -148,7 +152,10 @@ body {
     font-weight: bold;
     width: 100%;
 }
-.nobr { white-space: nowrap }
+
+.nobr {
+    white-space: nowrap
+}
 
 .form-input {
     width: 100%;
@@ -183,7 +190,7 @@ body {
     font-weight: 300;
 }
 
-.form-input::-moz-placeholder {  /* Firefox 19+ */
+.form-input::-moz-placeholder { /* Firefox 19+ */
     color: #b3b3b3;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -287,6 +294,7 @@ input[type=date]::-webkit-clear-button {
     padding: 8px;
     border-radius: 100%;
 }
+
 .calendar-header, .day-header {
     visibility: hidden;
     display: none;
@@ -307,15 +315,18 @@ input[type=date]::-webkit-clear-button {
 }
 
 .cal-green {
-    color: #00d800;
+    color: #47cfad;
+    font-size: 42pt;
 }
 
 .cal-yellow {
-    color: #c5ba00;
+    color: #ffed5e;
+    font-size: 42pt;
 }
 
 .cal-red {
-    color: #d30000;
+    color: #ff007a;
+    font-size: 42pt;
 }
 
 .events-type {

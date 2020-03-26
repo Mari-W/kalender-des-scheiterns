@@ -13,7 +13,9 @@
             <form id="form" action="/submit" method="post" enctype="multipart/form-data">
                 <label class="form-label">
                     <div class="form-label-div"></div>
-                    WAS?<br>
+                    WAS?
+                    <div class="form-label-extra">*Pflichtfeld</div>
+                    <br>
                     <textarea class="form-input form-textarea" name="description" maxlength="250" minlength="5"
                               placeholder="Es war einmal.. (max. 250 Zeichen)" required
                               autofocus
@@ -22,7 +24,9 @@
 
                 <label class="form-label">
                     <div class="form-label-div"></div>
-                    WANN?<br>
+                    WANN?
+                    <div class="form-label-extra">*Pflichtfeld</div>
+                    <br>
                     <input type="date" class="form-input form-date" data-date-format="tt/mm/yyyy" name="date"
                            min="0000-01-01" max="2020-12-31"
                            required>
@@ -42,7 +46,7 @@
                     <div class="form-label-extra">kann man dich bei Nachfragen erreichen?</div>
                     <br>
                     <input class="form-input" type="email" name="email" maxlength="32"
-                           placeholder="scheitern@beispiel.com">
+                           placeholder="scheitern@nicosemsrott.eu">
                 </label>
                 <label><input hidden value="personal" name="type"/></label>
                 <div>
@@ -51,7 +55,7 @@
                             type="submit" class="g-recaptcha submit-button"><b>ABSCHICKEN</b>
                     </button>
                     <br>
-                    <i class="form-label-extra">*Redaktionelle Änderungen behalten wir uns vor.</i>
+                    <div class="form-label-extra">*Redaktionelle Änderungen behalten wir uns vor.</div>
                 </div>
             </form>
         </div>

@@ -14,10 +14,12 @@
 </div>
 <div class="row">
     <div class="col">
-        <form style="font-size: 11.5pt" id="form" action="/submit" method="post" enctype="multipart/form-data">
+        <form style="font-size: 13pt" id="form" action="/submit" method="post" enctype="multipart/form-data">
             <label class="form-label">
                 <div class="form-label-div"></div>
-                WAS?<br>
+                WAS?
+                <div class="form-label-extra">*Pflichtfeld</div>
+                <br>
                 <textarea class="form-input form-textarea" name="description" maxlength="250" minlength="5"
                           placeholder="Es war einmal.. (max. 250 Zeichen)" required
                           autofocus
@@ -26,7 +28,9 @@
 
             <label class="form-label">
                 <div class="form-label-div"></div>
-                WANN?<br>
+                WANN?
+                <div class="form-label-extra">*Pflichtfeld</div>
+                <br>
                 <input type="date" class="form-input form-date" data-date-format="tt/mm/yyyy" name="date"
                        min="0000-01-01" max="2020-12-31"
                        required>
