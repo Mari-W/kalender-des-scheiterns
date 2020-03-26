@@ -129,39 +129,9 @@ fun Application.module() {
                 }
         }
 
-        /*route("/mobile"){
-            get("/") {
-                call.respondRedirect("/mobile/info")
-            }
-            get("info"){
-                call.respondTwig("info_mobile")
-            }
-            get("status") {
-                call.respondTwig("status_mobile", mapOf("dates" to Database.dates()))
-            }
-            get("events/{state?}") {
-                call.respondTwig(
-                    "events_mobile", mapOf(
-                        "dates" to Database.list(
-                            "approved", "date"),
-                        "message" to when (call.parameters["state"]) {
-                            "success"  -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was der*die anderen für Einträge gemacht haben. Sie werden chronologisch nach Ereignisdatum angezeigt."
-                            "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie werden chronologisch nach Ereignisdatum angezeigt."
-                            else -> "Hier könnt ihr die eingereichten Ereignisse ansehen. Sie werden chronologisch nach Ereignisdatum angezeigt."
-                        }
-                    )
-                )
-            }
-            get("submit_personal") {
-                call.respondTwig("submit_pers_mobile")
-            }
-            get("submit_historic") {
-                call.respondTwig("submit_hist_mobile")
-            }
-        }*/
 
         get("/imprint") {
-            call.respondTwig("imprint")
+            call.respondTwig("imprint",  mobile = false)
         }
 
         route("/mod") {
@@ -177,7 +147,8 @@ fun Application.module() {
                         "list" to Database.list(status!!, order!!),
                         "order" to order,
                         "status" to status
-                    )
+                    ),
+                    mobile = false
                 )
             }
             get("/download"){
