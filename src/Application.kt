@@ -10,6 +10,7 @@ import io.ktor.http.content.*
 import io.ktor.request.isMultipart
 import io.ktor.request.path
 import io.ktor.request.receiveMultipart
+import io.ktor.request.userAgent
 import io.ktor.response.header
 import io.ktor.response.respond
 import io.ktor.response.respondFile
@@ -129,7 +130,10 @@ fun Application.module() {
                 }
         }
 
-        route("/mobile"){
+        /*route("/mobile"){
+            get("/") {
+                call.respondRedirect("/mobile/info")
+            }
             get("info"){
                 call.respondTwig("info_mobile")
             }
@@ -155,7 +159,7 @@ fun Application.module() {
             get("submit_historic") {
                 call.respondTwig("submit_hist_mobile")
             }
-        }
+        }*/
 
         get("/imprint") {
             call.respondTwig("imprint")
