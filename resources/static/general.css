@@ -44,7 +44,19 @@ body {
     color: white;
     background-color: #9d1f60;
     text-decoration: none;
- }
+}
+
+.menu-items-mobile {
+    color: white;
+    background-color: #cf2e78;
+}
+
+.menu-items-mobile:hover {
+    color: white;
+    background-color: #9d1f60;
+    text-decoration: none;
+}
+
 
 .menu-items1 {
     padding-top: 44px;

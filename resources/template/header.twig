@@ -28,24 +28,24 @@
 </head>
 <body>
 
-<div class="container outer-container" style="background-color: white; height: 100%">
+<div class="container" style="background-color: white; height: 100%; width: 100%">
     <img src="/static/header.svg" alt="Header" style="width: 102%; text-align: center" class="overflow">
     <div style="height: 15px"></div>
     <div class="container-fluid navbar-top">
         <div class="row">
-            <a href="/info" class="col menu-items menu-items1{% if template == 'info' %} menu-active{% endif %}">
+            <a href="/info" class="col menu-items{% if template == 'info' %} menu-active{% endif %}">
                 <p>INFO</p>
             </a>
-            <a href="/submit_historic" class="col menu-items menu-items3{% if template == 'submit_hist' %} menu-active{% endif %}">
+            <a href="/submit_historic" class="col menu-items {% if template == 'submit_hist' %} menu-active{% endif %}">
                 <p>HISTORISCHES<br>EREIGNIS<br>EINREICHEN</p>
             </a>
-            <a href="/submit_personal" class="col menu-items menu-items3{% if template == 'submit_pers' %} menu-active{% endif %}">
+            <a href="/submit_personal" class="col menu-items {% if template == 'submit_pers' %} menu-active{% endif %}">
                 <p>PERSÖNLICHES<br>EREIGNIS<br>EINREICHEN</p>
             </a>
-            <a href="/status" class="col menu-items menu-items2{% if template == 'status' %} menu-active{% endif %}">
+            <a href="/status" class="col menu-items {% if template == 'status' %} menu-active{% endif %}">
                 <p>STATUS-<br>ÜBERSICHT</p>
             </a>
-            <a href="/events" class="col menu-items menu-items2{% if template == 'events' %} menu-active{% endif %}">
+            <a href="/events" class="col menu-items {% if template == 'events' %} menu-active{% endif %}">
                 <p>EINGEREICHTE<br>EREIGNISSE</p>
             </a>
         </div>
