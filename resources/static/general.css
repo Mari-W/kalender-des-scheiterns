@@ -47,6 +47,7 @@ body {
 }
 
 .menu-items-mobile {
+    text-align: center;
     color: white;
     background-color: #cf2e78;
 }
