@@ -51,8 +51,7 @@ fun Application.module() {
         get("events/{state?}") {
             call.respondTwig(
                 "events", mapOf(
-                    "dates" to Database.list(
-                        "approved", "date"),
+                    "dates" to Database.listEvents(),
                     "message" to when (call.parameters["state"]) {
                         "success"  -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was der*die anderen für Einträge gemacht haben. Sie werden chronologisch nach Ereignisdatum angezeigt."
                         "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie werden chronologisch nach Ereignisdatum angezeigt."

@@ -124,7 +124,15 @@ object Database {
             )
                 .executeAndFetch(Entry::class.java)
         }
+    }
 
+    fun listEvents(): List<Entry> {
+        db.open().use {
+            return it.createQuery(
+                "SELECT id, type, date, source, description, name, email, status FROM entries WHERE status in ('APPROVED', 'CHOSEN') ORDER BY MONTH(date), DAY(date)"
+            )
+                .executeAndFetch(Entry::class.java)
+        }
     }
 
     private fun check(entry: Entry): Boolean {
