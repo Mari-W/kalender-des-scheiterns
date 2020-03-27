@@ -12,11 +12,23 @@ fun Int.toBoolean(): Boolean {
     return this == 1
 }
 
+inline fun <reified K, V> Map<K, V>.containsKeys(vararg keys: K): Boolean {
+    for (key in keys) {
+        if(!containsKey(key))
+            return false
+    }
+    return true
+}
+
 private val templates = mutableMapOf<String, JtwigTemplate>()
 
 suspend fun ApplicationCall.respondTwig(template: String, model: Map<String, Any> = mapOf(), mobile: Boolean = true) {
     var template = template
-    if (mobile && request.userAgent() != null && request.accept() != null && UAgentInfo (request.userAgent()!!, request.accept()!!).detectMobileQuick()){
+    if (mobile && request.userAgent() != null && request.accept() != null && UAgentInfo(
+            request.userAgent()!!,
+            request.accept()!!
+        ).detectMobileQuick()
+    ) {
         template = "${template}_mobile"
     }
     if (!templates.containsKey(template))
