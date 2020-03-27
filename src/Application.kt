@@ -103,7 +103,7 @@ fun Application.module() {
                         if (containsKeys("description", "date") && type != null) {
 
                             val len = get("description")!!.length
-                            if(5 <= len || len <= 250)
+                            if(!(5 <= len || len <= 250))
                                 throw IllegalArgumentException("Invalid description length")
 
                             val entry = Entry(
