@@ -120,6 +120,7 @@ fun Application.module() {
                             call.respond(HttpStatusCode.Forbidden.description("Errör"))
                         }
                     } catch (e: IllegalArgumentException) {
+                        e.printStackTrace()
                         call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
