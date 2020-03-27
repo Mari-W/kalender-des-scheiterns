@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package de.moeri
 
 import io.ktor.application.ApplicationCall
@@ -7,6 +9,7 @@ import io.ktor.request.userAgent
 import io.ktor.response.respondText
 import org.jtwig.JtwigModel
 import org.jtwig.JtwigTemplate
+import java.util.regex.Pattern
 
 fun Int.toBoolean(): Boolean {
     return this == 1
@@ -14,11 +17,14 @@ fun Int.toBoolean(): Boolean {
 
 inline fun <reified K, V> Map<K, V>.containsKeys(vararg keys: K): Boolean {
     for (key in keys) {
-        if(!containsKey(key))
+        if (!containsKey(key))
             return false
     }
     return true
 }
+
+val urlRegex: Pattern =
+    Pattern.compile("(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
 
 private val templates = mutableMapOf<String, JtwigTemplate>()
 

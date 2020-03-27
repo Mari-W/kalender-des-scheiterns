@@ -98,9 +98,14 @@ fun Application.module() {
                         val type: Type? = try {
                             Type.valueOf(get("type")!!.toUpperCase())
                         } catch (e: Exception) {
-                            null
+                            throw  IllegalArgumentException("Invalid submit type")
                         }
                         if (containsKeys("description", "date") && type != null) {
+
+                            val len = get("description")!!.length
+                            if(5 <= len || len <= 250)
+                                throw IllegalArgumentException("Invalid description length")
+
                             val entry = Entry(
                                 type = type,
                                 source = if (type == Type.HISTORIC) get("source") ?: "" else "",
@@ -117,7 +122,7 @@ fun Application.module() {
                                 else -> call.respondRedirect("events/limit")
                             }
                         } else {
-                            call.respond(HttpStatusCode.Forbidden.description("Errör"))
+                            throw  IllegalArgumentException("Date or description missing")
                         }
                     } catch (e: IllegalArgumentException) {
                         e.printStackTrace()
