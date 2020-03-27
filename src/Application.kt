@@ -97,7 +97,7 @@ fun Application.module() {
                         val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
                         val okay = when (type) {
                             Type.PERSONAL -> containsKey("description") && containsKey("date")
-                            Type.HISTORIC -> containsKey("description") && containsKey("date") && containsKey("source")
+                            Type.HISTORIC -> containsKey("description") && containsKey("date")
                             else -> false
                         }
                         if (okay && type != null) {
