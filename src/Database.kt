@@ -141,7 +141,7 @@ data class Entry(
 ) {
     init {
         if (!urlRegex.matcher(source).matches()) {
-            source = "invalid url"
+            source = ""
         }
     }
 }
