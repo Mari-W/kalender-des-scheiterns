@@ -14,14 +14,7 @@ object Database {
         db = Sql2o(Config["db.url"], Config["db.user"], Config["db.pass"])
     }
 
-    private val urlCheck: Pattern =
-        Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})")
-
-
     fun insert(ip: String, entry: Entry): Boolean {
-        if (!check(entry)) {
-            throw IllegalArgumentException()
-        }
         db.open().use {
             val limit = it.createQuery("SELECT rate_limit(:ip);")
                 .addParameter("ip", ip)
@@ -134,25 +127,24 @@ object Database {
                 .executeAndFetch(Entry::class.java)
         }
     }
-
-    private fun check(entry: Entry): Boolean {
-        val len = entry.description.length
-        return if (entry.type == Type.HISTORIC && !urlCheck.matcher(entry.source).matches())
-            false
-        else 5 <= len || len <= 250
-    }
 }
 
 data class Entry(
     val id: Int = 0,
     val type: Type,
-    val source: String = "",
+    var source: String = "",
     val date: Date,
     val description: String,
     val name: String = "Unknown",
     val email: String = "Unknown",
     val status: Status = Status.PENDING
-)
+) {
+    init {
+        if (!urlRegex.matcher(source).matches()) {
+            source = ""
+        }
+    }
+}
 
 data class DateAmount(
     val month: Int,

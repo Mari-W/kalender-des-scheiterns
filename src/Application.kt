@@ -22,6 +22,7 @@ import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
 import org.slf4j.event.Level
 import java.io.File
+import java.lang.Exception
 import java.sql.Date
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -53,7 +54,7 @@ fun Application.module() {
                 "events", mapOf(
                     "dates" to Database.listEvents(),
                     "message" to when (call.parameters["state"]) {
-                        "success"  -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was der*die anderen für Einträge gemacht haben. Sie werden chronologisch nach Ereignisdatum angezeigt."
+                        "success" -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was der*die anderen für Einträge gemacht haben. Sie werden chronologisch nach Ereignisdatum angezeigt."
                         "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie werden chronologisch nach Ereignisdatum angezeigt."
                         else -> "Hier könnt ihr die eingereichten Ereignisse ansehen. Sie werden chronologisch nach Ereignisdatum angezeigt."
                     }
@@ -94,16 +95,20 @@ fun Application.module() {
                             call.respond(HttpStatusCode.Forbidden.description("Invalid type, only historic or personal allowed."))
                             return@post
                         }
-                        val type: Type? = Type.valueOf(get("type")!!.toUpperCase())
-                        val okay = when (type) {
-                            Type.PERSONAL -> containsKey("description") && containsKey("date")
-                            Type.HISTORIC -> containsKey("description") && containsKey("date") && containsKey("source")
-                            else -> false
+                        val type: Type? = try {
+                            Type.valueOf(get("type")!!.toUpperCase())
+                        } catch (e: Exception) {
+                            throw  IllegalArgumentException("Invalid submit type")
                         }
-                        if (okay && type != null) {
+                        if (containsKeys("description", "date") && type != null) {
+
+                            val len = get("description")!!.length
+                            if(!(5 <= len || len <= 250))
+                                throw IllegalArgumentException("Invalid description length")
+
                             val entry = Entry(
                                 type = type,
-                                source = if (type == Type.HISTORIC) get("source")!! else "",
+                                source = if (type == Type.HISTORIC) get("source") ?: "" else "",
                                 date = Date.valueOf(get("date")!!),
                                 description = get("description")!!,
                                 name = get("name") ?: "",
@@ -117,9 +122,10 @@ fun Application.module() {
                                 else -> call.respondRedirect("events/limit")
                             }
                         } else {
-                            call.respond(HttpStatusCode.Forbidden.description("Errör"))
+                            throw  IllegalArgumentException("Date or description missing")
                         }
                     } catch (e: IllegalArgumentException) {
+                        e.printStackTrace()
                         call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
@@ -131,7 +137,7 @@ fun Application.module() {
 
 
         get("/imprint") {
-            call.respondTwig("imprint",  mobile = false)
+            call.respondTwig("imprint", mobile = false)
         }
 
         route("/mod") {
@@ -151,7 +157,7 @@ fun Application.module() {
                     mobile = false
                 )
             }
-            get("/download"){
+            get("/download") {
                 ExcelWriter.gen()
                 call.response.header("Content-Disposition", "attachment; filename=\"kds-chosen-events-export.xlsx\"")
                 call.respondFile(File("kds-chosen-events-export.xlsx"))

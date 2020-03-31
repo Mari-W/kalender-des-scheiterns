@@ -24,18 +24,14 @@ object ReCaptcha {
         }
 
         if (res.errorCodes != null && res.errorCodes.isNotEmpty()) {
-            println("ReCaptcha Error: ${res.errorCodes.joinToString(", ")}")
-            throw CaptchaException
+            throw CaptchaException("ReCaptcha Error: ${res.errorCodes.joinToString(", ")}")
         }
         if (!res.success) {
-            println("ReCaptcha invalid")
-            throw CaptchaException
+            throw CaptchaException("No success")
         }
         if (res.score < 0.5) {
-            println("ReCaptcha too low with ${res.score}")
-            throw CaptchaException
+            throw CaptchaException("ReCaptcha too low with ${res.score}")
         }
-        println("Successful recaptcha with score of ${res.score}")
     }
 
     data class RecaptchaResponse(
@@ -46,5 +42,5 @@ object ReCaptcha {
         val hostname: String,
         @SerializedName("erros-codes") val errorCodes: Array<String>?)
 
-    object CaptchaException : Exception("captcha score too low")
+    class CaptchaException(s: String) : Exception(s)
 }
