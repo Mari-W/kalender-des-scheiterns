@@ -3,15 +3,12 @@ package de.moeri
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
-import io.ktor.features.CallLogging
 import io.ktor.features.ForwardedHeaderSupport
 import io.ktor.features.origin
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.isMultipart
-import io.ktor.request.path
 import io.ktor.request.receiveMultipart
-import io.ktor.request.userAgent
 import io.ktor.response.header
 import io.ktor.response.respond
 import io.ktor.response.respondFile
@@ -21,11 +18,9 @@ import io.ktor.routing.post
 import io.ktor.routing.route
 import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
-import org.slf4j.event.Level
 import java.io.File
 import java.lang.Exception
 import java.sql.Date
-import kotlin.system.exitProcess
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
