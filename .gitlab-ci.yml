@@ -6,4 +6,4 @@ build:
     expire_in: 3 days
 deploy:
   stage: deploy
-  script: "cp kds.jar /home/kds/kds.jar; ./home/kds/deploy.sh"
+  script: "cp kds.jar /home/kds/kds.jar; sudo /home/kds/deploy.sh"
