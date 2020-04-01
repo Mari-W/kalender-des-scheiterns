@@ -4,6 +4,7 @@ import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CallLogging
+import io.ktor.features.ForwardedHeaderSupport
 import io.ktor.features.origin
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
@@ -39,6 +40,8 @@ fun Application.module() {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
     }
+
+    install(ForwardedHeaderSupport)
 
     routing {
         get("/") {
