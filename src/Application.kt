@@ -25,6 +25,7 @@ import org.slf4j.event.Level
 import java.io.File
 import java.lang.Exception
 import java.sql.Date
+import kotlin.system.exitProcess
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -184,6 +185,20 @@ fun Application.module() {
                         }
                 }
             }
+        }
+
+        get("stop") {
+            if (!call.request.headers.contains("authcode")) {
+                call.respond(HttpStatusCode.NotFound)
+                return@get
+            }
+            if (call.request.headers["authcode"] != Config["authcode.stop"]) {
+                call.respond(HttpStatusCode.NotFound)
+                return@get
+            }
+            println("Shutdown now")
+            call.application.dispose()
+            exitProcess(0)
         }
 
         static("/static") {
