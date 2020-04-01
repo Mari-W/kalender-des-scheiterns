@@ -331,5 +331,5 @@ input[type=date]::-webkit-clear-button {
 
 .events-type {
     font-family: 'Roboto Slab', sans-serif;
-    font-weight: lighter;
+    font-weight: 200;
 }
