@@ -198,7 +198,7 @@ fun Application.module() {
                 call.respond(HttpStatusCode.NotFound)
                 return@get
             }
-            if (call.request.headers["authcode"] != Config["authcode"]) {
+            if (call.request.headers["authcode"] != Config["authcode.stop"]) {
                 call.respond(HttpStatusCode.NotFound)
                 return@get
             }
