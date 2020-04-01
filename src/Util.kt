@@ -9,6 +9,7 @@ import io.ktor.request.userAgent
 import io.ktor.response.respondText
 import org.jtwig.JtwigModel
 import org.jtwig.JtwigTemplate
+
 import java.util.regex.Pattern
 
 fun Int.toBoolean(): Boolean {

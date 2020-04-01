@@ -43,6 +43,7 @@ dependencies {
     implementation "org.jetbrains:kotlin-css-jvm:1.0.0-pre.31-kotlin-1.2.41"
     implementation "io.ktor:ktor-server-host-common:$ktor_version"
     implementation "org.jtwig:jtwig-core:5.87.0.RELEASE"
+    compile("ch.qos.logback:logback-classic:1.2.3")
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
     implementation group: 'org.sql2o', name: 'sql2o', version: '1.6.0'
     implementation "org.apache.poi:poi-ooxml:3.17"
