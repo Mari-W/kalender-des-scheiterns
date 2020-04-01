@@ -193,20 +193,6 @@ fun Application.module() {
             }
         }
 
-        get("stop") {
-            if (!call.request.headers.contains("authcode")) {
-                call.respond(HttpStatusCode.NotFound)
-                return@get
-            }
-            if (call.request.headers["authcode"] != Config["authcode.stop"]) {
-                call.respond(HttpStatusCode.NotFound)
-                return@get
-            }
-            println("Shutdown now")
-            call.application.dispose()
-            exitProcess(0)
-        }
-
         static("/static") {
             resources("static")
         }
