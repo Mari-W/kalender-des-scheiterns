@@ -3,6 +3,7 @@ package de.moeri
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.features.CallLogging
 import io.ktor.features.ForwardedHeaderSupport
 import io.ktor.features.origin
 import io.ktor.http.HttpStatusCode
@@ -32,6 +33,7 @@ fun Application.module() {
     Database.init()
 
     install(ForwardedHeaderSupport)
+    install(CallLogging)
 
     routing {
         get("/") {
