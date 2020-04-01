@@ -8,9 +8,11 @@
     <div style="text-align: justify">
         <p id="{{ e.date|date("dd.MM")|replace({'0': ''}) }}" style="color: #cf2e78; size: 22px; margin-top: 20px; font-family: 'Roboto Slab', serif;"><b>{{ e.date|date("dd.MM.yyyy") }}</b></p>
         <p class="events-type">{% if e.type == "HISTORIC" %} HISTORISCH {% else %} PERSÖNLICH {% endif %}</p>
-        {{ e.description }}
-        <br>
-        von: {{ e.name }}
+        <p class="events-type-entry">
+            {{ e.description }}
+            <br>
+            von: {{ e.name }}
+        </p>
         <hr>
     </div>
 {% endfor %}
