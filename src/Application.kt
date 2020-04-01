@@ -203,6 +203,7 @@ fun Application.module() {
                 return@get
             }
             println("Shutdown now")
+            call.application.dispose()
             exitProcess(0)
         }
 
