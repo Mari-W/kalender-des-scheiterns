@@ -18,24 +18,12 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
 import io.ktor.routing.routing
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import io.ktor.util.KtorExperimentalAPI
 import java.io.File
 import java.lang.Exception
 import java.sql.Date
 
-fun main(args: Array<String>): Unit {
-    embeddedServer(Netty, configure = {
-        // Size of the queue to store [ApplicationCall] instances that cannot be immediately processed
-        requestQueueLimit = 32
-        shareWorkGroup = true
-        // Timeout in seconds for sending responses to client
-        responseWriteTimeoutSeconds = 5
-    }) {
-        module()
-    }.start(true)
-}
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused") // Referenced in application.conf
 @UseExperimental(KtorExperimentalAPI::class)
