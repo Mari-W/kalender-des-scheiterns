@@ -35,11 +35,6 @@ fun Application.module() {
     Config.init(environment.config)
     Database.init()
 
-    install(CallLogging) {
-        level = Level.INFO
-        filter { call -> call.request.path().startsWith("/") }
-    }
-
     install(ForwardedHeaderSupport)
 
     routing {
@@ -128,7 +123,6 @@ fun Application.module() {
                             throw  IllegalArgumentException("Date or description missing")
                         }
                     } catch (e: IllegalArgumentException) {
-                        e.printStackTrace()
                         call.respond(HttpStatusCode.Forbidden.description("Invalid arguments"))
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
