@@ -335,6 +335,6 @@ input[type=date]::-webkit-clear-button {
 }
 
 .events-type-entry {
-    font-family: 'Roboto Slab', sans-serif;
-    font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
 }
