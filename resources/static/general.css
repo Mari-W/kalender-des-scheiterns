@@ -5,14 +5,14 @@ body {
 
 .outer-container {
     background-color: white;
-    width: 65%;
+    width: 1024px;
     padding-left: 0;
     padding-right: 0;
     padding-top: 15px;
 }
 
 .inner-container {
-    padding: 40px;
+    padding: 30px 80px;
     font-family: 'Roboto', sans-serif;
 }
 
