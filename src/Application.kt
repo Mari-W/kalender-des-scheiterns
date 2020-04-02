@@ -10,10 +10,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.isMultipart
 import io.ktor.request.receiveMultipart
-import io.ktor.response.header
-import io.ktor.response.respond
-import io.ktor.response.respondFile
-import io.ktor.response.respondRedirect
+import io.ktor.response.*
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
@@ -207,10 +204,9 @@ fun Application.module() {
 
         static("/static") {
             resources("static")
-            resource("favicon.ico")
         }
         static("/favicon.ico"){
-            resource("static/favicon.ico")
+            resource("favicon.ico")
         }
     }
 }
