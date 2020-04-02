@@ -3,10 +3,7 @@ package de.moeri
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
-import io.ktor.features.CachingHeaders
-import io.ktor.features.CallLogging
-import io.ktor.features.ForwardedHeaderSupport
-import io.ktor.features.origin
+import io.ktor.features.*
 import io.ktor.http.CacheControl
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
@@ -38,7 +35,7 @@ fun Application.module() {
     Config.init(environment.config)
     Database.init()
 
-    install(ForwardedHeaderSupport)
+    install(XForwardedHeaderSupport)
 
     install(CachingHeaders) {
         val nocache = CachingOptions(CacheControl.NoCache(CacheControl.Visibility.Public)) // do not cache the html
