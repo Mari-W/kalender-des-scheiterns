@@ -26,6 +26,8 @@ import java.io.File
 import java.lang.Exception
 import java.sql.Date
 
+private val applicationMp4 = ContentType("application", "mp4")
+
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused") // Referenced in application.conf
@@ -47,7 +49,7 @@ fun Application.module() {
                 ContentType.Text.Html -> nocache
                 ContentType.Text.CSS -> cache
                 ContentType.Text.JavaScript -> cache
-                ContentType.Video.MP4 -> cacheLong
+                applicationMp4 -> cacheLong
                 ContentType.Image.SVG -> cacheLong
                 ContentType.Image.PNG -> cacheLong
                 else -> null
