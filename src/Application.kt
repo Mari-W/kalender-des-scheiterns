@@ -158,6 +158,7 @@ fun Application.module() {
             call.respondTwig("imprint", mobile = false)
         }
 
+
         route("/mod") {
             get("/") {
                 call.respondRedirect("/mod/show/pending/sortby/date")
@@ -209,6 +210,10 @@ fun Application.module() {
 
         static("/static") {
             resources("static")
+        }
+
+        static("/favicon.ico"){
+            resource("/static/favicon.ico")
         }
     }
 }
