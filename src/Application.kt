@@ -213,7 +213,7 @@ fun Application.module() {
         }
 
         get("/favicon.ico"){
-            call.respondRedirect("/static/favicon.ico")
+            call.respondFile("static/favicon.ico")
         }
     }
 }
