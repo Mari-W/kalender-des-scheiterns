@@ -50,7 +50,7 @@
         dataSource: [
             {% for e in dates %}
             {
-                startDate: Date.parse('2020-{% if e.fromMonth|tra ns|length == 1 %}0{% endif %}{{ e.fromMonth }}-{% if e.fromDay|trans|length == 1 %}0{% endif %}{{ e.fromDay }}'),
+                startDate: Date.parse('2020-{% if e.fromMonth|trans|length == 1 %}0{% endif %}{{ e.fromMonth }}-{% if e.fromDay|trans|length == 1 %}0{% endif %}{{ e.fromDay }}'),
                 endDate: Date.parse('2020-{% if e.toMonth|trans|length == 1 %}0{% endif %}{{ e.toMonth }}-{% if e.toDay|trans|length == 1 %}0{% endif %}{{ e.toDay }}'),
                 color: "{{ e.color }}",
                 name: "{{ e.name }}",
