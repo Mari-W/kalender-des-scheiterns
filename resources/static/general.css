@@ -37,7 +37,8 @@ body {
     background-color: white;
     text-align: center;
     font-family: 'Roboto Slab', sans-serif;
-    font-size: 16.5pt;
+    font-size: 13pt;
+    font-weight: 500;
 }
 
 .menu-items {
