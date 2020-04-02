@@ -1,15 +1,5 @@
 {% include 'header.twig' %}
 
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
-    grecaptcha.ready(function () {
-        grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'submit_hist'}).then(function (token) {
-            document.getElementById("g-recaptcha-response").value = token;
-            document.getElementById("form").submit();
-        });
-    });
-</script>
-
 <div class="container">
     <div class="row">
         <div class="col">

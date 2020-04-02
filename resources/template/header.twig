@@ -15,6 +15,18 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/general.css">
+    {% if "submit" in template %}
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script>
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'submit_hist'}).then(function (token) {
+                    document.getElementById("g-recaptcha-response").value = token;
+                    document.getElementById("form").submit();
+                });
+            });
+        </script>
+    {% endif %}
+
     <title>Der Kalender des Scheiterns</title>
 </head>
 <body>
