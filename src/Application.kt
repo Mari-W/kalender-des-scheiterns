@@ -213,7 +213,7 @@ fun Application.module() {
         }
 
         static("/favicon.ico"){
-            resource("/static/favicon.ico")
+            resource("static/favicon.ico")
         }
     }
 }
