@@ -68,7 +68,8 @@ fun Application.module() {
                     "dates" to Database.listEvents(),
                     "message" to when (call.parameters["state"]) {
                         "success" -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was der*die anderen für Einträge gemacht haben. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
-                        "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
+                        "limit" -> "Du kannst maximal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
+                        "robot" -> "Fehler beim eintragen."
                         else -> "Hier könnt ihr die eingereichten Ereignisse ansehen. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
                     }
                 )
@@ -99,7 +100,7 @@ fun Application.module() {
                 }.toMap().apply {
                     try {
                         if (containsKey("g-recaptcha-response")) {
-                            ReCaptcha.validate(get("g-recaptcha-response")!!)
+                            ReCaptcha.validate(get("g-recaptcha-response")!!, call.request.origin.remoteHost)
                         } else {
                             call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
                             return@post
@@ -142,7 +143,7 @@ fun Application.module() {
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
                     } catch (e: ReCaptcha.CaptchaException) {
-                        call.respondRedirect("/events/limit")
+                        call.respondRedirect("/events/robot")
                     }
                 }
         }
