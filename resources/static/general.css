@@ -28,6 +28,9 @@ body {
     text-align: center;
     font-family: 'Roboto Slab', sans-serif;
     font-size: 16.5pt;
+    font-weight: bold;
+    line-height: 75%;
+    letter-spacing: 3px;
 }
 
 .navbar-top-mobile {
