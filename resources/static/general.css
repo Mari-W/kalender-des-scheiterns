@@ -3,7 +3,8 @@
 }
 
 body {
-    background-color: #cf2e78;
+    background: rgb(179,102,131);
+    background: linear-gradient(0deg, rgba(179,102,131,1) 0%, rgba(77,125,176,1) 26%);
     font-size: 16.5pt;
 }
 
