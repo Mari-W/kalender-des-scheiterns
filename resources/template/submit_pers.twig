@@ -3,7 +3,7 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
     function onSubmit() {
-        if(document.getElementById("what").innerText.length > 5 && document.getElementById("when").innerText.length > 1) {
+        if(document.getElementById("what").innerText.length > 5 && document.getElementById("when").innerText !== "") {
             document.getElementById("form").submit();
         }
     }
@@ -19,7 +19,7 @@
                     <div class="form-label-extra">*Pflichtfeld</div>
                     <br>
                     <textarea class="form-input form-textarea" name="description" maxlength="250" minlength="5"
-                              placeholder="Hier kannst du das Ereignis beschreiben. (maximal 250 Zeichen)" required id="what"
+                              placeholder="Hier kannst du das Ereignis beschreiben. (min 5, max. 250 Zeichen)" required id="what"
                               autofocus
                               oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                 </label>
