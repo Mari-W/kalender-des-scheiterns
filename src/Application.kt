@@ -38,7 +38,6 @@ fun Application.module() {
     Database.init()
 
     install(ForwardedHeaderSupport)
-    install(CallLogging)
 
     install(CachingHeaders) {
         val nocache = CachingOptions(CacheControl.NoCache(CacheControl.Visibility.Public)) // do not cache the html
