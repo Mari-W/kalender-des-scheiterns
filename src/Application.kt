@@ -19,6 +19,7 @@ import io.ktor.util.KtorExperimentalAPI
 import java.io.File
 import java.lang.Exception
 import java.sql.Date
+import java.util.concurrent.TimeUnit
 
 private val applicationMp4 = ContentType("application", "mp4")
 private val imageFavicon = ContentType("image", "fav")
@@ -120,10 +121,12 @@ fun Application.module() {
                             if(!(5 <= len || len <= 250))
                                 throw IllegalArgumentException("Invalid description length")
 
+                            val d = Date.valueOf(get("date")!!)
+
                             val entry = Entry(
                                 type = type,
                                 source = if (type == Type.HISTORIC) get("source") ?: "" else "",
-                                date = Date.valueOf(get("date")!!),
+                                date = Date(d.time + TimeUnit.HOURS.toMillis(3)),
                                 description = get("description")!!,
                                 name = get("name") ?: "",
                                 email = get("email") ?: ""
