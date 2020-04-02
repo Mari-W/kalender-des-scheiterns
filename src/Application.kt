@@ -47,8 +47,9 @@ fun Application.module() {
                 ContentType.Text.Html -> nocache
                 ContentType.Text.CSS -> cache
                 ContentType.Text.JavaScript -> cache
-                ContentType.Video.Any -> cacheLong
-                ContentType.Image.Any -> cacheLong
+                ContentType.Video.MP4 -> cacheLong
+                ContentType.Image.SVG -> cacheLong
+                ContentType.Image.PNG -> cacheLong
                 else -> null
             }
         }
