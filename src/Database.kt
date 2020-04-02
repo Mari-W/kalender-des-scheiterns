@@ -87,7 +87,7 @@ object Database {
                 ret.add(DateEvent(1, 1, 12, 31, "#ff007a"))
             } else {
                 if (last.month != 12 && last.day != 31) {
-                    ret.add(DateEvent(last.month, last.day, 12, 31, "#ff007a"))
+                    ret.add(DateEvent(last.month, last.day + 1, 12, 31, "#ff007a"))
                 }
             }
             ret.toList()
