@@ -24,6 +24,9 @@
             </li>
         </ul>
     </div>
+    <div style="font-weight: lighter; color: black; font-size: 13pt;">
+        *Bei einigen Browsern (unter anderem Safari) wird die Übersicht ggf. nicht korrekt dargestellt, wir wissen das und haben aufgegeben.
+    </div>
 </div>
 <div style="height: 30px"></div>
 
@@ -36,8 +39,8 @@
         dataSource: [
             {% for e in dates %}
             {
-                startDate: Date.parse('2020-{{ e.fromMonth }}-{{ e.fromDay }}'),
-                endDate: Date.parse('2020-{{ e.toMonth }}-{{ e.toDay }}'),
+                startDate: Date.parse('2020-{% if e.fromMonth|length == 1 %}0{% endif %}{{ e.fromMonth }}-{% if e.fromDay|length == 1 %}0{% endif %}{{ e.fromDay }}'),
+                endDate: Date.parse('2020-{% if e.toMonth|length == 1 %}0{% endif %}{{ e.toMonth }}-{% if e.toDay|length == 1 %}0{% endif %}{{ e.toDay }}'),
                 color: "{{ e.color }}",
                 name: "{{ e.name }}",
                 details: "{{ e.details }}"
