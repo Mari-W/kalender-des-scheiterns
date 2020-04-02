@@ -3,7 +3,9 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
     function onSubmit() {
-        document.getElementById("form").submit();
+        grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'submit_hist'}).then(function(token) {
+            document.getElementById("form").submit();
+        });
     }
 </script>
 
@@ -59,8 +61,8 @@
                 </label>
                 <label><input hidden value="historic" name="type"/></label>
                 <label>
-                    <input data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"
-                           type="submit" class="g-recaptcha submit-button" value="ABSCHICKEN"/>
+                    <input data-callback="onSubmit"
+                           type="submit" class="submit-button" value="ABSCHICKEN"/>
                     <br>
                     <div class="form-label-extra">*Redaktionelle Änderungen behalten wir uns vor.</div>
                 </label>
