@@ -76,10 +76,10 @@ fun Application.module() {
             )
         }
         get("submit_personal") {
-            call.respondTwig("submit_pers")
+            call.respondTwig("submit_pers", mapOf("recaptcha" to true))
         }
         get("submit_historic") {
-            call.respondTwig("submit_hist")
+            call.respondTwig("submit_hist", mapOf("recaptcha" to true))
         }
         post("submit") {
             if (!call.request.isMultipart())
