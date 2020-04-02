@@ -239,7 +239,7 @@ input[type=date]::-webkit-clear-button {
     text-align: center;
     border-radius: 10px;
     border: none;
-    font-weight: lighter;
+    font-weight: bold;
     font-family: 'Roboto Slab', sans-serif;
 }
 
