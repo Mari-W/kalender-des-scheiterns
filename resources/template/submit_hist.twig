@@ -4,6 +4,7 @@
 <script>
     function onSubmit() {
         grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'submit_hist'}).then(function(token) {
+            document.getElementById("g-recaptcha-response").value = token;
             document.getElementById("form").submit();
         });
     }
@@ -60,6 +61,7 @@
                            placeholder="scheitern@nicosemsrott.eu">
                 </label>
                 <label><input hidden value="historic" name="type"/></label>
+                <label><input id="g-recaptcha-response" hidden name="g-recaptcha-response"/></label>
                 <label>
                     <input data-callback="onSubmit"
                            type="submit" class="submit-button" value="ABSCHICKEN"/>
