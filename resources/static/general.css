@@ -1,10 +1,12 @@
 @font-face {
     font-display: swap;
 }
-
+html {
+    min-height: 100%;
+}
 body {
     background: rgb(207,46,120);
-    background: linear-gradient(180deg, rgba(207,46,120,1) 38%, rgba(158,18,89,1) 80%);
+    background: linear-gradient(180deg, rgba(207,46,120,1) 38%, rgb(140, 18, 73) 80%);
     font-size: 16.5pt;
 }
 
