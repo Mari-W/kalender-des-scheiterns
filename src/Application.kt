@@ -27,6 +27,7 @@ import java.lang.Exception
 import java.sql.Date
 
 private val applicationMp4 = ContentType("application", "mp4")
+private val imageFavicon = ContentType("image", "fav")
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -38,7 +39,6 @@ fun Application.module() {
     Database.init()
 
     install(ForwardedHeaderSupport)
-    install(CallLogging)
 
     install(CachingHeaders) {
         val nocache = CachingOptions(CacheControl.NoCache(CacheControl.Visibility.Public)) // do not cache the html
@@ -50,6 +50,7 @@ fun Application.module() {
                 ContentType.Text.CSS -> cache
                 ContentType.Text.JavaScript -> cache
                 applicationMp4 -> cacheLong
+                imageFavicon -> cacheLong
                 ContentType.Image.SVG -> cacheLong
                 ContentType.Image.PNG -> cacheLong
                 else -> null
