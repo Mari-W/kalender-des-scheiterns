@@ -3,7 +3,9 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
     function onSubmit() {
-        document.getElementById("form").submit();
+        if(document.getElementById("what").innerText.length > 5 && document.getElementById("when").innerText.length > 1) {
+            document.getElementById("form").submit();
+        }
     }
 </script>
 <div style="height: 20px"></div>
@@ -20,7 +22,7 @@
                 <div class="form-label-extra-mobile">*Pflichtfeld</div>
                 <br>
                 <textarea class="form-input form-textarea" name="description" maxlength="250" minlength="5"
-                          placeholder="Hier kannst du das Ereignis beschreiben. (maximal 250 Zeichen)" required
+                          placeholder="Hier kannst du das Ereignis beschreiben. (maximal 250 Zeichen)" required id="what"
                           autofocus
                           oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
             </label>
@@ -32,7 +34,7 @@
                 <br>
                 <input type="date" class="form-input form-date" data-date-format="tt/mm/yyyy" name="date"
                        min="0000-01-01" max="2020-12-31"
-                       required>
+                       required id="when">
             </label>
 
             <label class="form-label">
