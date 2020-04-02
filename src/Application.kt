@@ -212,8 +212,8 @@ fun Application.module() {
             resources("static")
         }
 
-        get("/favicon.ico"){
-            call.respondFile("static/favicon.ico")
+        static("/favicon.ico"){
+            resource("static/favicon.ico")
         }
     }
 }
