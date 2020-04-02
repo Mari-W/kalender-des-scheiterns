@@ -3,9 +3,12 @@ package de.moeri
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.features.CachingHeaders
 import io.ktor.features.CallLogging
 import io.ktor.features.ForwardedHeaderSupport
 import io.ktor.features.origin
+import io.ktor.http.CacheControl
+import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.isMultipart
@@ -23,6 +26,8 @@ import java.io.File
 import java.lang.Exception
 import java.sql.Date
 
+private val applicationMp4 = ContentType("application", "mp4")
+
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused") // Referenced in application.conf
@@ -34,6 +39,23 @@ fun Application.module() {
 
     install(ForwardedHeaderSupport)
     install(CallLogging)
+
+    install(CachingHeaders) {
+        val nocache = CachingOptions(CacheControl.NoCache(CacheControl.Visibility.Public)) // do not cache the html
+        val cache = CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 60 * 5)) // 5 minutes
+        val cacheLong = CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 60 * 60)) // 1 hour
+        options { outgoingContent ->
+            when (outgoingContent.contentType?.withoutParameters()) {
+                ContentType.Text.Html -> nocache
+                ContentType.Text.CSS -> cache
+                ContentType.Text.JavaScript -> cache
+                applicationMp4 -> cacheLong
+                ContentType.Image.SVG -> cacheLong
+                ContentType.Image.PNG -> cacheLong
+                else -> null
+            }
+        }
+    }
 
     routing {
         get("/") {
