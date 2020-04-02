@@ -3,7 +3,6 @@ package de.moeri
 import io.ktor.util.KtorExperimentalAPI
 import org.sql2o.Sql2o
 import java.sql.Date
-import java.util.regex.Pattern
 
 @KtorExperimentalAPI
 object Database {
