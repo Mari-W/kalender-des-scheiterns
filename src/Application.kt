@@ -205,8 +205,5 @@ fun Application.module() {
         static("/static") {
             resources("static")
         }
-        static("/favicon.ico"){
-            resource("favicon.ico")
-        }
     }
 }
