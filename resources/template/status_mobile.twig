@@ -6,92 +6,23 @@
 <script src="https://unpkg.com/tippy.js@4"></script>
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css"/>
-<link rel="stylesheet" type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
 
 <div style="color: black; font-size: 13pt; width:100%">
     Hier könnt ihr sehen, wie viele Eintragungen es schon gibt:
     <br>
     <ul>
         <li style="list-style-type: none">
-            <div style="font-weight: normal; color: black; font-size: 13pt;"><i class="fas fa-circle"
-                                                                                style="color: #ff007a; margin-right: 10px"></i>Hier
-                gibt es noch keine Ereignisse
-            </div>
+            <div style="font-weight: normal; color: black; font-size: 13pt;"><i class="fas fa-circle" style="color: #ff007a; margin-right: 10px"></i>Hier gibt es noch keine Ereignisse</div>
         </li>
         <li style="list-style-type: none">
-            <div style="font-weight: normal; color: black; font-size: 13pt;"><i class="fas fa-circle"
-                                                                                style="color: #ffed5e; margin-right: 10px"></i>Hier
-                ist es schon ereignisreicher
-            </div>
+            <div style="font-weight: normal; color: black; font-size: 13pt;"><i class="fas fa-circle" style="color: #ffed5e; margin-right: 10px"></i>Hier ist es schon ereignisreicher</div>
         </li>
         <li style="list-style-type: none">
-            <div style="font-weight: normal; color: black; font-size: 13pt;"><i class="fas fa-circle"
-                                                                                style="color: #47cfad; margin-right: 10px"></i>Hier
-                besteht bereits genug Auswahl
-            </div>
+            <div style="font-weight: normal; color: black; font-size: 13pt;"><i class="fas fa-circle" style="color: #47cfad; margin-right: 10px"></i>Hier besteht bereits genug Auswahl</div>
         </li>
     </ul>
 </div>
-<div style="font-weight: lighter; color: black; font-size: 11pt;">
-    *Bei einigen Browsern (unter anderem Safari) wird die Übersicht ggf. nicht korrekt dargestellt, wir wissen das und
-    haben aufgegeben.
-</div>
 
-<div id="calendar" class="calendar"></div>
-
-<script type="text/javascript">
-    const calendar = new Calendar('.calendar', {
-        language: 'de',
-        enableRangeSelection: false,
-        dataSource: [
-            {% for e in dates %}
-            {
-                startDate: Date.parse('2020-{% if e.fromMonth < 10 %}0{% endif %}{{ e.fromMonth }}-{% if e.fromDay < 10 %}0{% endif %}{{ e.fromDay }}'),
-                endDate: Date.parse('2020-{% if e.toMonth < 10 %}0{% endif %}{{ e.toMonth }}-{% if e.toDay < 10 %}0{% endif %}{{ e.toDay }}'),
-                color: "{{ e.color }}",
-                name: "{{ e.name }}",
-                details: "{{ e.details }}"
-            },
-            {% endfor %}
-        ],
-        mouseOnDay: function (e) {
-            if (e.events.length > 0) {
-                var content = '';
-
-                for (var i in e.events) {
-                    content += '<div class="event-tooltip-content">'
-                        + '<div class="event-name" style="color:' + e.events[i].color + '"><b>' + e.events[i].name + '</b></div>'
-                        + '<div class="event-details">' + e.events[i].details + '</div>'
-                        + '</div>';
-                }
-
-                if (this.tooltip != null) {
-                    this.tooltip.destroy();
-                    this.tooltip = null;
-                }
-
-                this.tooltip = tippy(e.element, {
-                    placement: 'right',
-                    content: content,
-                    animateFill: false,
-                    animation: 'shift-away',
-                    arrow: true
-                });
-                this.tooltip.show();
-            }
-        },
-        clickDay: function (e) {
-            for (var i in e.events) {
-                if (e.events[i].color === "#FF0000") {
-                    return;
-                }
-            }
-            day = e.date.getDate();
-            month = e.date.getMonth() + 1;
-            window.open("events#" + day + "." + month, "_self")
-        }
-    });
-</script>
-
+{% include 'calender.twig' %}
 {% include 'footer_mobile.twig' %}

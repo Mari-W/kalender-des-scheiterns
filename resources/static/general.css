@@ -1,5 +1,9 @@
+@font-face {
+    font-display: swap;
+}
+
 body {
-    background-color: #cf2e78;
+    background: rgb(207,46,120);
     font-size: 16.5pt;
 }
 

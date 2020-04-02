@@ -16,11 +16,11 @@ object ReCaptcha {
         }
     }
 
-    suspend fun validate(token: String) {
+    suspend fun validate(token: String, ip: String) {
         val res = httpClient.post<RecaptchaResponse>("https://www.google.com/recaptcha/api/siteverify") {
             parameter("secret", Config["recaptcha.secret"])
             parameter("response", token)
-            //parameter("remoteip", IP_HERE_WATCH_OUT_FOR_CLOUDFLARE)
+            parameter("remoteip", ip)
         }
 
         if (res.errorCodes != null && res.errorCodes.isNotEmpty()) {

@@ -19,6 +19,7 @@ import io.ktor.util.KtorExperimentalAPI
 import java.io.File
 import java.lang.Exception
 import java.sql.Date
+import java.util.concurrent.TimeUnit
 
 private val applicationMp4 = ContentType("application", "mp4")
 private val imageFavicon = ContentType("image", "fav")
@@ -67,18 +68,19 @@ fun Application.module() {
                 "events", mapOf(
                     "dates" to Database.listEvents(),
                     "message" to when (call.parameters["state"]) {
-                        "success" -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was der*die anderen für Einträge gemacht haben. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
-                        "limit" -> "Du kannst maxmimal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
+                        "success" -> "Dein Ereignis wurde erfolgreich eingetragen!<br>Schau, was die anderen für Einträge gemacht haben. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
+                        "limit" -> "Du kannst maximal 10 Ereignisse pro Tag eintragen!<br>Stattdessen kannst du dir die Einträge von anderen anschauen. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
+                        "robot" -> "Fehler beim eintragen."
                         else -> "Hier könnt ihr die eingereichten Ereignisse ansehen. Sie werden chronologisch nach Ereignisdatum angezeigt (nachdem mein Team sie freigeschaltet hat)."
                     }
                 )
             )
         }
         get("submit_personal") {
-            call.respondTwig("submit_pers")
+            call.respondTwig("submit_pers", mapOf("recaptcha" to true))
         }
         get("submit_historic") {
-            call.respondTwig("submit_hist")
+            call.respondTwig("submit_hist", mapOf("recaptcha" to true))
         }
         post("submit") {
             if (!call.request.isMultipart())
@@ -99,7 +101,7 @@ fun Application.module() {
                 }.toMap().apply {
                     try {
                         if (containsKey("g-recaptcha-response")) {
-                            ReCaptcha.validate(get("g-recaptcha-response")!!)
+                            ReCaptcha.validate(get("g-recaptcha-response")!!, call.request.origin.remoteHost)
                         } else {
                             call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
                             return@post
@@ -119,10 +121,12 @@ fun Application.module() {
                             if(!(5 <= len || len <= 250))
                                 throw IllegalArgumentException("Invalid description length")
 
+                            val d = Date.valueOf(get("date")!!)
+
                             val entry = Entry(
                                 type = type,
                                 source = if (type == Type.HISTORIC) get("source") ?: "" else "",
-                                date = Date.valueOf(get("date")!!),
+                                date = Date(d.time + TimeUnit.HOURS.toMillis(3)),
                                 description = get("description")!!,
                                 name = get("name") ?: "",
                                 email = get("email") ?: ""
@@ -142,7 +146,7 @@ fun Application.module() {
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
                     } catch (e: ReCaptcha.CaptchaException) {
-                        call.respondRedirect("/events/limit")
+                        call.respondRedirect("/events/robot")
                     }
                 }
         }

@@ -1,12 +1,5 @@
 {% include 'header.twig' %}
 
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
-    function onSubmit() {
-        document.getElementById("form").submit();
-    }
-</script>
-
 <div class="container">
     <div class="row">
         <div class="col">
@@ -17,7 +10,7 @@
                     <div class="form-label-extra">*Pflichtfeld</div>
                     <br>
                     <textarea class="form-input form-textarea" name="description" maxlength="250" minlength="5"
-                              placeholder="Hier kannst du das Ereignis beschreiben. (maximal 250 Zeichen)" required
+                              placeholder="Hier kannst du das Ereignis beschreiben. (min 5, max. 250 Zeichen)" required
                               autofocus
                               oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                 </label>
@@ -58,9 +51,9 @@
                            placeholder="scheitern@nicosemsrott.eu">
                 </label>
                 <label><input hidden value="historic" name="type"/></label>
+                <label><input id="g-recaptcha-response" hidden name="g-recaptcha-response"/></label>
                 <label>
-                    <input {# data-sitekey="6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"#}
-                           type="submit" class="g-recaptcha submit-button" value="ABSCHICKEN"/>
+                    <input type="submit" class="submit-button" value="ABSCHICKEN"/>
                     <br>
                     <div class="form-label-extra">*Redaktionelle Änderungen behalten wir uns vor.</div>
                 </label>
