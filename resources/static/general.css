@@ -355,3 +355,9 @@ input[type=date]::-webkit-clear-button {
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
 }
+
+.events-card{
+    border-radius: 25px;
+    padding: 20px;
+    font-weight: normal;
+}
