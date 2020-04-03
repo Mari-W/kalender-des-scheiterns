@@ -152,6 +152,12 @@ body {
     display: inline;
 }
 
+.form-label-div-mobile {
+    width: 4pt;
+    display: inline-block;
+    height: 30pt;
+}
+
 .form-label-div {
     width: 10pt;
     display: inline-block;
