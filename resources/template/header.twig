@@ -24,8 +24,10 @@
                     document.getElementById("g-recaptcha-response").value = token;
                 });
             });
-            if ( $('[type="date"]').prop('type') != 'date' ) {
-                $('[type="date"]').datepicker();
+            if ( $('[type="date"]').prop('type') !== 'date' ) {
+                $('[type="date"]').datepicker({
+                    dateFormat: 'dd.mm.yyyy'
+                });
             }
         </script>
     {% endif %}
