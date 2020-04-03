@@ -146,6 +146,7 @@ fun Application.module() {
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
                     } catch (e: ReCaptcha.CaptchaException) {
+                        call.application.environment.log.info("ReCaptcha Failed for %s with msg %s", call.request.origin.remoteHost, e.message)
                         call.respondRedirect("/events/robot")
                     }
                 }
