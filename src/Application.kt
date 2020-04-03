@@ -3,21 +3,25 @@ package de.moeri
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
-import io.ktor.features.*
+import io.ktor.features.CachingHeaders
+import io.ktor.features.XForwardedHeaderSupport
+import io.ktor.features.origin
 import io.ktor.http.CacheControl
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
 import io.ktor.request.isMultipart
 import io.ktor.request.receiveMultipart
-import io.ktor.response.*
+import io.ktor.response.header
+import io.ktor.response.respond
+import io.ktor.response.respondFile
+import io.ktor.response.respondRedirect
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
 import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
 import java.io.File
-import java.lang.Exception
 import java.sql.Date
 import java.util.concurrent.TimeUnit
 
@@ -146,7 +150,7 @@ fun Application.module() {
                     } catch (e: NullPointerException) {
                         call.respond(HttpStatusCode.Forbidden.description("Null,null"))
                     } catch (e: ReCaptcha.CaptchaException) {
-                        call.application.environment.log.info("ReCaptcha Failed for %s with msg %s", call.request.origin.remoteHost, e.message)
+                        call.application.environment.log.info("ReCaptcha Failed for " + call.request.origin.remoteHost + " with msg " + e.message)
                         call.respondRedirect("/events/robot")
                     }
                 }
