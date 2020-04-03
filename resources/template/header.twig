@@ -20,11 +20,17 @@
     {% if recaptcha %}
         <script src="https://www.google.com/recaptcha/api.js?render=6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP"></script>
         <script>
-            grecaptcha.ready(function () {
+            function cap() {
                 grecaptcha.execute('6Le1yuEUAAAAAP-gpOEBLyGCBLRUsUJWjmC2x6TP', {action: 'submit_hist'}).then(function (token) {
                     document.getElementById("g-recaptcha-response").value = token;
                 });
+            }
+            grecaptcha.ready(function () {
+                cap();
             });
+            setInterval(function() {
+                cap();
+            }, 115 * 1000); // 115 * 1000 milsec = nearly 2 mins
         </script>
     {% endif %}
 
