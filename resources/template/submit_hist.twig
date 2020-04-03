@@ -22,7 +22,7 @@
                     <div class="form-label-extra">*Pflichtfeld</div>
                     <br>
                     <input id="datepicker-xx" type="date" class="form-input form-date is-below"
-                           data-date-format="dd.mm.yyyy" name="date"
+                           name="date"
                            min="0000-01-01" max="2020-12-31"
                            required>
                 </label>
@@ -76,6 +76,9 @@
     if (dp.type !== "date") {
         let dpBelow = TinyDatePicker('.is-below', {
             mode: 'dp-below',
+            format(date) {
+                return date.getFullYear() + "-" + date.getMonth() + 1 + "-" + date.getDate();
+            },
         });
     }
 </script>
