@@ -361,3 +361,7 @@ input[type=date]::-webkit-clear-button {
     padding: 20px;
     font-weight: normal;
 }
+
+.dp:before {
+    background: linear-gradient(-90deg,#8c1149 0,#cf2e78 100%) !important;
+}
