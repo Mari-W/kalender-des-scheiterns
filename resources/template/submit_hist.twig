@@ -74,10 +74,16 @@
 <script>
     let dp = document.getElementById("datepicker-xx");
     if (dp.type !== "date") {
+        Number.prototype.pad = function(size) {
+            var s = String(this);
+            while (s.length < (size || 2)) {s = "0" + s;}
+            return s;
+        };
+
         let dpBelow = TinyDatePicker('.is-below', {
             mode: 'dp-below',
             format(date) {
-                return date.getFullYear() + "-" + date.getMonth() + 1 + "-" + date.getDate();
+                return date.getFullYear() + "-" + (date.getMonth() + 1).pad(2) + "-" + date.getDate().pad(2);
             },
         });
     }
