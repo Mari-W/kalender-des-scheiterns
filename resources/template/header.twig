@@ -24,6 +24,9 @@
                     document.getElementById("g-recaptcha-response").value = token;
                 });
             });
+            if ( $('[type="date"]').prop('type') != 'date' ) {
+                $('[type="date"]').datepicker();
+            }
         </script>
     {% endif %}
 
