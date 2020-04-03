@@ -73,6 +73,8 @@
 
         let dpBelow = TinyDatePicker('.is-below', {
             mode: 'dp-below',
+            min: '01/01/1000',
+            max: '05/01/2020',
             format(date) {
                 return date.getFullYear() + "-" + (date.getMonth() + 1).pad(2) + "-" + date.getDate().pad(2);
             },
