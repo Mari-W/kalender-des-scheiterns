@@ -75,7 +75,7 @@
             <div class="col justify-content-start">{{ i.type }}</div>
             <div class="col justify-content-start text-break" title="{{ i.description }}">{{ i.description }}</div>
             <div class="col justify-content-start text-break">
-                <a {% if i.email != "Unknown" %} href="mailto:{{ i.email }}" {% endif %}>{% if i.name == "Unknown" and i.email != "Unknown"  %} {{ i.email }} {% else %} {{ i.name }} {% endif %}</a>
+                <a {% if i.email != "Unknown" and i.email!= "" %} href="mailto:{{ i.email }}" {% endif %}>{% if (i.name == "Unknown" or i.name == "") and (i.email != "Unknown" or i.email != "") %} {{ i.email }} {% else %} {{ i.name }} {% endif %}</a>
             </div>
             {% if i.source|length > 1 %}
                 <div class="col justify-content-start text-break" title="{{ i.source }}"><a
