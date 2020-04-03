@@ -25,14 +25,6 @@
                     document.getElementById("g-recaptcha-response").value = token;
                 });
             });
-            var dp = document.getElementById("datepicker-xx");
-            if (dp.type!="date"){
-                document.write('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />\n');
-                document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous" > < /script>');
-                jQuery(function($){ //on document.ready
-                    $('#datepicker-xx').datepicker();
-                })
-            }
         </script>
     {% endif %}
 

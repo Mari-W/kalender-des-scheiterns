@@ -20,7 +20,7 @@
                     WANN?
                     <div class="form-label-extra">*Pflichtfeld</div>
                     <br>
-                    <input id="datepicker-xx" type="date" class="form-input form-date" data-date-format="dd.mm.yyyy" name="date"
+                    <input id="datepicker-xx" type="date" class="form-input form-date is-below" data-date-format="dd.mm.yyyy" name="date"
                            min="0000-01-01" max="2020-12-31"
                            required>
                 </label>
@@ -67,5 +67,14 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="/static/date-picker.css">
+<script src="/static/date-picker.min.js"></script>
+<script>
+    var TinyDatePicker = DateRangePicker.TinyDatePicker;
+
+    var dpBelow = TinyDatePicker('.is-below', {
+        mode: 'dp-below',
+    });
+</script>
 
 {% include 'footer.twig' %}
