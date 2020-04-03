@@ -24,7 +24,7 @@
         <appender-ref ref="FILE" />
     </root>
 
-    <root level="ALL">
+    <root level="INFO">
         <appender-ref ref="FILE" />
     </root>
 </configuration>
