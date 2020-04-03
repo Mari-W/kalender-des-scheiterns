@@ -6,20 +6,24 @@
 
  {% if dates|length < 1 %}
      <div>
-         <p id="noevents" style="color: #cf2e78; size: 22px; margin-top: 20px; font-family: 'Roboto Slab', serif; text-align: center"><b>Aktuell sind noch keine Ereignisse freigeschaltet! :(</b></p>
+         <p id="noevents"
+            style="color: #cf2e78; size: 22px; margin-top: 20px; font-family: 'Roboto Slab', serif; text-align: center">
+             <b>Aktuell sind noch keine Ereignisse freigeschaltet! :(</b></p>
      </div>
  {% endif %}
 
 {% for e in dates %}
     <div style="text-align: justify">
-        <p id="{{ e.date|date("dd.MM")|replace({'0': ''}) }}" style="color: #cf2e78; size: 22px; margin-top: 20px; font-family: 'Roboto Slab', serif;"><b>{{ e.date|date("dd.MM.yyyy") }}</b></p>
-        <p class="events-type">{% if e.type == "HISTORIC" %} HISTORISCH {% else %} PERSÖNLICH {% endif %}</p>
-        <p class="events-type-entry">
-            {{ e.description }}
-            <br>
-            von: {{ e.name }}
-        </p>
-        <hr>
+    <p id="{{ e.date|date("dd.MM")|replace({'0': ''}) }}"
+       style="color: #cf2e78; size: 22px; margin-top: 20px; font-family: 'Roboto Slab', serif;">
+        <b>{{ e.date|date("dd.MM.yyyy") }}</b></p>
+    <p class="events-type">{% if e.type == "HISTORIC" %} HISTORISCH {% else %} PERSÖNLICH {% endif %}</p>
+    <p class="events-type-entry">
+    {{ e.description }}
+    <br>
+    {% if e.type == "PERSONAL" %}von: {{ e.name }} {% else %}
+    </p>
+    <hr>
     </div>
 {% endfor %}
 
