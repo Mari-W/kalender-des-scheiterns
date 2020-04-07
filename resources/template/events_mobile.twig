@@ -30,7 +30,7 @@
     <p class="events-type">{% if e.type == "HISTORIC" %} HISTORISCH {% else %} PERSÖNLICH {% endif %}</p>
     {{ e.description }}
     <br>
-    {% if e.type == "PERSONAL" %}von: {{ e.name }} {% else %}
+    {% if e.type == "PERSONAL" %}von: {{ e.name }} {% endif %}
     <hr>
     </div>
 {% endfor %}
