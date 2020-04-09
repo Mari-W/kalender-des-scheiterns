@@ -41,7 +41,10 @@ object Database {
     fun dates(): List<DateEvent> {
         return db.open().use {
             val old =
-                it.createQuery("SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt FROM entries e WHERE e.status='APPROVED' GROUP BY MONTH(e.date), DAY(e.date)")
+                it.createQuery("""
+                        SELECT MONTH(e.date) month, DAY(e.date) day, COUNT(*) cnt, SUM(CASE WHEN e.status='CHOSEN' THEN 1 ELSE 0 END) > 0 chosen
+                        FROM entries e WHERE e.status='APPROVED' OR e.status='CHOSEN' GROUP BY MONTH(e.date), DAY(e.date)
+                        """)
                     .executeAndFetch(DateAmount::class.java)
             val ret = mutableListOf<DateEvent>()
             var last: DateAmount? = null
@@ -148,18 +151,19 @@ data class Entry(
 data class DateAmount(
     val month: Int,
     val day: Int,
-    val cnt: Int
+    val cnt: Int,
+    val chosen: Boolean
 ) {
     fun getColor(): String {
         return when {
+            chosen -> {
+                "#47cfad"
+            }
             cnt < 1 -> {
                 "#ff007a"
             }
-            cnt < 7 -> {
-                "#ffed5e"
-            }
             else -> {
-                "#47cfad"
+                "#ffed5e"
             }
         }
     }
