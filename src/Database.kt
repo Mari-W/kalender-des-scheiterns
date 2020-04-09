@@ -159,7 +159,7 @@ data class DateAmount(
             chosen -> {
                 "#47cfad"
             }
-            cnt < 1 -> {
+            cnt < 2 -> {
                 "#ff007a"
             }
             else -> {

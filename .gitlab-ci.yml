@@ -1,9 +1,27 @@
+stages:
+  - build
+  - deploy-mod
+  - deploy-live
+
 build:
+  stage: build
   script: "sh gradlew shadowJar ; cp build/libs/kds-all.jar kds.jar"
   artifacts:
     paths:
       - "kds.jar"
     expire_in: 3 days
-deploy:
-  stage: deploy
+deploy-mod:
+  stage: deploy-mod
   script: "cp kds.jar /home/kds/kds.jar; sudo /home/kds/deploy.sh"
+  environment:
+    name: mod
+    url: https://mod.kalenderdesscheiterns.de
+deploy-live:
+  stage: deploy-live
+  only:
+    - master
+  when: manual
+  script: "sudo /home/kds/deploylive.sh"
+  environment:
+    name: live
+    url: https://kalenderdesscheiterns.de
