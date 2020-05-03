@@ -39,6 +39,8 @@ fun Application.module() {
 
     install(XForwardedHeaderSupport)
 
+
+
     install(CachingHeaders) {
         val nocache = CachingOptions(CacheControl.NoCache(CacheControl.Visibility.Public)) // do not cache the html
         val cache = CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 60 * 5)) // 5 minutes
@@ -107,7 +109,7 @@ fun Application.module() {
                         if (containsKey("g-recaptcha-response")) {
                             ReCaptcha.validate(get("g-recaptcha-response")!!, call.request.origin.remoteHost)
                         } else {
-                            call.respond(HttpStatusCode.Forbidden.description("U ROBOT!!!"))
+                            call.respond(HttpStatusCode.Forbidden.description("U DUMB ROBOT!!!"))
                             return@post
                         }
                         if (!containsKey("type")) {
