@@ -4,6 +4,8 @@ import io.ktor.util.KtorExperimentalAPI
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 
 
 @KtorExperimentalAPI
@@ -37,14 +39,15 @@ object ExcelWriter {
             dataFormat = createHelper.createDataFormat().getFormat("dd.MM.yyyy")
         }
         // Create Other rows and cells with employees data
+
+        val formatter =  SimpleDateFormat("dd.MM.yyyy")
         var rowNum = 1
         for (entry in Database.list("chosen", "date")) {
             val row: Row = sheet.createRow(rowNum++)
-            val dateOfBirthCell: Cell = row.createCell(0)
-            dateOfBirthCell.setCellValue(entry.date)
-            dateOfBirthCell.cellStyle = dateCellStyle
+            row.createCell(0)
+                .setCellValue(formatter.format(entry.date))
             row.createCell(1)
-                .setCellValue(if(entry.type == Type.HISTORIC) "Histroisch" else "Persönlich")
+                .setCellValue(if (entry.type == Type.HISTORIC) "Histroisch" else "Persönlich")
             row.createCell(2)
                 .setCellValue(entry.description)
             row.createCell(3)
