@@ -35,10 +35,6 @@ object ExcelWriter {
                 cellStyle = headerCellStyle
             }
         }
-        val dateCellStyle: CellStyle = workbook.createCellStyle().apply {
-            dataFormat = createHelper.createDataFormat().getFormat("dd.MM.yyyy")
-        }
-        // Create Other rows and cells with employees data
 
         val formatter =  SimpleDateFormat("dd.MM.yyyy")
         var rowNum = 1
@@ -47,7 +43,7 @@ object ExcelWriter {
             row.createCell(0)
                 .setCellValue(formatter.format(entry.date))
             row.createCell(1)
-                .setCellValue(if (entry.type == Type.HISTORIC) "Histroisch" else "Persönlich")
+                .setCellValue(if (entry.type == Type.HISTORIC) "Historisch" else "Persönlich")
             row.createCell(2)
                 .setCellValue(entry.description)
             row.createCell(3)
